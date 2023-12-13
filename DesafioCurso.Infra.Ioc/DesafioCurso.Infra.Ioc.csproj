@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DesafioCurso.Application\DesafioCurso.Application.csproj" />
+    <ProjectReference Include="..\DesafioCurso.Domain\DesafioCurso.Domain.csproj" />
+    <ProjectReference Include="..\DesafioCurso.Infra.Data\DesafioCurso.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
