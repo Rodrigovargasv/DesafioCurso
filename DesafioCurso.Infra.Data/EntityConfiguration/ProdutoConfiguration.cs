@@ -22,8 +22,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.CodigoBarras).HasColumnName("codigo_barras").HasMaxLength(13);
             builder.Property(x => x.Ativo).HasColumnName("ativo").HasDefaultValue(true).IsRequired();
             builder.Property(x => x.Vendavel).HasColumnName("vendavel").HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.Unidade).HasColumnName("unidade").HasMaxLength(10).IsRequired();
-            builder.Property(x => x.IdUnidade).HasColumnName("id_unidade").IsRequired();
+            //builder.Property(x => x.Unidade).HasColumnName("unidade").HasMaxLength(10).IsRequired();
+            builder.Property(x => x.SiglaUnidade).HasColumnName("unidade").IsRequired();
 
 
             // Cofiguranção de index unico.
@@ -32,7 +32,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configuração de chave estrangeira
             builder.HasOne(p => p.UnidadeProduto)
                 .WithMany(u => u.ProdutosRelacionados)
-                .HasForeignKey(p => p.IdUnidade);
+                .HasForeignKey(p => p.SiglaUnidade)  // Utiliza a propriedade SiglaUnidade como chave estrangeira
+                .HasPrincipalKey(u => u.Sigla);
 
         }
     }

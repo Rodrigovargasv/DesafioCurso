@@ -12,10 +12,10 @@ namespace DesafioCurso.Domain.Entities
         public int CodigoBarras { get; set; }
         public bool Ativo { get; set; }
         public bool Vendavel { get; set; }
-        public string Unidade { get; set; }
+        public string SiglaUnidade { get; set; }
 
         public Unidade UnidadeProduto { get; set;}
-        public Guid IdUnidade { get; set; }
+
 
     }
 }
