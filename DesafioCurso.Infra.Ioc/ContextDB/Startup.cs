@@ -10,8 +10,9 @@ namespace DesafioCurso.Infra.Ioc.ContextDB
     {
         internal static IServiceCollection AddServicesDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                    builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             // Altera o formato de data e hora do banco de dados PostgreSql
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

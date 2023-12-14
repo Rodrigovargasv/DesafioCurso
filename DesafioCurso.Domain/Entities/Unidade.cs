@@ -10,6 +10,6 @@ namespace DesafioCurso.Domain.Entities
         public string Descricao { get; set; }
 
         // Propriedade de navegação inversa
-        public IEnumerable<Produto> Produtos { get; set; }
+        public IEnumerable<Produto> ProdutosRelacionados{ get; set; }
     }
 }

@@ -26,8 +26,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
 
             // Configuração de chave estrangeira
-            builder.HasMany(u => u.Produtos)
-                .WithOne(p => p.Unidade)
+            builder.HasMany(u => u.ProdutosRelacionados)
+                .WithOne(p => p.UnidadeProduto)
                 .HasForeignKey(p => p.IdUnidade);
 
         }

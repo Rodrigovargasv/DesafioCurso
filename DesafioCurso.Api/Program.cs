@@ -1,3 +1,5 @@
+using DesafioCurso.Infra.Ioc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// Adicona os serviços de injeção de depêndencia.
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
