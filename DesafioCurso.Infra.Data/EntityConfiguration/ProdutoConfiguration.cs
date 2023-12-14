@@ -9,17 +9,20 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            // Configura o banco de dados para gerar automaticamente o id
-            builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
+            // Configura nome da tabela no banco de dados
+            builder.ToTable("produto");
 
-            builder.Property(x => x.DescricaoCompleta).HasMaxLength(150).IsRequired();
-            builder.Property(x => x.DescricaoResumida).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.Preco).HasPrecision(18, 2).IsRequired();
-            builder.Property(x => x.QuantidadeEstoque).HasDefaultValue(0).HasPrecision(18, 2).IsRequired();
-            builder.Property(x => x.CodigoBarras).HasMaxLength(13);
-            builder.Property(x => x.Ativo).HasDefaultValue(true).IsRequired();
-            builder.Property(x => x.Vendavel).HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.Unidade).HasMaxLength(10).IsRequired();
+            // Configura o banco de dados para gerar automaticamente o id
+            builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
+
+            builder.Property(x => x.DescricaoCompleta).HasColumnName("descricao_completa").HasMaxLength(150).IsRequired();
+            builder.Property(x => x.DescricaoResumida).HasColumnName("descricao_resumida").HasMaxLength(100).IsRequired();
+            builder.Property(x => x.Preco).HasColumnName("preco").HasPrecision(18, 2).IsRequired();
+            builder.Property(x => x.QuantidadeEstoque).HasColumnName("quantidade_estoque").HasDefaultValue(0).HasPrecision(18, 2).IsRequired();
+            builder.Property(x => x.CodigoBarras).HasColumnName("codigo_barras").HasMaxLength(13);
+            builder.Property(x => x.Ativo).HasColumnName("ativo").HasDefaultValue(true).IsRequired();
+            builder.Property(x => x.Vendavel).HasColumnName("vendavel").HasDefaultValue(false).IsRequired();
+            builder.Property(x => x.Unidade).HasColumnName("unidade").HasMaxLength(10).IsRequired();
 
 
             // Cofiguranção de index unico.
