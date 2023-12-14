@@ -10,7 +10,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
             // Configura o banco de dados para gerar automaticamente o id
-            builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
 
             builder.Property(x => x.DescricaoCompleta).HasMaxLength(150).IsRequired();
             builder.Property(x => x.DescricaoResumida).HasMaxLength(100).IsRequired();
