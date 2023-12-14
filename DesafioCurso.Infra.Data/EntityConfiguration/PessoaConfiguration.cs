@@ -22,9 +22,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Ativo).HasDefaultValue(true).IsRequired();
 
 
-            /* Configura chave unica usando index.
-             * Não permitindo que seja aceito duplicade de dados na coluna Documento
-            */
+            // Cofiguranção de index unico.
             builder.HasIndex(x => x.Documento).IsUnique();
 
 
