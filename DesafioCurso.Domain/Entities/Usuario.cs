@@ -9,6 +9,8 @@ namespace DesafioCurso.Domain.Entities
         public string Apelido { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public int CpfCnpj { get; set; }
+
+        // Representa um CPF ou CNPJ.
+        public TipoIdentificadorFiscal Cpf_Cnpj { get; set; }
     }
 }
