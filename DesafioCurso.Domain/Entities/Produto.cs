@@ -10,8 +10,11 @@ namespace DesafioCurso.Domain.Entities
         public decimal Preco { get; set; } 
         public int QuantidadeEstoque { get; set;}
         public int CodigoBarras { get; set; }
-        public bool Ativo { get; set;}
+        public bool Ativo { get; set; }
+        public bool Vendavel { get; set; }
 
-        public Unidade unidade { get; set;}
+        public Unidade Unidade{ get; set;}
+        public Guid IdUnidade { get; set; }
+
     }
 }
