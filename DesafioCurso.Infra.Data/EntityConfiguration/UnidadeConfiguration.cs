@@ -21,7 +21,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Sigla).HasColumnName("sigla").HasMaxLength(10).IsRequired();
             builder.Property(x => x.Descricao).HasColumnName("descricao").HasMaxLength(50).IsRequired();
 
-            // Cofiguranção de index unico.
+            // Configuração de index unico.
             builder.HasIndex(x => x.Sigla).IsUnique();
 
 
