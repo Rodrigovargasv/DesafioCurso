@@ -11,10 +11,11 @@ namespace DesafioCurso.Infra.Data.Context
 
 
         // Configurar o mapeamento das entidades para o banco de dados
-        public DbSet<Pessoa> Pessoas { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Unidade> Unidades { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Unit> Units { get; set; }
+
+        //public DbSet<Usuario> Usuarios { get; set; }
 
 
         // Realiza a aplicação automatica das configurações de entidades que são definidas nas pasta EntityConfiguration

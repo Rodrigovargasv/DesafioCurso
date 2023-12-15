@@ -3,12 +3,12 @@ using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Domain.Entities
 {
-    public class Usuario : EntityBase
+    public class User : EntityBase
     {
-        public string NomeCompleto { get; set; }
-        public string Apelido { get; set; }
+        public string FullName { get; set; }
+        public string Surnamed { get; set; }
         public string Email { get; set; }
-        public string Senha { get; set; }
+        public string Password { get; set; }
 
         // Representa um CPF ou CNPJ.
         public string Cpf_Cnpj { get; set; }

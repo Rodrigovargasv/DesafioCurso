@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {
-    public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
+    public class UnidadeConfiguration : IEntityTypeConfiguration<Unit>
     {
 
-        public void Configure(EntityTypeBuilder<Unidade> builder)
+        public void Configure(EntityTypeBuilder<Unit> builder)
         {
 
             // Configura nome da tabela no banco de dados
@@ -18,18 +18,18 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configura o banco de dados para gerar automaticamente o id
             builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
 
-            builder.Property(x => x.Sigla).HasColumnName("sigla").HasMaxLength(10).IsRequired();
-            builder.Property(x => x.Descricao).HasColumnName("descricao").HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Acronym).HasColumnName("sigla").HasMaxLength(10).IsRequired();
+            builder.Property(x => x.Decription).HasColumnName("descricao").HasMaxLength(50).IsRequired();
 
             // Configuração de index unico.
-            builder.HasIndex(x => x.Sigla).IsUnique();
+            builder.HasIndex(x => x.Acronym).IsUnique();
 
 
             // Configuração de chave estrangeira
-            builder.HasMany(u => u.ProdutosRelacionados)
-                .WithOne(p => p.UnidadeProduto)
-                .HasForeignKey(p => p.SiglaUnidade) 
-                .HasPrincipalKey(u => u.Sigla);
+            builder.HasMany(u => u.RelatedProducts)
+                .WithOne(p => p.UnitProduct)
+                .HasForeignKey(p => p.AcronynmUit) 
+                .HasPrincipalKey(u => u.Acronym);
             
 
         }
