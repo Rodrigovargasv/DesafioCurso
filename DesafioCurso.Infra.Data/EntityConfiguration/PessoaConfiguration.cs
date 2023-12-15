@@ -28,6 +28,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
             // Cofiguranção de index unico.
             builder.HasIndex(x => x.Documento).IsUnique();
+            builder.HasIndex(x => x.CodigoAlternativo).IsUnique();
 
 
 
