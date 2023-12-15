@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {
-    public class UnidadeConfiguration : IEntityTypeConfiguration<Unit>
+    public class UnitConfiguration : IEntityTypeConfiguration<Unit>
     {
 
         public void Configure(EntityTypeBuilder<Unit> builder)
