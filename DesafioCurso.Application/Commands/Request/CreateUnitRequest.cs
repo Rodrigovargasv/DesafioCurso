@@ -1,9 +1,9 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Application.Commands.Response;
+using MediatR;
 
-namespace DesafioCurso.Domain.Commands.Request
+namespace DesafioCurso.Application.Commands.Request
 {
-    public class CreateUnitRequest
+    public class CreateUnitRequest : IRequest<CreateUnitResponse>
     {
         public string Acronym { get; set; } // Sigla
 

@@ -12,7 +12,7 @@ namespace DesafioCurso.Domain.Entities
         public int BarCode { get; set; }
         public bool Active { get; set; }
         public bool Saleable { get; set; } // vendavel
-        public string AcronynmUit { get; set; } 
+        public string AcronynmUnit { get; set; } 
 
         public Unit UnitProduct { get; set;}
 

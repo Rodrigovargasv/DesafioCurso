@@ -1,15 +1,41 @@
-﻿
-using DesafioCurso.Domain.Commands.Request;
-using DesafioCurso.Domain.Commands.Response;
-using DesafioCurso.Infra.Data.Handlers.Interfaces;
+﻿using DesafioCurso.Application.Commands.Request;
+using DesafioCurso.Application.Commands.Response;
+using DesafioCurso.Domain.Entities;
+using DesafioCurso.Domain.Interfaces;
+using DesafioCurso.Infra.Data.Repository;
+using Mapster;
+using MediatR;
+using Unit = DesafioCurso.Domain.Entities.Unit;
 
-namespace DesafioCurso.Infra.Ioc.Handlers
+namespace DesafioCurso.Application.Handlers
 {
-    public class CreateUnitHandler : ICreateUnitHandler
+    public class CreateUnitHandler : IRequestHandler<CreateUnitRequest, CreateUnitResponse>
     {
-        public Task<CreateUnitResponse> Handler(CreateUnitRequest request)
+
+        private readonly UnitRepository _context;
+        private readonly IUnitOfWork _uow;
+
+        public CreateUnitHandler(UnitRepository context, IUnitOfWork uow)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _uow = uow;
+        }
+
+
+
+        // Implementando a interface Handle
+        public async Task<CreateUnitResponse> Handle(CreateUnitRequest request, CancellationToken cancellationToken)
+        {
+
+            var unit = request.Adapt<Unit>();
+       
+            await _context.Create(unit);
+            await _uow.Commit();
+
+   
+
+            return unit.Adapt<CreateUnitResponse>();
+
         }
     }
 }

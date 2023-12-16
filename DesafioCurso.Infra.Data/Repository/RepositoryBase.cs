@@ -24,6 +24,7 @@ namespace DesafioCurso.Infra.Data.Repository
         public async Task Create(TEntity entity)
         {
            await _context.Set<TEntity>().AddAsync(entity);    
+        
         }
 
         public void Update(TEntity entity)
@@ -31,7 +32,7 @@ namespace DesafioCurso.Infra.Data.Repository
              _context.Set<TEntity>().Update(entity);
         }
 
-        public async Task<TEntity> GetbyId(int id)
+        public async Task<TEntity> GetById(int id)
         {
             return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
         }

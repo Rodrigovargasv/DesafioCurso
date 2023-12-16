@@ -28,7 +28,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configuração de chave estrangeira
             builder.HasMany(u => u.RelatedProducts)
                 .WithOne(p => p.UnitProduct)
-                .HasForeignKey(p => p.AcronynmUit) 
+                .HasForeignKey(p => p.AcronynmUnit) 
                 .HasPrincipalKey(u => u.Acronym);
             
 

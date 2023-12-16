@@ -22,7 +22,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.BarCode).HasColumnName("codigo_barras").HasMaxLength(13).IsRequired();
             builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true).IsRequired();
             builder.Property(x => x.Saleable).HasColumnName("vendavel").HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.UnitProduct).HasColumnName("unidade").IsRequired();
+            builder.Property(x => x.AcronynmUnit).HasColumnName("unidade").IsRequired();
 
 
             // Cofiguranção de index unico.
@@ -31,7 +31,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configuração de chave estrangeira
             builder.HasOne(p => p.UnitProduct)
                 .WithMany(u => u.RelatedProducts)
-                .HasForeignKey(p => p.AcronynmUit)  // Utiliza a propriedade SiglaUnidade como chave estrangeira
+                .HasForeignKey(p => p.AcronynmUnit)  // Utiliza a propriedade SiglaUnidade como chave estrangeira
                 .HasPrincipalKey(u => u.Acronym);
 
         }
