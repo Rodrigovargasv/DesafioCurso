@@ -1,7 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request;
 using DesafioCurso.Application.Commands.Response;
 using DesafioCurso.Application.Handlers;
-using DesafioCurso.Infra.Data.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,13 +13,19 @@ namespace DesafioCurso.Infra.Ioc.Mediator
         // Configura o serviço de injeção de dependência do mediator
         internal static IServiceCollection AddServiceMediator(this IServiceCollection services)
         {
-
+            
+            // Adiciona o MediatR e registra os handlers no assembly atual
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-
+            // Registra o handler para CreateUnitRequest
             services.AddScoped<IRequestHandler<CreateUnitRequest, CreateUnitResponse>, CreateUnitHandler>();
 
-            return services;
+
+            // Corrige o registro do handler para CreatePersonRequest
+            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonReponse>, CreatePesonHandler>();
+
+            return services; ;
+
         }
     }
 }

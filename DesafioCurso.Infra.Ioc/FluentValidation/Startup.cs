@@ -7,7 +7,10 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
     {
         internal static IServiceCollection AddServiceValidationDomains(this IServiceCollection services)
         {
+            // Configurado serviceço de validação com fluent validation
             services.AddScoped<UnitValidation>();
+            services.AddScoped<PersonValidation>();
+
             return services;
         }
     }

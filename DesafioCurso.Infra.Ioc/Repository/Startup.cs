@@ -11,6 +11,7 @@ namespace DesafioCurso.Infra.Ioc.Repository
         internal static IServiceCollection AddServiceRepository(this IServiceCollection services)
         {
             services.AddScoped<IUnitRepository, UnitRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             return services;
         }

@@ -10,7 +10,7 @@ namespace DesafioCurso.Domain.Entities
         public string City { get; set; }
         public string Observation { get; set; }
         public string AlternativeCode { get; set; }
-        public bool ReleaseSale { get; set; } // liberar vendda
-        public bool Active { get; set; }
+        public bool ReleaseSale { get; set; } // liberar venda
+        public bool Active { get; set; } = true;
     }
 }

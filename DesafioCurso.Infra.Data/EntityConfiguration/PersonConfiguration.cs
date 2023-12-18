@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Entities;
+﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -33,5 +32,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
 
         }
+
+     
     }
 }
