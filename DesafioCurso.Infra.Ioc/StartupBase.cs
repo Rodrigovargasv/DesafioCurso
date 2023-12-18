@@ -6,6 +6,7 @@ using DesafioCurso.Infra.Ioc.GlobalExecptions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using DesafioCurso.Infra.Ioc.FluentValidation;
 
 
 namespace DesafioCurso.Infra.Ioc
@@ -24,6 +25,9 @@ namespace DesafioCurso.Infra.Ioc
             services.AddServiceMediator();
 
             services.AddServiceGlobalExecptions();
+
+            services.AddServiceValidationDomains();
+
 
             return services;
         }

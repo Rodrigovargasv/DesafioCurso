@@ -12,4 +12,3 @@ namespace DesafioCurso.Domain.Entities
         public int StatusCode { get; set; }
     }
 }
-}

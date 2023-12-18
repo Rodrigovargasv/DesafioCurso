@@ -1,4 +1,5 @@
 ﻿
+using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,7 @@ namespace DesafioCurso.Infra.Ioc.Repository
     {
         internal static IServiceCollection AddServiceRepository(this IServiceCollection services)
         {
-            services.AddScoped<UnitRepository>();
+            services.AddScoped<IUnitRepository, UnitRepository>();
 
             return services;
         }

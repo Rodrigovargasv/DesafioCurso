@@ -30,6 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configuração de middleware: GlobalException
+app.UseInfrastructure(builder.Configuration);
 
 app.UseHttpsRedirection();
 

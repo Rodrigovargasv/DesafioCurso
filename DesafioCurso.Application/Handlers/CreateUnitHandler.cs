@@ -1,24 +1,28 @@
 ﻿using DesafioCurso.Application.Commands.Request;
 using DesafioCurso.Application.Commands.Response;
-using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Infra.Data.Repository;
+using DesafioCurso.Domain.Validations;
 using Mapster;
 using MediatR;
 using Unit = DesafioCurso.Domain.Entities.Unit;
+using FluentValidation;
+
+
 
 namespace DesafioCurso.Application.Handlers
 {
     public class CreateUnitHandler : IRequestHandler<CreateUnitRequest, CreateUnitResponse>
     {
 
-        private readonly UnitRepository _context;
+        private readonly IUnitRepository _context;
         private readonly IUnitOfWork _uow;
+        private readonly UnitValidation _unitValidation;
 
-        public CreateUnitHandler(UnitRepository context, IUnitOfWork uow)
+        public CreateUnitHandler(IUnitRepository context, IUnitOfWork uow, UnitValidation validations)
         {
             _context = context;
             _uow = uow;
+            _unitValidation = validations;
         }
 
 
@@ -28,12 +32,16 @@ namespace DesafioCurso.Application.Handlers
         {
 
             var unit = request.Adapt<Unit>();
-       
+
+
+            var userValidation = await _unitValidation.ValidateAsync(unit);
+
+            if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
+
             await _context.Create(unit);
             await _uow.Commit();
 
    
-
             return unit.Adapt<CreateUnitResponse>();
 
         }
