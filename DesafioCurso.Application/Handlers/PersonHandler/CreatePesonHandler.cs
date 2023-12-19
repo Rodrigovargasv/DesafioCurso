@@ -8,7 +8,7 @@ using FluentValidation;
 using Mapster;
 using MediatR;
 
-namespace DesafioCurso.Application.Handlers
+namespace DesafioCurso.Application.Handlers.PersonHandler
 {
     public class CreatePesonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResponse>
     {
@@ -42,7 +42,7 @@ namespace DesafioCurso.Application.Handlers
 
             await _uow.Commit();
 
-        
+
             return person.Adapt<CreatePersonResponse>();
         }
     }

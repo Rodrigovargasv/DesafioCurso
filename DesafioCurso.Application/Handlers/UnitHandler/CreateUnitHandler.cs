@@ -10,7 +10,7 @@ using DesafioCurso.Domain.Common.Exceptions;
 
 
 
-namespace DesafioCurso.Application.Handlers
+namespace DesafioCurso.Application.Handlers.UnitHandler
 {
     public class CreateUnitHandler : IRequestHandler<CreateUnitRequest, CreateUnitResponse>
     {
@@ -49,7 +49,7 @@ namespace DesafioCurso.Application.Handlers
             await _context.Create(unit);
             await _uow.Commit();
 
-   
+
             return unit.Adapt<CreateUnitResponse>();
 
         }

@@ -1,11 +1,10 @@
-﻿
-using DesafioCurso.Application.Commands.Request;
+﻿using DesafioCurso.Application.Commands.Request;
 using DesafioCurso.Application.Commands.Response;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
 using MediatR;
 
-namespace DesafioCurso.Application.Handlers
+namespace DesafioCurso.Application.Handlers.UnitHandler
 {
 
     public class GetAllUnitHandler : IRequestHandler<GetAllUnitRequest, IEnumerable<GetAllUnitResponse>>
@@ -15,12 +14,12 @@ namespace DesafioCurso.Application.Handlers
         public GetAllUnitHandler(IUnitRepository context)
         {
             _context = context;
-        
+
         }
 
         public async Task<IEnumerable<GetAllUnitResponse>> Handle(GetAllUnitRequest request, CancellationToken cancellationToken)
         {
-            
+
             var units = await _context.GetAll(request.Quantity);
 
             var unitResponses = units.Adapt<IEnumerable<GetAllUnitResponse>>();

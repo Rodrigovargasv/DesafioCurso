@@ -9,7 +9,7 @@ using MediatR;
 using System;
 using Unit = DesafioCurso.Domain.Entities.Unit;
 
-namespace DesafioCurso.Application.Handlers
+namespace DesafioCurso.Application.Handlers.UnitHandler
 {
     public class UpdateUnitHandler : IRequestHandler<UpdateUnitRequest, UpdateUnitResponse>
     {
@@ -43,14 +43,14 @@ namespace DesafioCurso.Application.Handlers
             // Se a unidade não for válida, lança uma exceção de validação
             if (!unitValidation.IsValid)
                 if (!unitValidation.IsValid)
-                throw new ValidationException(unitValidation.Errors);
+                    throw new ValidationException(unitValidation.Errors);
 
             // Atualiza a entidade no contexto
             _context.Update(unit);
 
             // Commit das alterações no banco de dados
             await _uow.Commit();
-      
+
 
             return unit.Adapt<UpdateUnitResponse>();
 

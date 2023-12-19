@@ -41,6 +41,12 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [HttpDelete("DeleteUnit")]
+        public async Task<DeleteUnitResponse> DeleteUnit([FromBody] DeleteUnitRequest command)
+        {
+            return await _mediator.Send(command);
+        }
+
 
     }
 }
