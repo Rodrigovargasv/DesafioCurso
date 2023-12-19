@@ -10,7 +10,7 @@ using MediatR;
 
 namespace DesafioCurso.Application.Handlers
 {
-    public class CreatePesonHandler : IRequestHandler<CreatePersonRequest, CreatePersonReponse>
+    public class CreatePesonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResponse>
     {
         private readonly IPersonRepository _context;
         private readonly IUnitOfWork _uow;
@@ -23,7 +23,7 @@ namespace DesafioCurso.Application.Handlers
             _personValidation = validations;
         }
 
-        public async Task<CreatePersonReponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
+        public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
 
             var person = request.Adapt<Person>();
@@ -43,7 +43,7 @@ namespace DesafioCurso.Application.Handlers
             await _uow.Commit();
 
         
-            return person.Adapt<CreatePersonReponse>();
+            return person.Adapt<CreatePersonResponse>();
         }
     }
 }

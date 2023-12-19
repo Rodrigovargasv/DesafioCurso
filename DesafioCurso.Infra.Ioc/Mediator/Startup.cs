@@ -22,7 +22,11 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
 
             // Corrige o registro do handler para CreatePersonRequest
-            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonReponse>, CreatePesonHandler>();
+            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePesonHandler>();
+
+
+            services.AddTransient<IRequestHandler<GetAllUnitRequest, IEnumerable<GetAllUnitResponse>>, GetAllUnitHandler>();
+
 
             return services; ;
 

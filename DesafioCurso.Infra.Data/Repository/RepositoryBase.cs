@@ -16,9 +16,9 @@ namespace DesafioCurso.Infra.Data.Repository
         }
 
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll(int quantidade)
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            return await _context.Set<TEntity>().Take(quantidade).ToListAsync();
         }
 
         public async Task Create(TEntity entity)

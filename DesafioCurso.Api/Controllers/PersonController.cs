@@ -19,7 +19,7 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [HttpPost("CreatePerson")]
-        public async Task<CreatePersonReponse> CreateUnit([FromBody] CreatePersonRequest command)
+        public async Task<CreatePersonResponse> CreateUnit([FromBody] CreatePersonRequest command)
         {
             return await _mediator.Send(command);
 

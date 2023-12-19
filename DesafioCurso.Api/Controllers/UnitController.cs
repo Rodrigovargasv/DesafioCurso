@@ -18,11 +18,23 @@ namespace DesafioCurso.Api.Controllers
             _mediator = mediator;
         }
 
+
+        [HttpGet("GetAllUnit")]
+        public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int value)
+        {
+            var command = new GetAllUnitRequest();
+            command.Quantity = value;
+
+            return await _mediator.Send(command);
+        }
+
         [HttpPost("CreateUnit")]
         public async Task<CreateUnitResponse> CreateUnit([FromBody] CreateUnitRequest command)
         {
             return await _mediator.Send(command);
 
         }
+
+
     }
 }

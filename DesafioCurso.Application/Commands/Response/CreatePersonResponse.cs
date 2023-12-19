@@ -3,7 +3,7 @@ using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Application.Commands.Response
 {
-    public class CreatePersonReponse : EntityBase
+    public class CreatePersonResponse : EntityBase
     {
     }
 }

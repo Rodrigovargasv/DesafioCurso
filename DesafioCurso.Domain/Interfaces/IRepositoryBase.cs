@@ -3,7 +3,7 @@ namespace DesafioCurso.Domain.Interfaces
 {
     public interface IRepositoryBase<TEntity>
     {
-        Task<IEnumerable<TEntity>> GetAll();
+        Task<IEnumerable<TEntity>> GetAll(int quantidade);
         Task<TEntity> GetById(int id);
 
         Task Create(TEntity entity);

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request
 {
-    public class CreatePersonRequest : IRequest<CreatePersonReponse>
+    public class CreatePersonRequest : IRequest<CreatePersonResponse>
     {
        
 
