@@ -32,9 +32,9 @@ namespace DesafioCurso.Infra.Data.Repository
              _context.Set<TEntity>().Update(entity);
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetById(Guid? id)
         {
-            return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync();
+            return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id);
         }
 
         public void Delete(TEntity entity)

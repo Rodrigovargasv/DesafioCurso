@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231218191559_InitalCreateDataBase")]
-    partial class InitalCreateDataBase
+    [Migration("20231219202424_InitialCreateDataBase")]
+    partial class InitialCreateDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

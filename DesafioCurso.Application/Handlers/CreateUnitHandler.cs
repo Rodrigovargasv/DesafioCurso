@@ -6,6 +6,7 @@ using Mapster;
 using MediatR;
 using Unit = DesafioCurso.Domain.Entities.Unit;
 using FluentValidation;
+using DesafioCurso.Domain.Common.Exceptions;
 
 
 
@@ -34,9 +35,16 @@ namespace DesafioCurso.Application.Handlers
             var unit = request.Adapt<Unit>();
 
 
-            var userValidation = await _unitValidation.ValidateAsync(unit);
+            var unitValidation = await _unitValidation.ValidateAsync(unit);
 
-            if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
+            if (!unitValidation.IsValid) throw new ValidationException(unitValidation.Errors);
+
+
+            var unitExists = await _context.PropertyAcronymExists(unit.Acronym);
+
+            if (unitExists != null)
+                throw new CustomException($"Já existe um unidade: {unit.Acronym}");
+
 
             await _context.Create(unit);
             await _uow.Commit();

@@ -35,6 +35,12 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [HttpPut("UpdateUnit")]
+        public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command)
+        {
+            return await _mediator.Send(command);
+        }
+
 
     }
 }

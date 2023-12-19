@@ -6,8 +6,7 @@ namespace DesafioCurso.Application.Commands.Request
 {
     public class CreatePersonRequest : IRequest<CreatePersonResponse>
     {
-       
-
+      
         public string FullName { get; set; }
         public string? Document { get; set; }
         public string City { get; set; }
