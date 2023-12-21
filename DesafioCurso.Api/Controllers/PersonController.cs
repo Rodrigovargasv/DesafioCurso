@@ -21,7 +21,7 @@ namespace DesafioCurso.Api.Controllers
         }
 
 
-   
+
         [HttpGet("GetAllPerson")]
         public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int value)
         {
@@ -31,7 +31,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
-        [HttpGet("GetPersonById")]
+        [HttpGet("GetPersonById/{id:Guid}")]
         public async Task<GetPersonByIdResponse> GetPersonByID(Guid id)
         {
             var command = new GetPersonByIdRequest();
@@ -43,6 +43,14 @@ namespace DesafioCurso.Api.Controllers
         [HttpPost("CreatePerson")]
         public async Task<CreatePersonResponse> CreateUnit([FromBody] CreatePersonRequest command)
         {
+            return await _mediator.Send(command);
+
+        }
+
+        [HttpPut("UpdatePerson/{id:Guid}")]
+        public async Task<UpdatePersonResponse> UpdatePerson([FromBody] UpdatePersonRequest command, Guid id)
+        {
+            command.Id = id;
             return await _mediator.Send(command);
 
         }

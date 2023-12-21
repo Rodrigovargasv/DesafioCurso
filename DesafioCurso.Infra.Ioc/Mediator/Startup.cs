@@ -48,7 +48,9 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
             services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePesonHandler>();
 
-           
+            // Registra o handler para UpdatePersonHandler
+            services.AddScoped<IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>, UpdatePersonHandler>();
+
             return services; 
 
         }

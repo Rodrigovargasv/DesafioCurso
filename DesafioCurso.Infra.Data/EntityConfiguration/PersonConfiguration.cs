@@ -21,8 +21,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.City).HasMaxLength(30).HasColumnName("cidade").IsRequired();
             builder.Property(x => x.Observation).HasColumnName("observacao").HasMaxLength(250);
             builder.Property(x => x.AlternativeCode).HasColumnName("codigo_alternativo").HasMaxLength(50);
-            builder.Property(x => x.ReleaseSale).HasColumnName("libera_venda").HasDefaultValue(false).IsRequired();
-            builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true).IsRequired();
+            builder.Property(x => x.ReleaseSale).HasColumnName("libera_venda").HasDefaultValue(false);
+            builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true);
 
 
             // Configuranção de index unico.

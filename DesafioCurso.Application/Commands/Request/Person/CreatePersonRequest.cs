@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Domain.Commons;
 using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Person
@@ -8,7 +9,7 @@ namespace DesafioCurso.Application.Commands.Request.Person
         public string FullName { get; set; }
         public string? Document { get; set; }
         public string City { get; set; }
-        public string Observation { get; set; }
+        public string? Observation { get; set; }
         public string? AlternativeCode { get; set; }
     }
 }

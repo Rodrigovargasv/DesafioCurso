@@ -30,21 +30,20 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
            
             var unitId = await _context.GetById(request.Id);
 
-            // Verifica se a unidade existe
+            // Verifica se a pessoa existe
             if (unitId is null)
                 throw new NotFoundException("Unidade não encontrada");
 
-            // Atualiza as propriedades da unidade com os dados da requisição
+            // Atualiza as propriedades da pessoa com os dados da requisição
             unitId.Decription = request.Decription;
 
             var unitValidation = await _unitValidation.ValidateAsync(unitId);
 
-            // Se a unidade não for válida, lança uma exceção de validação
+            // Se a pessoa não for válida, lança uma exceção de validação
             if (!unitValidation.IsValid)
-                if (!unitValidation.IsValid)
                     throw new ValidationException(unitValidation.Errors);
 
-            // Atualiza a entidade no contexto
+            // Atualiza a pessoa no contexto
             _context.Update(unitId);
 
             // Commit das alterações no banco de dados
