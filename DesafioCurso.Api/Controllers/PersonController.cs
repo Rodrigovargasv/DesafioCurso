@@ -31,6 +31,15 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [HttpGet("GetPersonById")]
+        public async Task<GetPersonByIdResponse> GetPersonByID(Guid id)
+        {
+            var command = new GetPersonByIdRequest();
+            command.Id = id;
+
+            return await _mediator.Send(command);
+        }
+
         [HttpPost("CreatePerson")]
         public async Task<CreatePersonResponse> CreateUnit([FromBody] CreatePersonRequest command)
         {
