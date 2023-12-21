@@ -25,7 +25,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true).IsRequired();
 
 
-            // Cofiguranção de index unico.
+            // Configuranção de index unico.
             builder.HasIndex(x => x.Document).IsUnique();
             builder.HasIndex(x => x.AlternativeCode).IsUnique();
 
