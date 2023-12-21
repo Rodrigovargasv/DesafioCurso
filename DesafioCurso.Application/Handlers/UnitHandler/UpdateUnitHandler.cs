@@ -1,5 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
@@ -27,16 +27,15 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<UpdateUnitResponse> Handle(UpdateUnitRequest request, CancellationToken cancellationToken)
         {
-            var unit = request.Adapt<Unit>();
-
-            var unitId = await _context.GetById(unit.Id);
+           
+            var unitId = await _context.GetById(request.Id);
 
             // Verifica se a unidade existe
             if (unitId is null)
                 throw new NotFoundException("Unidade não encontrada");
 
             // Atualiza as propriedades da unidade com os dados da requisição
-            unitId.Decription = unit.Decription;
+            unitId.Decription = request.Decription;
 
             var unitValidation = await _unitValidation.ValidateAsync(unitId);
 
@@ -46,13 +45,13 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
                     throw new ValidationException(unitValidation.Errors);
 
             // Atualiza a entidade no contexto
-            _context.Update(unit);
+            _context.Update(unitId);
 
             // Commit das alterações no banco de dados
             await _uow.Commit();
 
 
-            return unit.Adapt<UpdateUnitResponse>();
+            return unitId.Adapt<UpdateUnitResponse>();
 
         }
     }

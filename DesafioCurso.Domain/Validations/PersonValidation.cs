@@ -22,15 +22,11 @@ namespace DesafioCurso.Domain.Validations
                 .WithMessage("CPF ou CNPJ inválido");
 
 
-
             RuleFor(p => p.Observation)
                 .MaximumLength(250);
 
             RuleFor(p => p.AlternativeCode)
                 .MaximumLength(50);
-
-
-
         }
 
         // Implementando metados de validação de documento usuando a biblioteca DocumentValidator;

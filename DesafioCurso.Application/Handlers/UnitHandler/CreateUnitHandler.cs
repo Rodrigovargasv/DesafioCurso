@@ -1,12 +1,12 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
-using DesafioCurso.Domain.Interfaces;
+﻿using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using Mapster;
 using MediatR;
 using Unit = DesafioCurso.Domain.Entities.Unit;
 using FluentValidation;
 using DesafioCurso.Domain.Common.Exceptions;
+using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Response.Unit;
 
 
 
@@ -45,6 +45,8 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             if (unitExists != null)
                 throw new CustomException($"Já existe um unidade: {unit.Acronym}");
 
+            // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
+            unit.Acronym = unit.Acronym.ToUpper();
 
             await _context.Create(unit);
             await _uow.Commit();

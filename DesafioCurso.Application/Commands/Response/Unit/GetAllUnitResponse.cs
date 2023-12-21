@@ -1,9 +1,8 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 using MediatR;
 
 
-namespace DesafioCurso.Application.Commands.Response
+namespace DesafioCurso.Application.Commands.Response.Unit
 {
     public class GetAllUnitResponse : EntityBase
     {

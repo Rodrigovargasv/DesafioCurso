@@ -1,5 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
@@ -23,7 +23,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             _personValidation = validations;
         }
 
-        public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
+        public async  Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
 
             var person = request.Adapt<Person>();

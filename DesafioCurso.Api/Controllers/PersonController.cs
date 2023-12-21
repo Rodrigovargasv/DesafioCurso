@@ -1,5 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Response.Person;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

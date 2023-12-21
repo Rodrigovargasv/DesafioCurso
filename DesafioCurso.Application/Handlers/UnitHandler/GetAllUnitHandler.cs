@@ -1,5 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
 using MediatR;

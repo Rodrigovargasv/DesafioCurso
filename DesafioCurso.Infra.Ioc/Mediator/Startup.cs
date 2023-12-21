@@ -1,5 +1,7 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Application.Handlers.PersonHandler;
 using DesafioCurso.Application.Handlers.UnitHandler;
 using MediatR;
@@ -26,6 +28,9 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             // Registra o handler para GetAllUnitHandler
             services.AddScoped<IRequestHandler<GetAllUnitRequest, IEnumerable<GetAllUnitResponse>>, GetAllUnitHandler>();
 
+            // Registra o handler para GetUnitByIdHandler
+            services.AddScoped<IRequestHandler<GetUnitByIdRequest, GetUnitByIdResponse>, GetUnitByIdHandler>();
+
             // Registra o handler para UpdateUnitHandler
             services.AddScoped<IRequestHandler<UpdateUnitRequest, UpdateUnitResponse>, UpdateUnitHandler>();
 
@@ -37,8 +42,6 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePesonHandler>();
 
            
-
-
             return services; ;
 
         }

@@ -1,5 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request;
-using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +28,17 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+
+
+        [HttpGet("GetUnitById")]
+        public async Task<GetUnitByIdResponse> GetUnitById(Guid id)
+        {
+            var command = new GetUnitByIdRequest { Id = id };
+
+            return await _mediator.Send(command);
+        }
+
+
         [HttpPost("CreateUnit")]
         public async Task<CreateUnitResponse> CreateUnit([FromBody] CreateUnitRequest command)
         {
@@ -36,8 +47,9 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [HttpPut("UpdateUnit")]
-        public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command)
+        public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command, Guid id)
         {
+            command.Id = id;
             return await _mediator.Send(command);
         }
 

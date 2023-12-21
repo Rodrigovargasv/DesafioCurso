@@ -1,7 +1,7 @@
-﻿using DesafioCurso.Application.Commands.Response;
+﻿using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
 
-namespace DesafioCurso.Application.Commands.Request
+namespace DesafioCurso.Application.Commands.Request.Unit
 {
     public class CreateUnitRequest : IRequest<CreateUnitResponse>
     {
