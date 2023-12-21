@@ -39,7 +39,7 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             #endregion
 
 
-
+            #region Handlers de Person
             // Registra o handler para CreatePersonRequest
             services.AddScoped<IRequestHandler<GetAllPersonRequest, IEnumerable<GetAllPersonResponse>>, GetAllPersonHandler>();
 
@@ -50,6 +50,10 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
             // Registra o handler para UpdatePersonHandler
             services.AddScoped<IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>, UpdatePersonHandler>();
+
+            // Registra o handler para DeletePersonHandler
+            services.AddScoped<IRequestHandler<DeletePesonRequest, DeletePersonResponse>, DeletePersonHandler>();
+            #endregion
 
             return services; 
 

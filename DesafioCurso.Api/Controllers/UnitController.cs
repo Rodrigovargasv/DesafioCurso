@@ -30,7 +30,7 @@ namespace DesafioCurso.Api.Controllers
 
 
 
-        [HttpGet("GetUnitById")]
+        [HttpGet("GetUnitById/{id:Guid}")]
         public async Task<GetUnitByIdResponse> GetUnitById(Guid id)
         {
             var command = new GetUnitByIdRequest { Id = id };
@@ -46,7 +46,7 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
-        [HttpPut("UpdateUnit")]
+        [HttpPut("UpdateUnit/{id:Guid}")]
         public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command, Guid id)
         {
             command.Id = id;
@@ -56,6 +56,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUnit")]
         public async Task<DeleteUnitResponse> DeleteUnit([FromBody] DeleteUnitRequest command)
         {
+          
             return await _mediator.Send(command);
         }
 

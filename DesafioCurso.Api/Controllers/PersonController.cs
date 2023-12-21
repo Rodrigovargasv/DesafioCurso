@@ -55,5 +55,11 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [HttpDelete("DeletePerson")]
+        public async Task<DeletePersonResponse> DeletePerson([FromBody] DeletePesonRequest command)
+        {
+            return await _mediator.Send(command);
+        }
+
     }
 }
