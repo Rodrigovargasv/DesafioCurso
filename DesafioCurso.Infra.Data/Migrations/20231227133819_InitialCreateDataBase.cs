@@ -71,7 +71,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                     codigo_barras = table.Column<int>(type: "integer", maxLength: 13, nullable: false),
                     ativo = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     vendavel = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    unidade = table.Column<string>(type: "character varying(10)", nullable: false)
+                    unidade = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {

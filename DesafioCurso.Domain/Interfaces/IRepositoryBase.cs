@@ -9,5 +9,6 @@ namespace DesafioCurso.Domain.Interfaces
         Task Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+      
     }
 }

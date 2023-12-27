@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231219202424_InitialCreateDataBase")]
-    partial class InitialCreateDataBase
+    [Migration("20231227135632_ModifidPropertyBarCode")]
+    partial class ModifidPropertyBarCode
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,7 @@ namespace DesafioCurso.Infra.Data.Migrations
 
                     b.Property<string>("AcronynmUnit")
                         .IsRequired()
+                        .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("unidade");
 
@@ -100,9 +101,9 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("ativo");
 
-                    b.Property<int>("BarCode")
+                    b.Property<string>("BarCode")
                         .HasMaxLength(13)
-                        .HasColumnType("integer")
+                        .HasColumnType("character varying(13)")
                         .HasColumnName("codigo_barras");
 
                     b.Property<string>("BriefDescription")

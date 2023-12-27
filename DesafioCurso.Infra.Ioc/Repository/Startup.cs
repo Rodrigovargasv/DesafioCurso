@@ -12,6 +12,7 @@ namespace DesafioCurso.Infra.Ioc.Repository
         {
             services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;
         }

@@ -32,8 +32,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
                 .HasForeignKey(p => p.AcronynmUnit)
                 .HasPrincipalKey(u => u.Acronym)
 
-                 // Exclusão da Unit é restrita(ou proibida) se houver entidades relacionadas que dependem dela.
-                .OnDelete(DeleteBehavior.Restrict); 
+                // Exclusão da Unit é restrita(ou proibida) se houver entidades relacionadas que dependem dela.
+               .OnDelete(DeleteBehavior.Restrict); 
 
 
 

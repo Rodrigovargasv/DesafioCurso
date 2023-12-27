@@ -10,6 +10,7 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             // Configurado serviceço de validação com fluent validation
             services.AddScoped<UnitValidation>();
             services.AddScoped<PersonValidation>();
+            services.AddScoped<ProductValidation>();
 
             return services;
         }

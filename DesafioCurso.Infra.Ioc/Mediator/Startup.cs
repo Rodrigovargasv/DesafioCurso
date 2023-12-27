@@ -1,8 +1,11 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Application.Handlers.PersonHandler;
+using DesafioCurso.Application.Handlers.ProductHandler;
 using DesafioCurso.Application.Handlers.UnitHandler;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +57,8 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             // Registra o handler para DeletePersonHandler
             services.AddScoped<IRequestHandler<DeletePesonRequest, DeletePersonResponse>, DeletePersonHandler>();
             #endregion
+
+            services.AddScoped<IRequestHandler<CreateProductRequest, CreateProductResponse>, CreateProductHandler>();
 
             return services; 
 
