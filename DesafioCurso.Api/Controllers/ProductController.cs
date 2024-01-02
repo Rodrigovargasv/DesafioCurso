@@ -1,4 +1,6 @@
-﻿using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Request.Product;
+using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Product;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +19,27 @@ namespace DesafioCurso.Api.Controllers
             _mediator = mediator;
         }
 
+
+
+ 
+        [HttpGet("GetAllProduct")]
+        public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
+        {
+            var command = new GetAllProductRequest();
+            command.Quantity = value;
+
+            return await _mediator.Send(command);
+        }
+
+        [HttpGet("GetProductById/{id:Guid}")]
+        public async Task<GetProductByIdResponse> GetProductById(Guid id)
+        {
+            var command = new GetProductByIdRequest();
+            command.Id = id;
+
+            return await _mediator.Send(command);
+        }
+    
 
         [HttpPost("CreateProduct")]
         public async Task<CreateProductResponse> CreateProduct([FromBody] CreateProductRequest command)

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DesafioCurso.Domain\DesafioCurso.Domain.csproj" />
+    <ProjectReference Include="..\DesafioCurso.Infra.Data\DesafioCurso.Infra.Data.csproj" />
    
   </ItemGroup>
 
