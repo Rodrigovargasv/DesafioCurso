@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
-    public class UnitRepository : RepositoryBase<Unit>, IUnitRepository
+    public class UnitRepository : RepositoryBase<Unit, ApplicationDbContext>, IUnitRepository
     {
         private readonly ApplicationDbContext _dbContext;
 

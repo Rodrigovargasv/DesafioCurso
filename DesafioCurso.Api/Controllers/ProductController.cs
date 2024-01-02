@@ -53,5 +53,11 @@ namespace DesafioCurso.Api.Controllers
             command.Id = id;
             return await _mediator.Send(command);
         }
+
+        [HttpDelete("DeleteProduct")]
+        public async Task<DeleteProductResponse> DeleteProduct([FromBody] DeleteProductRequest command)
+        {
+            return await _mediator.Send(command);
+        }
     }
 }

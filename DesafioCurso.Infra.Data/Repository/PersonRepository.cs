@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
-    public class PersonRepository : RepositoryBase<Person>, IPersonRepository
+    public class PersonRepository : RepositoryBase<Person, ApplicationDbContext>, IPersonRepository
     {
         private readonly ApplicationDbContext _dbContext;
 

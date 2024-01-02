@@ -65,6 +65,8 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<GetAllProductRequest, IEnumerable<GetAllProductResponse>>, GetAllProductHandler>();
 
             services.AddScoped<IRequestHandler<GetProductByIdRequest, GetProductByIdResponse>, GetProductByIdHandler>();
+
+            services.AddScoped<IRequestHandler<DeleteProductRequest, DeleteProductResponse>, DeleteProductHandler>();
             return services; 
 
         }

@@ -1,18 +1,18 @@
 ﻿
-using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity, TDbContext> 
+        : IRepositoryBase<TEntity> where TEntity : class
+        where TDbContext : DbContext
     {
         // Contexto do banco de dados
-        private readonly ApplicationDbContext _context;
+        private readonly TDbContext _context;
 
-        public RepositoryBase(ApplicationDbContext context)
+        public RepositoryBase(TDbContext context)
         {
             _context = context;
         }
