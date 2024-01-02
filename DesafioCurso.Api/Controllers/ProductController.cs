@@ -23,5 +23,12 @@ namespace DesafioCurso.Api.Controllers
         {
             return await _mediator.Send(command);
         }
+
+        [HttpPut("UpdateProduct/{id:Guid}")]
+        public async Task<UpdateProductResponse> UpdateProduct([FromBody] UpdateProductRequest command, Guid id)
+        {
+            command.Id = id;
+            return await _mediator.Send(command);
+        }
     }
 }

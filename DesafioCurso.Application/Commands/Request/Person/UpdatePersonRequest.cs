@@ -2,7 +2,6 @@
 using MediatR;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using System.Text.Json.Serialization;
 using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
 
 namespace DesafioCurso.Application.Commands.Request.Person
@@ -14,18 +13,18 @@ namespace DesafioCurso.Application.Commands.Request.Person
         [JsonIgnore]
         public Guid Id { get; set; }    
 
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
         public string? Document { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public string? Observation { get; set; }
         public string? AlternativeCode { get; set; }
 
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool ReleaseSale { get; set; } // liberar venda
+        public bool? ReleaseSale { get; set; } // liberar venda
 
 
-        public bool Active { get; set; } 
+        public bool? Active { get; set; } 
     }
     
 }

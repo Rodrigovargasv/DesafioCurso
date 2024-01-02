@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Domain.Common.Exceptions;
+using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using FluentValidation;
@@ -33,11 +34,21 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             #region Atualiza as propriedades da unidade com os dados da requisição
 
-            personId.FullName = string.IsNullOrEmpty(request.FullName) ? personId.FullName : request.FullName;
-            personId.Document = !string.IsNullOrEmpty(request.Document) ? null : request.Document;
-            personId.City = string.IsNullOrEmpty(request.City) ? null : request.City;
-            personId.Observation = string.IsNullOrEmpty(request.Observation) ? null : request.Observation;
-            personId.AlternativeCode = string.IsNullOrEmpty(request.AlternativeCode) ? null : request.AlternativeCode;
+            if (!string.IsNullOrEmpty(request.FullName))
+                personId.FullName = request.FullName;
+
+            if (!string.IsNullOrEmpty(request.Document))
+                personId.Document = request.Document;
+
+            if (!string.IsNullOrEmpty(request.City))
+                personId.City = request.City;
+
+            if (!string.IsNullOrEmpty(request.Observation))
+                personId.Observation = request.Observation;
+
+            if (!string.IsNullOrEmpty(request.AlternativeCode))
+                personId.AlternativeCode = request.AlternativeCode;
+
             personId.ReleaseSale = string.IsNullOrEmpty(request.ReleaseSale.ToString()) ? personId.ReleaseSale : request.ReleaseSale;
             personId.Active = string.IsNullOrEmpty(request.Active.ToString()) ? personId.Active : request.Active;
             #endregion

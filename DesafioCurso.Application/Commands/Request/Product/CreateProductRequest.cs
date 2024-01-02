@@ -1,16 +1,15 @@
 ﻿
 using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Product;
+using DesafioCurso.Domain.Commons;
 using MediatR;
 using Newtonsoft.Json;
 using System.ComponentModel;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class CreateProductRequest : IRequest<CreateProductResponse>
+    public class CreateProductRequest :IRequest<CreateProductResponse>
     {
-
-
         public string FullDescription { get; set; }
         public string BriefDescription { get; set; } // Descrição Resumida
         public decimal Price { get; set; }
