@@ -7,6 +7,7 @@ using FluentValidation;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
+using DesafioCurso.Infra.Data.Context;
 
 
 
@@ -16,10 +17,10 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
     {
 
         private readonly IUnitRepository _context;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UnitValidation _unitValidation;
 
-        public CreateUnitHandler(IUnitRepository context, IUnitOfWork uow, UnitValidation validations)
+        public CreateUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow, UnitValidation validations)
         {
             _context = context;
             _uow = uow;

@@ -4,6 +4,7 @@ using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -13,10 +14,10 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
     public class UpdatePersonHandler : IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>
     {
         private readonly IPersonRepository _personRepository;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly PersonValidation _personValidation;
 
-        public UpdatePersonHandler(IPersonRepository personRepository, IUnitOfWork uow, PersonValidation validation)
+        public UpdatePersonHandler(IPersonRepository personRepository, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validation)
         {
             _personRepository = personRepository;
             _uow = uow;
@@ -29,7 +30,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             // Verifica se a unidade existe
             if (personId is null)
-                throw new NotFoundException("Pessoa não encontrada");
+                throw new NotFoundException("Pessoa não encontrado");
 
 
             #region Atualiza as propriedades da unidade com os dados da requisição
@@ -38,7 +39,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                 personId.FullName = request.FullName;
 
             if (!string.IsNullOrEmpty(request.Document))
-                personId.Document = request.Document;
+                personId.Document = request.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
             if (!string.IsNullOrEmpty(request.City))
                 personId.City = request.City;

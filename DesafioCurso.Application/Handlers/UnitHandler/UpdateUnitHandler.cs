@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -15,10 +16,10 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
     {
 
         private readonly IUnitRepository _context;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UnitValidation _unitValidation;
 
-        public UpdateUnitHandler(IUnitRepository context, IUnitOfWork uow, UnitValidation unitValidation)
+        public UpdateUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow, UnitValidation unitValidation)
         {
             _context = context;
             _uow = uow;

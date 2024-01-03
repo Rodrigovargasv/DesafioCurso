@@ -28,6 +28,8 @@ namespace DesafioCurso.Infra.Ioc
 
             services.AddServiceValidationDomains();
 
+      
+
 
             return services;
         }

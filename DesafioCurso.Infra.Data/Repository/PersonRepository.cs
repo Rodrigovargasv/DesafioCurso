@@ -16,9 +16,13 @@ namespace DesafioCurso.Infra.Data.Repository
 
         public async Task<Person> PropertyDocumentAndAlternativeCodeExist(string document, string alternativeCode)
         {
-
+            if (document == null || alternativeCode == null)
             
-            return await _dbContext.Set<Person>().AsNoTracking().FirstOrDefaultAsync(p => p.Document == document && p.AlternativeCode == alternativeCode);
+                // Lida com o caso em que o código de barras é nulo
+                return null;
+
+
+            return await _dbContext.Set<Person>().AsNoTracking().FirstOrDefaultAsync(p => p.Document == document || p.AlternativeCode == alternativeCode);
         }
     }
 }

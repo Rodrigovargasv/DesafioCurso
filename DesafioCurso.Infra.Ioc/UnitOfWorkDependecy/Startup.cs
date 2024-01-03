@@ -9,7 +9,7 @@ namespace DesafioCurso.Infra.Ioc.UnitOfWorkDependecy
         
             internal static IServiceCollection AddServiceUnitOfWork(this IServiceCollection services)
             {
-                services.AddTransient<IUnitOfWork, UnitOfWork>();
+                services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
                 return services;
             }

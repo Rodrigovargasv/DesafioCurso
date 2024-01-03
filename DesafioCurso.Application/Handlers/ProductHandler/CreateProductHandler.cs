@@ -4,6 +4,7 @@ using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -16,11 +17,11 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
     {
         private readonly IProductRepository _productRepository;
         private readonly ProductValidation _productValidations;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
 
         private readonly IUnitRepository _unitRepository;
 
-        public CreateProductHandler(IProductRepository productRepository, ProductValidation productValidations, IUnitOfWork uow, IUnitRepository unitRepository)
+        public CreateProductHandler(IProductRepository productRepository, ProductValidation productValidations, IUnitOfWork<ApplicationDbContext> uow, IUnitRepository unitRepository)
         {
             _productRepository = productRepository;
             _productValidations = productValidations;

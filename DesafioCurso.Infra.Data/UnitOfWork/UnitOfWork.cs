@@ -1,16 +1,18 @@
 ﻿using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Infra.Data.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
     {
-        private readonly ApplicationDbContext _context;
+        private readonly TDbContext _context;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(TDbContext context)
         {
             _context = context;
         }
+
 
 
         // Implementação do unit of work

@@ -1,12 +1,13 @@
 ﻿
-using DesafioCurso.Domain.Commons;
+using DesafioCurso.Application.Commands.Response.User;
+using MediatR;
 
-namespace DesafioCurso.Domain.Entities
+namespace DesafioCurso.Application.Commands.Request.User
 {
-    public class User : EntityBase
+    public class CreateUserRequest : IRequest<CreateUserResponse>
     {
         public string FullName { get; set; }
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 

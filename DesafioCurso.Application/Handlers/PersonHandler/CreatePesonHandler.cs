@@ -4,6 +4,7 @@ using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -13,10 +14,10 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
     public class CreatePesonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResponse>
     {
         private readonly IPersonRepository _context;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly PersonValidation _personValidation;
 
-        public CreatePesonHandler(IPersonRepository context, IUnitOfWork uow, PersonValidation validations)
+        public CreatePesonHandler(IPersonRepository context, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validations)
         {
             _context = context;
             _uow = uow;
@@ -27,6 +28,8 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         {
 
             var person = request.Adapt<Person>();
+
+            person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
 
             var personValidation = await _personValidation.ValidateAsync(person);

@@ -1,16 +1,15 @@
 ﻿
 using DesafioCurso.Domain.Commons;
 
-namespace DesafioCurso.Domain.Entities
+namespace DesafioCurso.Application.Commands.Response.User
 {
-    public class User : EntityBase
+    public class GetUserByIdResponse : EntityBase
     {
+
         public string FullName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-
         // Representa um CPF ou CNPJ.
-        public string? Cpf_Cnpj { get; set; }
+        public string Cpf_Cnpj { get; set; }
     }
 }

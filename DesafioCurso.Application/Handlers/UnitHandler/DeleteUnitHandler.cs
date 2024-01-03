@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;
 using Unit = DesafioCurso.Domain.Entities.Unit;
@@ -13,10 +14,10 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
     {
 
         private readonly IUnitRepository _context;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
   
 
-        public DeleteUnitHandler(IUnitRepository context, IUnitOfWork uow)
+        public DeleteUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow)
         {
             _context = context;
             _uow = uow;
