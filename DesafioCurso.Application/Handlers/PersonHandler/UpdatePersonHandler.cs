@@ -4,6 +4,7 @@ using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
+using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -13,10 +14,10 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
     public class UpdatePersonHandler : IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>
     {
         private readonly IPersonRepository _personRepository;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly PersonValidation _personValidation;
 
-        public UpdatePersonHandler(IPersonRepository personRepository, IUnitOfWork uow, PersonValidation validation)
+        public UpdatePersonHandler(IPersonRepository personRepository, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validation)
         {
             _personRepository = personRepository;
             _uow = uow;

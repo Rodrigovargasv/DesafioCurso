@@ -16,15 +16,15 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
 
             builder.Property(x => x.FullName).HasColumnName("nome_completo").HasMaxLength(100).IsRequired();
-            builder.Property(x => x.Surnamed).HasColumnName("apelido").HasMaxLength(50);
+            builder.Property(x => x.Surname).HasColumnName("apelido").HasMaxLength(50);
             builder.Property(x => x.Email).HasColumnName("email").HasMaxLength(100).IsRequired();
             builder.Property(x => x.Password).HasColumnName("senha").HasMaxLength(255).IsRequired();
-            builder.Property(x => x.Cpf_Cnpj).HasColumnName("cpf_cnpj").HasMaxLength(14).IsRequired();
+            builder.Property(x => x.Cpf_Cnpj).HasColumnName("cpf_cnpj").HasMaxLength(14);
 
             // Configuração de index unico.
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();
-            builder.HasIndex(x => x.Surnamed).IsUnique();
+            builder.HasIndex(x => x.Surname).IsUnique();
 
 
         }

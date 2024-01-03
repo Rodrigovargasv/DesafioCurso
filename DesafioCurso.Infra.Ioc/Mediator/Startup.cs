@@ -1,12 +1,15 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Application.Commands.Response.Unit;
+using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Application.Handlers.PersonHandler;
 using DesafioCurso.Application.Handlers.ProductHandler;
 using DesafioCurso.Application.Handlers.UnitHandler;
+using DesafioCurso.Application.Handlers.UserHandler;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -58,6 +61,8 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<DeletePesonRequest, DeletePersonResponse>, DeletePersonHandler>();
             #endregion
 
+            #region Handlers de Product
+
             services.AddScoped<IRequestHandler<CreateProductRequest, CreateProductResponse>, CreateProductHandler>();
 
             services.AddScoped<IRequestHandler<UpdateProductRequest, UpdateProductResponse>, UpdateProductHandler>();
@@ -67,6 +72,11 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<GetProductByIdRequest, GetProductByIdResponse>, GetProductByIdHandler>();
 
             services.AddScoped<IRequestHandler<DeleteProductRequest, DeleteProductResponse>, DeleteProductHandler>();
+
+            #endregion
+
+            services.AddScoped<IRequestHandler<CreateUserRequest, CreateUserResponse>, CreateUserHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserRequest, IEnumerable<GetAllUserResponse>>, GetAllUserHandler>();
             return services; 
 
         }

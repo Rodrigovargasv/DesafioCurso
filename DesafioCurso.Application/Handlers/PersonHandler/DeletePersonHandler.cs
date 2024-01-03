@@ -4,6 +4,7 @@ using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
+using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;
 
@@ -13,9 +14,9 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
     {
 
         private readonly IPersonRepository _personRepository;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
 
-        public DeletePersonHandler(IPersonRepository personRepository, IUnitOfWork uow)
+        public DeletePersonHandler(IPersonRepository personRepository, IUnitOfWork<ApplicationDbContext> uow)
         {
             _personRepository = personRepository;
             _uow = uow;

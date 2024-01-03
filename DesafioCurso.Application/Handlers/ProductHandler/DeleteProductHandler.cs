@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
+using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;
 
@@ -11,9 +12,9 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
     public class DeleteProductHandler : IRequestHandler<DeleteProductRequest, DeleteProductResponse>
     {
         private readonly IProductRepository _context;
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ApplicationDbContext> _uow;
 
-        public DeleteProductHandler(IProductRepository context, IUnitOfWork uow)
+        public DeleteProductHandler(IProductRepository context, IUnitOfWork<ApplicationDbContext> uow)
         {
             _context = context;
             _uow = uow;
