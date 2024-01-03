@@ -52,5 +52,14 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [HttpDelete("DeleteUser/{id:Guid}")]
+        public async Task<DeleteUserResponse> DeleteUser(Guid id)
+        {
+            var command = new DeleteUserRequest();
+            command.Id = id;
+
+            return await _mediator.Send(command);
+        }
+
     }
 }

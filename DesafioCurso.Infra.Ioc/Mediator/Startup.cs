@@ -75,10 +75,14 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
             #endregion
 
+            #region Handlers de User
             services.AddScoped<IRequestHandler<CreateUserRequest, CreateUserResponse>, CreateUserHandler>();
             services.AddScoped<IRequestHandler<GetAllUserRequest, IEnumerable<GetAllUserResponse>>, GetAllUserHandler>();
             services.AddScoped<IRequestHandler<UpdateUserRequest, UpdateUserResponse>, UpdateUserHandler>();
             services.AddScoped<IRequestHandler<GetUserByIdRequest, GetUserByIdResponse>, GetUserByIdHandler>();
+            services.AddScoped<IRequestHandler<DeleteUserRequest, DeleteUserResponse>, DeleteUserHandler>();
+
+            #endregion
             return services; 
 
         }
