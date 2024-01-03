@@ -31,6 +31,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             var user = request.Adapt<User>();
+            user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
 
             var userValidation = await _userValidation.ValidateAsync(user);
 

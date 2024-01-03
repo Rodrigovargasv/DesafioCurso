@@ -29,6 +29,8 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var person = request.Adapt<Person>();
 
+            person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+
 
             var personValidation = await _personValidation.ValidateAsync(person);
 

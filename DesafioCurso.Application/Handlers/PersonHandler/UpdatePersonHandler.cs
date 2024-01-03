@@ -39,7 +39,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                 personId.FullName = request.FullName;
 
             if (!string.IsNullOrEmpty(request.Document))
-                personId.Document = request.Document;
+                personId.Document = request.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
             if (!string.IsNullOrEmpty(request.City))
                 personId.City = request.City;
