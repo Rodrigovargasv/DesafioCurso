@@ -77,6 +77,7 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
             services.AddScoped<IRequestHandler<CreateUserRequest, CreateUserResponse>, CreateUserHandler>();
             services.AddScoped<IRequestHandler<GetAllUserRequest, IEnumerable<GetAllUserResponse>>, GetAllUserHandler>();
+            services.AddScoped<IRequestHandler<UpdateUserRequest, UpdateUserResponse>, UpdateUserHandler>();
             return services; 
 
         }

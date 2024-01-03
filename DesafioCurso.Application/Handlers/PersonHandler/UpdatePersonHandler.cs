@@ -30,7 +30,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             // Verifica se a unidade existe
             if (personId is null)
-                throw new NotFoundException("Pessoa não encontrada");
+                throw new NotFoundException("Pessoa não encontrado");
 
 
             #region Atualiza as propriedades da unidade com os dados da requisição
