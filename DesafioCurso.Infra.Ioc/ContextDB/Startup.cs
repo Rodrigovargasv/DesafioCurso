@@ -23,6 +23,10 @@ namespace DesafioCurso.Infra.Ioc.ContextDB
                options.UseSqlite(configuration.GetConnectionString("SqliteConnection"),
                    builder => builder.MigrationsAssembly(typeof(SqliteDbcontext).Assembly.FullName)));
 
+            // Configuração de banco de dados em memoria
+            services.AddDbContext<DataBaseInMemory>(options =>
+                options.UseInMemoryDatabase("BancoEmMemoria"));
+
 
 
             return services;
