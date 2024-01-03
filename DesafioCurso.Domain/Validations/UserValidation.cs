@@ -11,21 +11,21 @@ namespace DesafioCurso.Domain.Validations
         public UserValidation() 
         {
             RuleFor(x => x.FullName)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo nome não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo nome não pode conter espaço em branco.")
                 .NotNull()
                 .MaximumLength(100);
 
             RuleFor(x => x.Surname)
-                 .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo apelido não pode conter espaço em branco.");
+                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo apelido não pode conter espaço em branco.");
 
 
 
             RuleFor(x => x.Email)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo email não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo email não pode conter espaço em branco.")
                 .EmailAddress();
 
             RuleFor(x => x.Password)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.")
                 .NotNull()
                 .NotEmpty()
                 .Matches(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!%^&*])[A-Za-z\d@#$!%^&*]{8,}$")
@@ -33,8 +33,8 @@ namespace DesafioCurso.Domain.Validations
 
 
             RuleFor(p => p.Cpf_Cnpj)
-               .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo CPF/CNPJ não pode conter espaço em branco.")
-               .Must(value => Utils.ValidationCpfAndCnpj(value))
+               .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo CPF/CNPJ não pode conter espaço em branco.")
+               .Must(value => UtilsValidations.ValidationCpfAndCnpj(value))
                .WithMessage("CPF ou CNPJ inválido");
         }
 

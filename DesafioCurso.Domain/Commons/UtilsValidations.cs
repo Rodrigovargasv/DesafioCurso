@@ -4,7 +4,7 @@ using DocumentValidator;
 
 namespace DesafioCurso.Domain.Commons
 {
-    public static class Utils
+    public static class UtilsValidations
     {
         public static bool ContainsWhitespace(string value)
         {

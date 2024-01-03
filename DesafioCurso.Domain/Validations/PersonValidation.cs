@@ -11,30 +11,30 @@ namespace DesafioCurso.Domain.Validations
         public PersonValidation()
         {
             RuleFor(p => p.FullName)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo descrição completa não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo descrição completa não pode conter espaço em branco.")
                 .NotNull()
                 .NotEmpty()
                 .MaximumLength(100);
 
 
             RuleFor(p => p.Document)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo documento não pode conter espaço em branco.")
-                .Must(value => Utils.ValidationCpfAndCnpj(value))
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo documento não pode conter espaço em branco.")
+                .Must(value => UtilsValidations.ValidationCpfAndCnpj(value))
                 .WithMessage("CPF ou CNPJ inválido");
 
             RuleFor(p => p.City)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo cidade não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo cidade não pode conter espaço em branco.")
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(30);
 
 
             RuleFor(p => p.Observation)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo obeservação não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo obeservação não pode conter espaço em branco.")
                 .MaximumLength(250);
 
             RuleFor(p => p.AlternativeCode)
-                .Must(value => !Utils.ContainsWhitespace(value)).WithMessage("O campo codigo alternativo não pode conter espaço em branco.")
+                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo codigo alternativo não pode conter espaço em branco.")
                 .MaximumLength(50);
 
         }

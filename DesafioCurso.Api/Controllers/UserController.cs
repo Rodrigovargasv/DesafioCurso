@@ -1,6 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Request.User;
-using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.User;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +18,21 @@ namespace DesafioCurso.Api.Controllers
             _mediator = mediator;
         }
 
-   
+
         [HttpGet("GetAllUser")]
         public async Task<IEnumerable<GetAllUserResponse>> GetAllPerson(int value)
         {
             var command = new GetAllUserRequest();
             command.Quantity = value;
+
+            return await _mediator.Send(command);
+        }
+
+        [HttpGet("GetUserById/{id:Guid}")]
+        public async Task<GetUserByIdResponse> GetUserById(Guid id)
+        {
+            var command = new GetUserByIdRequest();
+            command.Id = id;
 
             return await _mediator.Send(command);
         }

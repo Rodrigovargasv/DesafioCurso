@@ -35,7 +35,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             // Verifica se a unidade existe
             if (userId is null)
-                throw new NotFoundException("Usuário não encontrada");
+                throw new NotFoundException("Usuário não encontrado");
 
 
             #region Atualiza as propriedades da usuário com os dados da requisição
