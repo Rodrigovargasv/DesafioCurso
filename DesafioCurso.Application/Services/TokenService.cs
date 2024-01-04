@@ -17,7 +17,7 @@ namespace DesafioCurso.Application.Services
         }
 
 
-        public string GenerateToken(User user, UserPermission userPermission)
+        public async Task<string> GenerateToken(User user, UserPermission userPermission)
         {
             // Busca dados no appsettings
             var builder = new ConfigurationBuilder()

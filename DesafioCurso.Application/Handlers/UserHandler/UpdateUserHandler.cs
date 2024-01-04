@@ -60,7 +60,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
 
-            var userCheck = await _userRepository.ChecksIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
+            var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
 
             var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
 

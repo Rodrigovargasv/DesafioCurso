@@ -1,4 +1,5 @@
 ﻿
+using DesafioCurso.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ namespace DesafioCurso.Infra.Ioc.JWT
     {
         internal static IServiceCollection AddServiceJwtAuthenticationAndAutorization(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<TokenService>();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

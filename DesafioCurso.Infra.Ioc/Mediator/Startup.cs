@@ -88,6 +88,8 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             #endregion
 
             services.AddScoped<IRequestHandler<UpdateUserPermissionRequest, UpdateUserPermissionResponse>, UpdateUserPermissionHandler>();
+
+            services.AddScoped<IRequestHandler<LoginUserRequest, LoginUserResponse>, LoginUserHandler>();
             return services; 
 
         }

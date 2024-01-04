@@ -44,7 +44,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
 
-            var userCheck = await _userRepository.ChecksIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
+            var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
 
             var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
 
@@ -54,7 +54,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             
             await _userRepository.Create(user);
-            await _userPermissionRepository.Create(new UserPermission() { Role = UserRole.CommonUser, UserId = user.Id.Value});
+            await _userPermissionRepository.Create(new UserPermission() { Role = UserRole.commonUser, UserId = user.Id.Value});
             await _uow.Commit();
            
 
