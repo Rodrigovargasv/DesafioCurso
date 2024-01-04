@@ -15,7 +15,7 @@ namespace DesafioCurso.Domain.Validations
                 .NotNull()
                 .MaximumLength(100);
 
-            RuleFor(x => x.Surname)
+            RuleFor(x => x.Nickname)
                  .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo apelido não pode conter espaço em branco.");
 
 

@@ -2,14 +2,17 @@
 using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Request.User;
+using DesafioCurso.Application.Commands.Request.UserPermission;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Application.Commands.Response.User;
+using DesafioCurso.Application.Commands.Response.UserPermission;
 using DesafioCurso.Application.Handlers.PersonHandler;
 using DesafioCurso.Application.Handlers.ProductHandler;
 using DesafioCurso.Application.Handlers.UnitHandler;
 using DesafioCurso.Application.Handlers.UserHandler;
+using DesafioCurso.Application.Handlers.UserPermissionHandler;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -83,6 +86,8 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<DeleteUserRequest, DeleteUserResponse>, DeleteUserHandler>();
 
             #endregion
+
+            services.AddScoped<IRequestHandler<UpdateUserPermissionRequest, UpdateUserPermissionResponse>, UpdateUserPermissionHandler>();
             return services; 
 
         }

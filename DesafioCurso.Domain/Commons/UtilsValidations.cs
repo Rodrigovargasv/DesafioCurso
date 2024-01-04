@@ -1,6 +1,7 @@
 ﻿
 
 using DocumentValidator;
+using System.Text.RegularExpressions;
 
 namespace DesafioCurso.Domain.Commons
 {
@@ -8,7 +9,10 @@ namespace DesafioCurso.Domain.Commons
     {
         public static bool ContainsWhitespace(string value)
         {
-            return value?.Contains(" ") == true;
+           if (value == null) return false;
+
+           return Regex.IsMatch(value, @"^\s|\s$") ? true : false;
+
         }
 
         public static bool ValidationCpfAndCnpj(string document)

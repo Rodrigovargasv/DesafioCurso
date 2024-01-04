@@ -29,12 +29,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Configuração de middleware: GlobalException
+// Configuração de middlewares: GlobalException, Authentication e Authorization
 app.UseInfrastructure(builder.Configuration);
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 
 app.MapControllers();
 

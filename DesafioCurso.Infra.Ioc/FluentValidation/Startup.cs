@@ -12,6 +12,7 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddScoped<PersonValidation>();
             services.AddScoped<ProductValidation>();
             services.AddScoped<UserValidation>();
+            services.AddScoped<UserPermissionValidation>();
 
             return services;
         }

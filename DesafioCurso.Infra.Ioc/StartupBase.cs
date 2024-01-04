@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using DesafioCurso.Infra.Ioc.FluentValidation;
+using DesafioCurso.Infra.Ioc.JWT;
 
 
 namespace DesafioCurso.Infra.Ioc
@@ -28,8 +29,7 @@ namespace DesafioCurso.Infra.Ioc
 
             services.AddServiceValidationDomains();
 
-      
-
+            services.AddServiceJwtAuthenticationAndAutorization(configuration);
 
             return services;
         }

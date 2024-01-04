@@ -44,7 +44,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
                 userId.FullName = request.FullName;
 
             if (!string.IsNullOrEmpty(request.Surname))
-                userId.Surname = request.Surname;
+                userId.Nickname = request.Surname;
 
             if (!string.IsNullOrEmpty(request.Email))
                 userId.Email = request.Email;

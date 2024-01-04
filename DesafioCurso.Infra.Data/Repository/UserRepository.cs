@@ -20,7 +20,7 @@ namespace DesafioCurso.Infra.Data.Repository
             if (cpf_cnpj == null || email == null || surname == null)
                 return null;
 
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj || u.Email == email || u.Surname == surname);
+            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj || u.Email == email || u.Nickname == surname);
         }
        
     }

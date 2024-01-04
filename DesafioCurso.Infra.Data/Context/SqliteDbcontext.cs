@@ -14,14 +14,17 @@ namespace DesafioCurso.Infra.Data.Context
         // Configurar o mapeamento das entidades para o banco de dados
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserPermission> Permissions { get; set; }
 
 
         // Realiza a aplicação automatica das configurações de entidades que são definidas nas pasta EntityConfiguration
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Gera e aplica as migrações apenas da classe User.
+            // Gera e aplica as migrações apenas da classe User e UserPermission.
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new UserConfiguration());
+
+            builder.ApplyConfiguration(new UserPermissionConfiguration());
 
         }
     }
