@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace DesafioCurso.Api.Controllers
         }
 
 
-
+        [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllPerson")]
         public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int value)
         {
@@ -31,6 +32,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetPersonById/{id:Guid}")]
         public async Task<GetPersonByIdResponse> GetPersonByID(Guid id)
         {
@@ -40,6 +42,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpPost("CreatePerson")]
         public async Task<CreatePersonResponse> CreateUnit([FromBody] CreatePersonRequest command)
         {
@@ -47,6 +50,7 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpPut("UpdatePerson/{id:Guid}")]
         public async Task<UpdatePersonResponse> UpdatePerson([FromBody] UpdatePersonRequest command, Guid id)
         {
@@ -55,6 +59,7 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpDelete("DeletePerson")]
         public async Task<DeletePersonResponse> DeletePerson([FromBody] DeletePesonRequest command)
         {

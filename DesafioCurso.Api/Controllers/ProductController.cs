@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Product;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace DesafioCurso.Api.Controllers
 
 
 
- 
+        [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
         {
@@ -31,6 +32,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetProductById/{id:Guid}")]
         public async Task<GetProductByIdResponse> GetProductById(Guid id)
         {
@@ -39,14 +41,16 @@ namespace DesafioCurso.Api.Controllers
 
             return await _mediator.Send(command);
         }
-    
 
+
+        [Authorize(Roles = "administrator, manager, seller")]
         [HttpPost("CreateProduct")]
         public async Task<CreateProductResponse> CreateProduct([FromBody] CreateProductRequest command)
         {
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpPut("UpdateProduct/{id:Guid}")]
         public async Task<UpdateProductResponse> UpdateProduct([FromBody] UpdateProductRequest command, Guid id)
         {
@@ -54,6 +58,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpDelete("DeleteProduct")]
         public async Task<DeleteProductResponse> DeleteProduct([FromBody] DeleteProductRequest command)
         {

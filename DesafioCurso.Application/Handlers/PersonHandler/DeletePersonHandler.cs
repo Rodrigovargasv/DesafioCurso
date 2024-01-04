@@ -30,6 +30,9 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             if (personId is null)
                 throw new NotFoundException("Pessoa não encontrada.");
 
+            if (personId.ReleaseSale == true)
+                throw new CustomException ("Não foi possível realizar a exclusão da pessoa, desative a opção liberar venda e tente novamente.");
+
             _personRepository.Delete(personId);
             await _uow.Commit();
 

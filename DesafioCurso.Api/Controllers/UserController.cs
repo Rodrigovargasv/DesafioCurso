@@ -2,6 +2,7 @@
 using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioCurso.Api.Controllers
@@ -19,6 +20,7 @@ namespace DesafioCurso.Api.Controllers
         }
 
 
+        [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUser")]
         public async Task<IEnumerable<GetAllUserResponse>> GetAllPerson(int value)
         {
@@ -28,6 +30,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetUserById/{id:Guid}")]
         public async Task<GetUserByIdResponse> GetUserById(Guid id)
         {
@@ -37,6 +40,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpPost("CreateUser")]
         public async Task<CreateUserResponse> CreateUser(CreateUserRequest command)
         {
@@ -44,6 +48,7 @@ namespace DesafioCurso.Api.Controllers
             return await _mediator.Send(command);
         }
 
+        [Authorize(Roles = "administrator")]
         [HttpPut("UpdateUser/{id:Guid}")]
         public async Task<UpdateUserResponse> UpdateUser([FromBody] UpdateUserRequest command, Guid id)
         {
@@ -52,6 +57,7 @@ namespace DesafioCurso.Api.Controllers
 
         }
 
+        [Authorize(Roles = "administrator, manager")]
         [HttpDelete("DeleteUser/{id:Guid}")]
         public async Task<DeleteUserResponse> DeleteUser(Guid id)
         {

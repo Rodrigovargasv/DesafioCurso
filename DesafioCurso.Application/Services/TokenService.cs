@@ -57,7 +57,7 @@ namespace DesafioCurso.Application.Services
                 claims.AddClaim(new Claim(ClaimTypes.Email, user.Email));
 
             if (!string.IsNullOrEmpty(user.Nickname))
-                claims.AddClaim(new Claim(ClaimTypes.Surname, user.Nickname));
+                claims.AddClaim(new Claim(ClaimTypes.Name, user.Nickname));
 
             claims.AddClaim(new Claim(ClaimTypes.Role, userPermission.Role.ToString()));
 
