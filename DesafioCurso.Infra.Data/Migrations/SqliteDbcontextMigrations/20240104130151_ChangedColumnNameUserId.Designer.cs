@@ -3,6 +3,7 @@ using System;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    partial class SqliteDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240104130151_ChangedColumnNameUserId")]
+    partial class ChangedColumnNameUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -41,16 +44,16 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                         .HasColumnType("TEXT")
                         .HasColumnName("nome_completo");
 
-                    b.Property<string>("Nickname")
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("apelido");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("TEXT")
                         .HasColumnName("senha");
+
+                    b.Property<string>("Surname")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("apelido");
 
                     b.HasKey("Id");
 
@@ -60,7 +63,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Nickname")
+                    b.HasIndex("Surname")
                         .IsUnique();
 
                     b.ToTable("usuario", (string)null);
@@ -84,8 +87,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("permissões", (string)null);
                 });
@@ -93,8 +95,8 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
             modelBuilder.Entity("DesafioCurso.Domain.Entities.UserPermission", b =>
                 {
                     b.HasOne("DesafioCurso.Domain.Entities.User", "User")
-                        .WithOne("Permission")
-                        .HasForeignKey("DesafioCurso.Domain.Entities.UserPermission", "UserId")
+                        .WithMany("Permissions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -103,7 +105,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Permission");
+                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

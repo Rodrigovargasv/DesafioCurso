@@ -3,6 +3,7 @@ using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
+using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
@@ -19,25 +20,31 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         private readonly IUnitOfWork<SqliteDbcontext> _uow;
         private readonly UserValidation _userValidation;
         private readonly IPersonRepository _personRepository;
+        private readonly IUserPermissionRepository _userPermissionRepository;
 
-        public CreateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow, UserValidation userValidation, IPersonRepository personRepository)
+        public CreateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow, 
+            UserValidation userValidation, IPersonRepository personRepository, IUserPermissionRepository userPermissionRepository)
         {
             _userRepository = userRepository;
             _uow = uow;
             _userValidation = userValidation;
             _personRepository = personRepository;
+            _userPermissionRepository = userPermissionRepository;
         }
 
         public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             var user = request.Adapt<User>();
-            user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+
+            if(user.Cpf_Cnpj != null)
+                user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+
 
             var userValidation = await _userValidation.ValidateAsync(user);
 
             if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
 
-            var userCheck = await _userRepository.ChecksIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
+            var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Nickname);
 
             var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
 
@@ -45,7 +52,12 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (userCheck != null ) throw new CustomException("Ja existe um usuário com esta informação de CPF/CNPJ, Email ou Apelido.");
 
+            if (request.Password != request.ConfirmPassword)
+                throw new BadRequestException("O dados dos campos senha e confirmação de senha devem ser iguais");
+
+            
             await _userRepository.Create(user);
+            await _userPermissionRepository.Create(new UserPermission() { Role = UserRole.commonUser, UserId = user.Id.Value});
             await _uow.Commit();
            
 
