@@ -29,16 +29,20 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var person = request.Adapt<Person>();
 
-            person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+            if (person.Document != null)
+                person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
 
             var personValidation = await _personValidation.ValidateAsync(person);
 
             if (!personValidation.IsValid) throw new ValidationException(personValidation.Errors);
 
-            var personExists = await _context.PropertyDocumentAndAlternativeCodeExist(person.Document, person.AlternativeCode);
+            var documentExist = await _context.PropertyDocumentExist(person.Document);
 
-            if (personExists != null) throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
+            var alternativeCode = await _context.PropertyAlternativeCodeExist(person.Document);
+
+            if (alternativeCode != null || documentExist != null) 
+                throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
 
 
             await _context.Create(person);

@@ -49,7 +49,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (request.Password != request.ConfirmPassword)
                 throw new BadRequestException("O dados dos campos senha e confirmação de senha devem ser iguais");
 
-            var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
+            var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if(documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 

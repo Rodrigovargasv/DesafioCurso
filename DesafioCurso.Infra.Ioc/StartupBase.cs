@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using DesafioCurso.Infra.Ioc.FluentValidation;
 using DesafioCurso.Infra.Ioc.JWT;
+using DesafioCurso.Infra.Ioc.Swagger;
 
 
 namespace DesafioCurso.Infra.Ioc
@@ -30,6 +31,8 @@ namespace DesafioCurso.Infra.Ioc
             services.AddServiceValidationDomains();
 
             services.AddServiceJwtAuthenticationAndAutorization(configuration);
+
+            services.AddServiceSwagger();
 
             return services;
         }

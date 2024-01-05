@@ -5,6 +5,8 @@ namespace DesafioCurso.Domain.Interfaces
 {
     public interface IPersonRepository : IRepositoryBase<Person>
     {
-        Task<Person> PropertyDocumentAndAlternativeCodeExist(string document, string AlternativeCode);    
+        Task<Person> PropertyDocumentExist(string document);   
+        Task<Person> PropertyAlternativeCodeExist(string AlternativeCode);   
+        
     }
 }

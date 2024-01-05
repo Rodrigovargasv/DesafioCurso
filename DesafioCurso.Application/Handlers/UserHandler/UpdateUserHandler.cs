@@ -62,7 +62,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
 
-            var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
+            var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 

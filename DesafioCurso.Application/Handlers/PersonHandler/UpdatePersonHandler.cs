@@ -8,6 +8,8 @@ using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace DesafioCurso.Application.Handlers.PersonHandler
 {
@@ -32,14 +34,20 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             if (personId is null)
                 throw new NotFoundException("Pessoa não encontrado");
 
-
             #region Atualiza as propriedades da unidade com os dados da requisição
 
             if (!string.IsNullOrEmpty(request.FullName))
                 personId.FullName = request.FullName;
 
             if (!string.IsNullOrEmpty(request.Document))
+            {
                 personId.Document = request.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+
+                var documentExist = await _personRepository.PropertyDocumentExist(personId.Document);
+
+                if (documentExist != null) 
+                    throw new CustomException("O documento não pode ser cadastrado, tente novamente");
+            }
 
             if (!string.IsNullOrEmpty(request.City))
                 personId.City = request.City;
@@ -48,18 +56,19 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                 personId.Observation = request.Observation;
 
             if (!string.IsNullOrEmpty(request.AlternativeCode))
+            {
                 personId.AlternativeCode = request.AlternativeCode;
+
+                var alternativeCode = await _personRepository.PropertyAlternativeCodeExist(personId.AlternativeCode);
+
+                if (alternativeCode != null) 
+                    throw new CustomException("Já existe um código alternativo com estas informações, tente novamente");
+            }
 
             personId.ReleaseSale = string.IsNullOrEmpty(request.ReleaseSale.ToString()) ? personId.ReleaseSale : request.ReleaseSale;
             personId.Active = string.IsNullOrEmpty(request.Active.ToString()) ? personId.Active : request.Active;
             #endregion
 
-
-            // Verifica se documento ou codigo alternativo já existe no banco de dados.
-            var personExist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(personId.Document, personId.AlternativeCode);
-
-            if (personExist != null)
-                throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
 
             var personValidation = await _personValidation.ValidateAsync(personId);
 
