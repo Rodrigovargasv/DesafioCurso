@@ -46,14 +46,24 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Nickname);
 
+            if (request.Password != request.ConfirmPassword)
+                throw new BadRequestException("O dados dos campos senha e confirmação de senha devem ser iguais");
+
             var documentInPersonexist = await _personRepository.PropertyDocumentAndAlternativeCodeExist(request.Cpf_Cnpj, "");
 
             if(documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 
             if (userCheck != null ) throw new CustomException("Ja existe um usuário com esta informação de CPF/CNPJ, Email ou Apelido.");
 
-            if (request.Password != request.ConfirmPassword)
-                throw new BadRequestException("O dados dos campos senha e confirmação de senha devem ser iguais");
+            var person = await _personRepository.GetById(request.PersonId);
+
+            if (person == null)
+                throw new NotFoundException("Não possível realizar o vinculo entre pessoa e usuario, pois não foi encontrado a pesssoa informada");
+
+            var personId = await _userRepository.GetById(request.PersonId);
+
+            if (personId != null)
+                throw new BadRequestException("Já existe um usuário com estes dados de pessoa.");
 
             
             await _userRepository.Create(user);

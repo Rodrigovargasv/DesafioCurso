@@ -11,13 +11,13 @@ using MediatR;
 
 namespace DesafioCurso.Application.Handlers.PersonHandler
 {
-    public class CreatePesonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResponse>
+    public class CreatePersonHandler : IRequestHandler<CreatePersonRequest, CreatePersonResponse>
     {
         private readonly IPersonRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly PersonValidation _personValidation;
 
-        public CreatePesonHandler(IPersonRepository context, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validations)
+        public CreatePersonHandler(IPersonRepository context, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validations)
         {
             _context = context;
             _uow = uow;

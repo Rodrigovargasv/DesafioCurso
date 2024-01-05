@@ -10,7 +10,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
         public void Configure(EntityTypeBuilder<UserPermission> builder)
         {
             // Configura nome da tabela no banco de dados
-            builder.ToTable("permissões");
+            builder.ToTable("permissoes");
 
             // Configura o banco de dados para gerar automaticamente o id
             builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();

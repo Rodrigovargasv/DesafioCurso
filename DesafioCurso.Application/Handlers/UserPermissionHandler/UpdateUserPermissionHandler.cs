@@ -2,12 +2,9 @@
 using DesafioCurso.Application.Commands.Request.UserPermission;
 using DesafioCurso.Application.Commands.Response.UserPermission;
 using DesafioCurso.Domain.Common.Exceptions;
-using DesafioCurso.Domain.Entities;
-using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
-using DesafioCurso.Infra.Data.Repository;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -33,7 +30,7 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
         {
             var userId = await _userPermissionRepository.VerifyIfUserExist(request.UserId);
 
-            // Verifica se a unidade existe
+            // Verifica se a usuário existe
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 

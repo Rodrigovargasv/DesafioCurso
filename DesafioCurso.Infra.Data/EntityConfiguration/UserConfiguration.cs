@@ -24,9 +24,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Relacionamento 1 para muitos entre permissões e usuário
             builder.HasOne(u => u.Permission)
             .WithOne(u => u.User)
-            .HasForeignKey<UserPermission>(x => x.Id);
-
-
+            .HasForeignKey<UserPermission>(x => x.Id)
+            .OnDelete(DeleteBehavior.Cascade);
             // Configuração de index unico.
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();

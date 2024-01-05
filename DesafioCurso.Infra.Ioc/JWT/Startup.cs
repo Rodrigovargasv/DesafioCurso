@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Services;
+﻿using DesafioCurso.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

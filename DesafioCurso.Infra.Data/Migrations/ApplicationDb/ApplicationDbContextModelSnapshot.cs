@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations
+namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -29,7 +29,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(true)
@@ -62,7 +62,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("character varying(250)")
                         .HasColumnName("observacao");
 
-                    b.Property<bool>("ReleaseSale")
+                    b.Property<bool?>("ReleaseSale")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false)
@@ -92,7 +92,8 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("character varying(10)")
                         .HasColumnName("unidade");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(true)
@@ -115,19 +116,21 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("descricao_completa");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
+                        .IsRequired()
                         .HasPrecision(18, 2)
                         .HasColumnType("numeric(18,2)")
                         .HasColumnName("preco");
 
-                    b.Property<int>("QuantityStock")
+                    b.Property<int?>("QuantityStock")
                         .ValueGeneratedOnAdd()
                         .HasPrecision(18, 2)
                         .HasColumnType("integer")
                         .HasDefaultValue(0)
                         .HasColumnName("quantidade_estoque");
 
-                    b.Property<bool>("Saleable")
+                    b.Property<bool?>("Saleable")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false)
@@ -168,56 +171,6 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("unidade", (string)null);
-                });
-
-            modelBuilder.Entity("DesafioCurso.Domain.Entities.User", b =>
-                {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Cpf_Cnpj")
-                        .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("character varying(14)")
-                        .HasColumnName("cpf_cnpj");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("nome_completo");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("senha");
-
-                    b.Property<string>("Surnamed")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("apelido");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Cpf_Cnpj")
-                        .IsUnique();
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Surnamed")
-                        .IsUnique();
-
-                    b.ToTable("usuario", (string)null);
                 });
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Product", b =>

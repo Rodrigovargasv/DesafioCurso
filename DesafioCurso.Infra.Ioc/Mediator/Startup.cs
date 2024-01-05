@@ -55,7 +55,7 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             // Registra o handler para GetPersonByIdHandler
             services.AddScoped<IRequestHandler<GetPersonByIdRequest, GetPersonByIdResponse>, GetPersonByIdHandler>();
 
-            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePesonHandler>();
+            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePersonHandler>();
 
             // Registra o handler para UpdatePersonHandler
             services.AddScoped<IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>, UpdatePersonHandler>();
