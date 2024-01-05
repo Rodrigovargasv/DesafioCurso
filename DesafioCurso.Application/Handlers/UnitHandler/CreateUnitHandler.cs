@@ -44,7 +44,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             var unitExists = await _context.PropertyAcronymExists(unit.Acronym);
 
             if (unitExists != null)
-                throw new CustomException($"Já existe um unidade: {unit.Acronym}");
+                throw new CustomException($"Já existe a unidade: {unit.Acronym}");
 
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();

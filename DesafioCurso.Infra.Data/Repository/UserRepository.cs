@@ -20,7 +20,7 @@ namespace DesafioCurso.Infra.Data.Repository
             if (cpf_cnpj == null)
                 return null;
 
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
         }
 
 
@@ -30,7 +30,7 @@ namespace DesafioCurso.Infra.Data.Repository
             if (email == null)
                 return null;
 
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<User> CheckIfNicknameExist(string nickname)
@@ -38,7 +38,7 @@ namespace DesafioCurso.Infra.Data.Repository
             if (nickname == null)
                 return null;
 
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
         }
 
 
@@ -51,10 +51,10 @@ namespace DesafioCurso.Infra.Data.Repository
             bool isEmail = IsValidEmail(userName);
 
             if(isEmail)
-                return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName && u.Password == password);
+                return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName && u.Password == password);
 
     
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName && u.Password == password);
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName && u.Password == password);
         }
 
         // verifica se é email o que o usuário digitou

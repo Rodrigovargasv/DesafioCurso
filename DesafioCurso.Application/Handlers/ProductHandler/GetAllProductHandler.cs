@@ -1,6 +1,5 @@
 ﻿
 using DesafioCurso.Application.Commands.Request.Product;
-using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;

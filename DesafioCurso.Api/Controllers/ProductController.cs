@@ -30,6 +30,16 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
+        [HttpGet("GetAllProductSeleable")]
+        public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int value)
+        {
+            var command = new GetAllProductSeleableRequest();
+            command.Quantity = value;
+
+            return await _mediator.Send(command);
+        }
+
+        [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetProductById/{id:Guid}")]
         public async Task<GetProductByIdResponse> GetProductById(Guid id)
         {

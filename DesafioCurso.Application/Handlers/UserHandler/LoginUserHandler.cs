@@ -25,7 +25,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
         public async Task<LoginUserResponse> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var userLogin = await _userRepository.CheckDataLogin(request.UserName, request.Password);
+            var userLogin = await _userRepository.CheckDataLogin(request.UserName.ToLower(), request.Password);
 
             if (userLogin == null)
                 throw new BadRequestException("Usuário ou senha inválido.");

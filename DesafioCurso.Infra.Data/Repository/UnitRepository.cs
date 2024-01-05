@@ -16,7 +16,7 @@ namespace DesafioCurso.Infra.Data.Repository
         }
         public async Task<Unit> PropertyAcronymExists(string acronym)
         {
-            return await _dbContext.Set<Unit>().AsNoTracking().FirstOrDefaultAsync(p => p.Acronym == acronym);
+            return await _dbContext.Units.AsNoTracking().FirstOrDefaultAsync(p => p.Acronym == acronym);
         }
 
     }

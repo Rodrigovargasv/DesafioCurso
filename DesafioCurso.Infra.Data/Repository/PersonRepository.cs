@@ -21,7 +21,7 @@ namespace DesafioCurso.Infra.Data.Repository
                 return null;
 
 
-            return await _dbContext.Set<Person>().AsNoTracking().FirstOrDefaultAsync(p => p.AlternativeCode == alternativeCode);
+            return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.AlternativeCode == alternativeCode);
         }
 
      
@@ -31,7 +31,7 @@ namespace DesafioCurso.Infra.Data.Repository
             if (document == null)
                 return null;
 
-            return await _dbContext.Set<Person>().AsNoTracking().FirstOrDefaultAsync(p => p.Document == document);
+            return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.Document == document);
         }
     }
 }

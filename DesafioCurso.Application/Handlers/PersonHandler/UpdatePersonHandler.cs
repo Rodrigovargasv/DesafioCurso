@@ -1,15 +1,14 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Domain.Common.Exceptions;
-using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace DesafioCurso.Application.Handlers.PersonHandler
 {
@@ -65,8 +64,12 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                     throw new CustomException("Já existe um código alternativo com estas informações, tente novamente");
             }
 
-            personId.ReleaseSale = string.IsNullOrEmpty(request.ReleaseSale.ToString()) ? personId.ReleaseSale : request.ReleaseSale;
-            personId.Active = string.IsNullOrEmpty(request.Active.ToString()) ? personId.Active : request.Active;
+            if (!string.IsNullOrEmpty(request.ReleaseSale.ToString()))
+                personId.ReleaseSale = request.ReleaseSale;
+
+            if (!string.IsNullOrEmpty(request.Active.ToString()))
+                personId.Active = request.Active;
+
             #endregion
 
 

@@ -15,6 +15,14 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbContext = context;
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductsSaleables(int quantity)
+        {
+            return await _dbContext.Products
+                 .Where(s => s.Saleable == true)
+                 .Take(quantity)
+                 .ToListAsync();
+        }
+
         public async Task<Product> VerifyIfBarCodeExists(string? barCode)
         {
             if (barCode == null)
@@ -23,11 +31,13 @@ namespace DesafioCurso.Infra.Data.Repository
                 return null;
             }
 
-            return await _dbContext.Set<Product>()
+            return await _dbContext.Products
                 .AsNoTracking()
                 .FirstOrDefaultAsync(b => b.BarCode == barCode);
             
         }
+
+
     }
     
 }

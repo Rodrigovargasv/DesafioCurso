@@ -2,7 +2,6 @@
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
