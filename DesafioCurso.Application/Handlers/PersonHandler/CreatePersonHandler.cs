@@ -24,14 +24,12 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             _personValidation = validations;
         }
 
-        public async  Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
+        public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
-
             var person = request.Adapt<Person>();
 
             if (person.Document != null)
                 person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
-
 
             var personValidation = await _personValidation.ValidateAsync(person);
 
@@ -41,14 +39,12 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var alternativeCode = await _context.PropertyAlternativeCodeExist(person.AlternativeCode);
 
-            if (alternativeCode != null || documentExist != null) 
+            if (alternativeCode != null || documentExist != null)
                 throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
-
 
             await _context.Create(person);
 
             await _uow.Commit();
-
 
             return person.Adapt<CreatePersonResponse>();
         }

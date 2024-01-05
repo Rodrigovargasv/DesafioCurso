@@ -1,6 +1,4 @@
-﻿
-
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;

@@ -1,11 +1,9 @@
-﻿
-using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Infra.Data.Context;
+﻿using DesafioCurso.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
-    public class RepositoryBase<TEntity, TDbContext> 
+    public class RepositoryBase<TEntity, TDbContext>
         : IRepositoryBase<TEntity> where TEntity : class
         where TDbContext : DbContext
     {
@@ -17,7 +15,6 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
-
         public async Task<IEnumerable<TEntity>> GetAll(int quantidade)
         {
             return await _context.Set<TEntity>().Take(quantidade).ToListAsync();
@@ -25,13 +22,12 @@ namespace DesafioCurso.Infra.Data.Repository
 
         public async Task Create(TEntity entity)
         {
-           await _context.Set<TEntity>().AddAsync(entity);    
-        
+            await _context.Set<TEntity>().AddAsync(entity);
         }
 
         public void Update(TEntity entity)
         {
-             _context.Set<TEntity>().Update(entity);
+            _context.Set<TEntity>().Update(entity);
         }
 
         public async Task<TEntity> GetById(Guid? id)
@@ -41,7 +37,7 @@ namespace DesafioCurso.Infra.Data.Repository
 
         public void Delete(TEntity entity)
         {
-             _context.Set<TEntity>().Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
         }
     }
 }

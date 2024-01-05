@@ -8,6 +8,5 @@ namespace DesafioCurso.Application.Commands.Request.Unit
         public string Acronym { get; set; } // Sigla
 
         public string Decription { get; set; }
-
     }
 }

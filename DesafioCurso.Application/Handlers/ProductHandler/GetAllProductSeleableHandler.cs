@@ -1,10 +1,8 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Application.Handlers.ProductHandler
 {

@@ -1,8 +1,6 @@
 ﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
-
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {
@@ -32,9 +30,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasIndex(x => x.Nickname).IsUnique();
-
         }
-
-
     }
 }

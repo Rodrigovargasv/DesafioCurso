@@ -17,8 +17,6 @@ namespace DesafioCurso.Api.Controllers
             _mediator = mediator;
         }
 
-
-
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
@@ -48,7 +46,6 @@ namespace DesafioCurso.Api.Controllers
 
             return await _mediator.Send(command);
         }
-
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpPost("CreateProduct")]

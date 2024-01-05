@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Entities;
+﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,7 +23,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Saleable).HasColumnName("vendavel").HasDefaultValue(false).IsRequired();
             builder.Property(x => x.AcronynmUnit).HasColumnName("unidade").HasMaxLength(10).IsRequired();
 
-
             // Cofiguranção de index unico.
             builder.HasIndex(x => x.BarCode).IsUnique();
 
@@ -32,8 +30,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.HasOne(p => p.UnitProduct)
                 .WithMany(u => u.RelatedProducts)
                 .HasForeignKey(p => p.AcronynmUnit);  // Utiliza a propriedade SiglaUnidade como chave estrangeira
-                
-
         }
     }
 }

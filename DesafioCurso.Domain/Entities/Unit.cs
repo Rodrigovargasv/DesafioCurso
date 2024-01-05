@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Domain.Entities
 {
@@ -10,6 +9,6 @@ namespace DesafioCurso.Domain.Entities
         public string Decription { get; set; }
 
         // Propriedade de navegação inversa
-        public IEnumerable<Product> RelatedProducts{ get; set; } // Produtos Relacionados
+        public IEnumerable<Product> RelatedProducts { get; set; } // Produtos Relacionados
     }
 }

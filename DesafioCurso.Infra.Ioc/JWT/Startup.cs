@@ -23,7 +23,6 @@ namespace DesafioCurso.Infra.Ioc.JWT
                    x.RequireHttpsMetadata = false;
                    x.SaveToken = true;
 
-
                    x.TokenValidationParameters = new TokenValidationParameters
                    {
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
@@ -41,11 +40,9 @@ namespace DesafioCurso.Infra.Ioc.JWT
                 option.AddPolicy("commonUser", p => p.RequireRole("commonUser"));
                 option.AddPolicy("manager", p => p.RequireRole("manager"));
                 option.AddPolicy("seller", p => p.RequireRole("seller"));
-
             });
 
             return services;
-
         }
     }
 }

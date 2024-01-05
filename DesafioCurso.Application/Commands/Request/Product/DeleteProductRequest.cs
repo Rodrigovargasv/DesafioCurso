@@ -1,6 +1,4 @@
-﻿
-
-using DesafioCurso.Application.Commands.Response.Product;
+﻿using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Domain.Commons;
 using MediatR;
 

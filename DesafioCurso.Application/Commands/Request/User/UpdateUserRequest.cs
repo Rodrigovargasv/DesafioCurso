@@ -8,6 +8,7 @@ namespace DesafioCurso.Application.Commands.Request.User
     {
         [JsonIgnore]
         public Guid Id { get; set; }
+
         public string? FullName { get; set; }
         public string? NickName { get; set; }
         public string? Email { get; set; }
@@ -17,4 +18,3 @@ namespace DesafioCurso.Application.Commands.Request.User
         public string? Cpf_Cnpj { get; set; }
     }
 }
-

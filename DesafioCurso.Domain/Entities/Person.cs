@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Domain.Entities
 {
@@ -11,7 +10,6 @@ namespace DesafioCurso.Domain.Entities
         public string? Observation { get; set; }
         public string? AlternativeCode { get; set; }
         public bool? ReleaseSale { get; set; }// liberar venda
-        public bool? Active { get; set; } 
-        
+        public bool? Active { get; set; }
     }
 }

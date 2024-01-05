@@ -2,7 +2,6 @@
 using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;
@@ -12,10 +11,8 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 {
     public class DeleteUnitHandler : IRequestHandler<DeleteUnitRequest, DeleteUnitResponse>
     {
-
         private readonly IUnitRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
-  
 
         public DeleteUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow)
         {
@@ -38,8 +35,6 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             await _uow.Commit();
 
             return request.Adapt<DeleteUnitResponse>();
-
-
         }
     }
 }

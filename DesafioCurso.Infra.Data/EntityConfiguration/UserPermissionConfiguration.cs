@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Entities;
+﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,12 +19,10 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
             builder.Property(x => x.UserId).HasColumnName("id_usuario");
 
-
             // Relacionamento 1 para 1 entre permissões e usuário
             builder.HasOne(x => x.User)
                 .WithOne(x => x.Permission)
                   .HasForeignKey<UserPermission>(p => p.UserId);
-
         }
     }
 }

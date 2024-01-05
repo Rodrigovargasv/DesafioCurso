@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Entities;
+﻿using DesafioCurso.Domain.Entities;
 
 namespace DesafioCurso.Domain.Interfaces
 {

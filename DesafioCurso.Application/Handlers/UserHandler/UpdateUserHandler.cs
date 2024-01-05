@@ -1,9 +1,6 @@
-﻿
-
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Domain.Common.Exceptions;
-using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
@@ -15,7 +12,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 {
     public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateUserResponse>
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork<SqliteDbcontext> _uow;
         private readonly UserValidation _userValidation;
@@ -37,7 +33,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 
-
             #region Atualiza as propriedades da usuário com os dados da requisição e faz sua validação de duplicidade
 
             if (!string.IsNullOrEmpty(request.FullName))
@@ -49,9 +44,8 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
                 var nicknameExist = _userRepository.CheckIfNicknameExist(userId.Nickname);
 
-                if (nicknameExist != null) 
+                if (nicknameExist != null)
                     throw new CustomException("Não possível cadastrar o Apelido, pois ele está indisponível");
-
             }
 
             if (!string.IsNullOrEmpty(request.Email))
@@ -75,7 +69,8 @@ namespace DesafioCurso.Application.Handlers.UserHandler
                 if (Cpf_CnpjExist != null)
                     throw new CustomException("Não possível cadastrar o CPF ou CNPJ, pois eles estão indisponíveis.");
             }
-            #endregion
+
+            #endregion Atualiza as propriedades da usuário com os dados da requisição e faz sua validação de duplicidade
 
             var userValidation = await _userValidation.ValidateAsync(userId);
 
@@ -85,12 +80,10 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 
-
             _userRepository.Update(userId);
             await _uow.Commit();
 
             return userId.Adapt<UpdateUserResponse>();
-
         }
     }
 }

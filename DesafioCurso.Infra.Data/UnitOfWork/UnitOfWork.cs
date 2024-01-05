@@ -1,5 +1,4 @@
 ﻿using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioCurso.Infra.Data.UnitOfWork
@@ -13,17 +12,13 @@ namespace DesafioCurso.Infra.Data.UnitOfWork
             _context = context;
         }
 
-
-
         // Implementação do unit of work
         public async Task<bool> Commit()
-          =>   await _context.SaveChangesAsync() > 0;
-        
+          => await _context.SaveChangesAsync() > 0;
 
         public void Rollback()
         {
             // não faz nada;
-            
         }
     }
 }

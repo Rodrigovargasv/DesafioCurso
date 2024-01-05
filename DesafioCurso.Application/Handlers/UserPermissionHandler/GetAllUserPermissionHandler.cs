@@ -1,10 +1,6 @@
-﻿
-using DesafioCurso.Application.Commands.Request.UserPermission;
-using DesafioCurso.Application.Commands.Response.User;
+﻿using DesafioCurso.Application.Commands.Request.UserPermission;
 using DesafioCurso.Application.Commands.Response.UserPermission;
-using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Infra.Data.Repository;
 using Mapster;
 using MediatR;
 
@@ -25,7 +21,7 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
 
             var userReponse = users.Adapt<IEnumerable<GetAllUserPermissionResponse>>();
 
-            return userReponse; 
+            return userReponse;
         }
     }
 }

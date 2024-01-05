@@ -10,7 +10,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 {
     public class DeleteUserHandler : IRequestHandler<DeleteUserRequest, DeleteUserResponse>
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork<SqliteDbcontext> _uow;
 
@@ -28,12 +27,10 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 
-
             _userRepository.Delete(userId);
             await _uow.Commit();
 
             return userId.Adapt<DeleteUserResponse>();
-            
         }
     }
 }

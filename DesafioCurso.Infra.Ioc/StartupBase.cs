@@ -1,15 +1,14 @@
 ﻿using DesafioCurso.Infra.Ioc.ContextDB;
+using DesafioCurso.Infra.Ioc.FluentValidation;
+using DesafioCurso.Infra.Ioc.GlobalExecptions;
+using DesafioCurso.Infra.Ioc.JWT;
 using DesafioCurso.Infra.Ioc.Mediator;
 using DesafioCurso.Infra.Ioc.Repository;
+using DesafioCurso.Infra.Ioc.Swagger;
 using DesafioCurso.Infra.Ioc.UnitOfWorkDependecy;
-using DesafioCurso.Infra.Ioc.GlobalExecptions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using DesafioCurso.Infra.Ioc.FluentValidation;
-using DesafioCurso.Infra.Ioc.JWT;
-using DesafioCurso.Infra.Ioc.Swagger;
-
 
 namespace DesafioCurso.Infra.Ioc
 {
@@ -37,7 +36,6 @@ namespace DesafioCurso.Infra.Ioc
             return services;
         }
 
-    
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder builder, IConfiguration config)
         {
             builder.UseGlobalExceptionMiddleware();

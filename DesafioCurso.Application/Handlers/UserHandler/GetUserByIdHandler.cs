@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
@@ -24,7 +23,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             // Verifica se a usuário existe
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
-
 
             return userId.Adapt<GetUserByIdResponse>();
         }

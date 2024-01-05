@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
@@ -13,8 +12,6 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 {
     public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, UpdateProductResponse>
     {
-
-
         private readonly IProductRepository _productRepository;
         private readonly ProductValidation _productValidations;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
@@ -30,7 +27,6 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
         public async Task<UpdateProductResponse> Handle(UpdateProductRequest request, CancellationToken cancellationToken)
         {
-
             var productId = await _productRepository.GetById(request.Id);
 
             // Verifica se a unidade existe
@@ -39,34 +35,31 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
             #region Atualiza as propriedades da product com os dados da requisição
 
-            if(!string.IsNullOrEmpty(request.FullDescription))
+            if (!string.IsNullOrEmpty(request.FullDescription))
                 productId.FullDescription = request.FullDescription;
 
-            if(!string.IsNullOrEmpty(request.BriefDescription))
+            if (!string.IsNullOrEmpty(request.BriefDescription))
                 productId.BriefDescription = request.BriefDescription;
 
             if (!string.IsNullOrEmpty(request.Price.ToString()))
                 productId.Price = request.Price;
 
-            if(!string.IsNullOrEmpty(request.QuantityStock.ToString()))
+            if (!string.IsNullOrEmpty(request.QuantityStock.ToString()))
                 productId.QuantityStock = request.QuantityStock;
-       
-            if(!string.IsNullOrEmpty(request.BarCode))
+
+            if (!string.IsNullOrEmpty(request.BarCode))
                 productId.BarCode = request.BarCode;
-   
-            if(!string.IsNullOrEmpty(request.Saleable.ToString()))
-                   productId.Saleable = request.Saleable;
-       
-            if(!string.IsNullOrEmpty(request.Active.ToString()))
+
+            if (!string.IsNullOrEmpty(request.Saleable.ToString()))
+                productId.Saleable = request.Saleable;
+
+            if (!string.IsNullOrEmpty(request.Active.ToString()))
                 productId.Active = request.Active;
 
-            if(!string.IsNullOrEmpty(request.AcronynmUnit))
+            if (!string.IsNullOrEmpty(request.AcronynmUnit))
                 productId.AcronynmUnit = request.AcronynmUnit;
 
-            #endregion
-
-
-
+            #endregion Atualiza as propriedades da product com os dados da requisição
 
             var ProductValidation = await _productValidations.ValidateAsync(productId);
 
@@ -77,7 +70,6 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             if (product is null)
                 throw new NotFoundException("Unidade informada não existe no banco de dados." +
                     "Realize o cadastro da unidade em seu endpoint.");
-
 
             var barCode = await _productRepository.VerifyIfBarCodeExists(productId.BarCode);
 

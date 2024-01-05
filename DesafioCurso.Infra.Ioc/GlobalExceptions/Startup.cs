@@ -6,7 +6,7 @@ namespace DesafioCurso.Infra.Ioc.GlobalExecptions
 {
     internal static class Startup
     {
-        internal static IServiceCollection AddServiceGlobalExecptions(this IServiceCollection services) 
+        internal static IServiceCollection AddServiceGlobalExecptions(this IServiceCollection services)
         {
             services.AddScoped<GlobalExceptionMiddleware>();
             return services;
@@ -16,6 +16,5 @@ namespace DesafioCurso.Infra.Ioc.GlobalExecptions
         {
             return app.UseMiddleware<GlobalExceptionMiddleware>();
         }
-
     }
 }

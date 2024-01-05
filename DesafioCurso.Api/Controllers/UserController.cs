@@ -1,5 +1,4 @@
-﻿using DesafioCurso.Application.Commands.Request.Person;
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,14 +10,12 @@ namespace DesafioCurso.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }
-
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUser")]
@@ -74,7 +71,6 @@ namespace DesafioCurso.Api.Controllers
         [HttpPost("CreateUser")]
         public async Task<CreateUserResponse> CreateUser(CreateUserRequest command)
         {
-
             return await _mediator.Send(command);
         }
 
@@ -84,7 +80,6 @@ namespace DesafioCurso.Api.Controllers
         {
             command.Id = id;
             return await _mediator.Send(command);
-
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -96,6 +91,5 @@ namespace DesafioCurso.Api.Controllers
 
             return await _mediator.Send(command);
         }
-
     }
 }

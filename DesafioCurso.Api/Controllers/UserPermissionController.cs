@@ -23,7 +23,6 @@ namespace DesafioCurso.Api.Controllers
         {
             command.UserId = id;
             return await _mediator.Send(command);
-
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -35,6 +34,5 @@ namespace DesafioCurso.Api.Controllers
 
             return await _mediator.Send(command);
         }
-
     }
 }

@@ -2,7 +2,6 @@
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
@@ -17,14 +16,11 @@ namespace DesafioCurso.Infra.Data.Repository
 
         public async Task<Person> PropertyAlternativeCodeExist(string alternativeCode)
         {
-            if(alternativeCode == null)
+            if (alternativeCode == null)
                 return null;
-
 
             return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.AlternativeCode == alternativeCode);
         }
-
-     
 
         public async Task<Person> PropertyDocumentExist(string document)
         {

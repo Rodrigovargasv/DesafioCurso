@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Application.Commands.Response.Person
 {
@@ -14,4 +13,3 @@ namespace DesafioCurso.Application.Commands.Response.Person
         public string Cpf_Cnpj { get; set; }
     }
 }
-

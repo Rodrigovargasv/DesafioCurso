@@ -7,9 +7,9 @@ namespace DesafioCurso.Infra.Data.Repository
 {
     public class UserPermissionRepository : RepositoryBase<UserPermission, SqliteDbcontext>, IUserPermissionRepository
     {
-        private readonly SqliteDbcontext _dbcontext; 
+        private readonly SqliteDbcontext _dbcontext;
 
-        public UserPermissionRepository (SqliteDbcontext context) : base(context)
+        public UserPermissionRepository(SqliteDbcontext context) : base(context)
         {
             _dbcontext = context;
         }
@@ -21,7 +21,7 @@ namespace DesafioCurso.Infra.Data.Repository
                 // Lida com o caso em que id é nulo
                 return null;
 
-            return await _dbcontext.Set<UserPermission>().AsNoTracking().FirstOrDefaultAsync(x => x.UserId == id);    
+            return await _dbcontext.Set<UserPermission>().AsNoTracking().FirstOrDefaultAsync(x => x.UserId == id);
         }
     }
 }

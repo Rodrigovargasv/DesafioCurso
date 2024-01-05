@@ -4,7 +4,5 @@ namespace DesafioCurso.Application.Commands.Response.Unit
 {
     public class CreateUnitResponse : EntityBase
     {
-
-
     }
 }

@@ -8,13 +8,11 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
-
             // Configura nome da tabela
             builder.ToTable("pessoa");
 
             // Configura o banco de dados para gerar automaticamente o id
             builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
-
 
             builder.Property(x => x.FullName).HasColumnName("nome_completo").HasMaxLength(100).IsRequired();
             builder.Property(x => x.Document).HasColumnName("documento").HasMaxLength(14);
@@ -24,12 +22,9 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.ReleaseSale).HasColumnName("libera_venda").HasDefaultValue(false);
             builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true);
 
-
             // Configuranção de index unico.
             builder.HasIndex(x => x.Document).IsUnique();
             builder.HasIndex(x => x.AlternativeCode).IsUnique();
         }
-
-     
     }
 }

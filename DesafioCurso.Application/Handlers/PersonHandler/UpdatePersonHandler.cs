@@ -7,8 +7,6 @@ using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
-
 
 namespace DesafioCurso.Application.Handlers.PersonHandler
 {
@@ -44,7 +42,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
                 var documentExist = await _personRepository.PropertyDocumentExist(personId.Document);
 
-                if (documentExist != null) 
+                if (documentExist != null)
                     throw new CustomException("O documento não pode ser cadastrado, tente novamente");
             }
 
@@ -60,7 +58,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
                 var alternativeCode = await _personRepository.PropertyAlternativeCodeExist(personId.AlternativeCode);
 
-                if (alternativeCode != null) 
+                if (alternativeCode != null)
                     throw new CustomException("Já existe um código alternativo com estas informações, tente novamente");
             }
 
@@ -70,21 +68,19 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             if (!string.IsNullOrEmpty(request.Active.ToString()))
                 personId.Active = request.Active;
 
-            #endregion
-
+            #endregion Atualiza as propriedades da unidade com os dados da requisição
 
             var personValidation = await _personValidation.ValidateAsync(personId);
 
             // Se a unidade não for válida, lança uma exceção de validação
             if (!personValidation.IsValid)
-                    throw new ValidationException(personValidation.Errors);
+                throw new ValidationException(personValidation.Errors);
 
             // Atualiza a entidade no contexto
             _personRepository.Update(personId);
 
             // Commit das alterações no banco de dados
             await _uow.Commit();
-
 
             return personId.Adapt<UpdatePersonResponse>();
         }

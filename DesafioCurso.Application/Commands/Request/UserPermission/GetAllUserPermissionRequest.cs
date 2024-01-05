@@ -1,6 +1,4 @@
-﻿
-
-using DesafioCurso.Application.Commands.Response.UserPermission;
+﻿using DesafioCurso.Application.Commands.Response.UserPermission;
 using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.UserPermission

@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Application.Commands.Response.UserPermission
 {

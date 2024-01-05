@@ -1,5 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace DesafioCurso.Infra.Ioc.Swagger
 {
@@ -37,8 +37,6 @@ namespace DesafioCurso.Infra.Ioc.Swagger
                     }
                 });
             });
-
-
 
             return services;
         }

@@ -1,7 +1,5 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Person;
+﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
-using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
@@ -11,7 +9,6 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 {
     public class GetPersonByIdHandler : IRequestHandler<GetPersonByIdRequest, GetPersonByIdResponse>
     {
-
         public readonly IPersonRepository _personRepository;
 
         public GetPersonByIdHandler(IPersonRepository context)

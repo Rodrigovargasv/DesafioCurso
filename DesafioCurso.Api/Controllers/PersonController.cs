@@ -1,10 +1,7 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
-using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Person;
-using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioCurso.Api.Controllers
@@ -13,14 +10,12 @@ namespace DesafioCurso.Api.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public PersonController(IMediator mediator)
         {
             _mediator = mediator;
         }
-
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllPerson")]
@@ -47,7 +42,6 @@ namespace DesafioCurso.Api.Controllers
         public async Task<CreatePersonResponse> CreateUnit([FromBody] CreatePersonRequest command)
         {
             return await _mediator.Send(command);
-
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -56,7 +50,6 @@ namespace DesafioCurso.Api.Controllers
         {
             command.Id = id;
             return await _mediator.Send(command);
-
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -65,6 +58,5 @@ namespace DesafioCurso.Api.Controllers
         {
             return await _mediator.Send(command);
         }
-
     }
 }

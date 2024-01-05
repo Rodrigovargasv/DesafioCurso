@@ -1,13 +1,12 @@
-﻿
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Domain.Commons;
 using DesafioCurso.Domain.Entities;
 using FluentValidation;
 
 namespace DesafioCurso.Domain.Validations
 {
     public class ProductValidation : AbstractValidator<Product>
-    { 
-        public ProductValidation() 
+    {
+        public ProductValidation()
         {
             RuleFor(x => x.FullDescription)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo descrição completa não pode conter espaço em branco.")
@@ -29,8 +28,6 @@ namespace DesafioCurso.Domain.Validations
 
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
-
-
         }
     }
 }

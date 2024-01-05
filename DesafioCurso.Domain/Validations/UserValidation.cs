@@ -6,9 +6,7 @@ namespace DesafioCurso.Domain.Validations
 {
     public class UserValidation : AbstractValidator<User>
     {
-
-     
-        public UserValidation() 
+        public UserValidation()
         {
             RuleFor(x => x.FullName)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo nome não pode conter espaço em branco.")
@@ -28,7 +26,6 @@ namespace DesafioCurso.Domain.Validations
                 .NotEmpty()
                 .Matches(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!%^&*])[A-Za-z\d@#$!%^&*]{8,}$")
                 .WithMessage("A senha deve conter no mínimo 1 letra maiúscula, 1 letra minúsculas, 1 caracter especial e 8 caracteres.");
-
 
             RuleFor(p => p.Cpf_Cnpj)
                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo CPF/CNPJ não pode conter espaço em branco.")
@@ -50,6 +47,5 @@ namespace DesafioCurso.Domain.Validations
         //    return false;
 
         //}
-        
     }
 }

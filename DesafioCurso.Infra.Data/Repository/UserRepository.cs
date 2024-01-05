@@ -3,11 +3,9 @@ using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
-
     public class UserRepository : RepositoryBase<User, SqliteDbcontext>, IUserRepository
     {
         private readonly SqliteDbcontext _context;
@@ -25,8 +23,6 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
         }
 
-
-
         public async Task<User> CheckIfdEmailExist(string email)
         {
             if (email == null)
@@ -43,7 +39,6 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
         }
 
-
         public async Task<User> CheckDataLogin(string userName, string password)
         {
             if (userName == null || password == null)
@@ -54,7 +49,6 @@ namespace DesafioCurso.Infra.Data.Repository
 
             if (isEmail)
                 return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName && u.Password == password);
-
 
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName && u.Password == password);
         }
@@ -81,7 +75,7 @@ namespace DesafioCurso.Infra.Data.Repository
             var userIds = permission.Select(p => p.UserId).ToList();
 
             var user = await _context.Users.Where(u => userIds.Contains(u.Id)).Take(quantity).ToListAsync();
-                  
+
             return user;
         }
     }

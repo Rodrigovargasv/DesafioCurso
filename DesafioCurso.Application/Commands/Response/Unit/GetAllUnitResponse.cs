@@ -1,6 +1,4 @@
 ﻿using DesafioCurso.Domain.Commons;
-using MediatR;
-
 
 namespace DesafioCurso.Application.Commands.Response.Unit
 {
@@ -8,6 +6,5 @@ namespace DesafioCurso.Application.Commands.Response.Unit
     {
         public string Acronym { get; set; } // Sigla
         public string Decription { get; set; }
-
     }
 }
