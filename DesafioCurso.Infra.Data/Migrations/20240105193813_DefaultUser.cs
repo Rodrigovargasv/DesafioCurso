@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -17,7 +18,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                 Apelido = "admin",
                 Email = "admin@example.com",
                 Senha = "Ro12345#@",
-                CpfCnpj = "12345678901"
+                CpfCnpj = (string)null
             };
 
             migrationBuilder.InsertData(
@@ -38,7 +39,7 @@ namespace DesafioCurso.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+          
         }
     }
 }

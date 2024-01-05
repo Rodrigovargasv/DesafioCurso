@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    [Migration("20240105123353_DefaultUser")]
+    [Migration("20240105193813_DefaultUser")]
     partial class DefaultUser
     {
         /// <inheritdoc />
@@ -81,7 +81,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("perfil_de_acesso");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("id_usuario");
 
@@ -98,8 +98,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                     b.HasOne("DesafioCurso.Domain.Entities.User", "User")
                         .WithOne("Permission")
                         .HasForeignKey("DesafioCurso.Domain.Entities.UserPermission", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

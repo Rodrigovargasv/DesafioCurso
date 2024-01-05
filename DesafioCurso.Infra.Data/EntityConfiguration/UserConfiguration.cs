@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
@@ -26,10 +27,14 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             .WithOne(u => u.User)
             .HasForeignKey<UserPermission>(x => x.Id)
             .OnDelete(DeleteBehavior.Cascade);
+
             // Configuração de index unico.
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasIndex(x => x.Nickname).IsUnique();
+
         }
+
+
     }
 }

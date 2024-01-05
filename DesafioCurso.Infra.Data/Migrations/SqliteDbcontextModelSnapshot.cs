@@ -41,6 +41,13 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("nome_completo");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
+
                     b.Property<string>("Nickname")
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
@@ -60,6 +67,9 @@ namespace DesafioCurso.Infra.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
                     b.HasIndex("Nickname")
                         .IsUnique();
 
@@ -73,16 +83,26 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
+
                     b.Property<int>("Role")
                         .HasMaxLength(15)
                         .HasColumnType("INTEGER")
                         .HasColumnName("perfil_de_acesso");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("id_usuario");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Identifier")
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -95,8 +115,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                     b.HasOne("DesafioCurso.Domain.Entities.User", "User")
                         .WithOne("Permission")
                         .HasForeignKey("DesafioCurso.Domain.Entities.UserPermission", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });
