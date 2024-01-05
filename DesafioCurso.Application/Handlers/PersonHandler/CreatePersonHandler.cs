@@ -39,7 +39,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var documentExist = await _context.PropertyDocumentExist(person.Document);
 
-            var alternativeCode = await _context.PropertyAlternativeCodeExist(person.Document);
+            var alternativeCode = await _context.PropertyAlternativeCodeExist(person.AlternativeCode);
 
             if (alternativeCode != null || documentExist != null) 
                 throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");

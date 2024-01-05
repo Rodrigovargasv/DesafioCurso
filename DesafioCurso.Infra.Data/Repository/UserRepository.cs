@@ -15,13 +15,32 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
-        public async Task<User> CheckIfCPF_CNPJAndEmailAndSurnameExists(string cpf_cnpj, string email, string surname)
+        public async Task<User> CheckIfCPF_CNPJExist(string cpf_cnpj)
         {
-            if (cpf_cnpj == null || email == null || surname == null)
+            if (cpf_cnpj == null)
                 return null;
 
-            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj || u.Email == email || u.Nickname == surname);
+            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
         }
+
+
+
+        public async Task<User> CheckIfdEmailExist(string email)
+        {
+            if (email == null)
+                return null;
+
+            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User> CheckIfNicknameExist(string nickname)
+        {
+            if (nickname == null)
+                return null;
+
+            return await _context.Set<User>().AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
+        }
+
 
         public async Task<User> CheckDataLogin(string userName, string password)
         {

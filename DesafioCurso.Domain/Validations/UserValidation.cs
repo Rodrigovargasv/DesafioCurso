@@ -18,8 +18,6 @@ namespace DesafioCurso.Domain.Validations
             RuleFor(x => x.Nickname)
                  .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo apelido não pode conter espaço em branco.");
 
-
-
             RuleFor(x => x.Email)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo email não pode conter espaço em branco.")
                 .EmailAddress();

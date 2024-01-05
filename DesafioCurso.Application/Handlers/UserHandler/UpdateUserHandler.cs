@@ -33,40 +33,57 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         {
             var userId = await _userRepository.GetById(request.Id);
 
-            // Verifica se a unidade existe
+            // Verifica se o usuário existe
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 
 
-            #region Atualiza as propriedades da usuário com os dados da requisição
+            #region Atualiza as propriedades da usuário com os dados da requisição e faz sua validação de duplicidade
 
             if (!string.IsNullOrEmpty(request.FullName))
                 userId.FullName = request.FullName;
 
-            if (!string.IsNullOrEmpty(request.Surname))
-                userId.Nickname = request.Surname;
+            if (!string.IsNullOrEmpty(request.NickName))
+            {
+                userId.Nickname = request.NickName;
+
+                var nicknameExist = _userRepository.CheckIfNicknameExist(userId.Nickname);
+
+                if (nicknameExist != null) 
+                    throw new CustomException("Não possível cadastrar o Apelido, pois ele está indisponível");
+
+            }
 
             if (!string.IsNullOrEmpty(request.Email))
+            {
                 userId.Email = request.Email;
+                var emailExist = _userRepository.CheckIfdEmailExist(userId.Nickname);
+
+                if (emailExist != null)
+                    throw new CustomException("Não possível cadastrar o Email, pois ele está indisponível.");
+            }
 
             if (!string.IsNullOrEmpty(request.Password))
                 userId.Password = request.Password;
 
             if (!string.IsNullOrEmpty(request.Cpf_Cnpj))
+            {
                 userId.Cpf_Cnpj = request.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+
+                var Cpf_CnpjExist = _userRepository.CheckIfdEmailExist(userId.Cpf_Cnpj);
+
+                if (Cpf_CnpjExist != null)
+                    throw new CustomException("Não possível cadastrar o CPF ou CNPJ, pois eles estão indisponíveis.");
+            }
             #endregion
 
             var userValidation = await _userValidation.ValidateAsync(userId);
 
             if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
 
-            var userCheck = await _userRepository.CheckIfCPF_CNPJAndEmailAndSurnameExists(request.Cpf_Cnpj, request.Email, request.Surname);
-
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
-
-            if (userCheck != null) throw new CustomException("Ja existe um usuário com esta informação de CPF/CNPJ, Email ou Apelido.");
 
 
             _userRepository.Update(userId);
