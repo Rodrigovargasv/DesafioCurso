@@ -1,7 +1,9 @@
 ﻿using DesafioCurso.Domain.Entities;
+using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
@@ -50,10 +52,10 @@ namespace DesafioCurso.Infra.Data.Repository
             // Recebe o resultado da verificação se o email é valido
             bool isEmail = IsValidEmail(userName);
 
-            if(isEmail)
+            if (isEmail)
                 return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName && u.Password == password);
 
-    
+
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName && u.Password == password);
         }
 
@@ -71,5 +73,16 @@ namespace DesafioCurso.Infra.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role)
+        {
+            var permission = await _context.Permissions
+                .Where(p => p.Role == role).ToListAsync();
+
+            var userIds = permission.Select(p => p.UserId).ToList();
+
+            var user = await _context.Users.Where(u => userIds.Contains(u.Id)).Take(quantity).ToListAsync();
+                  
+            return user;
+        }
     }
 }

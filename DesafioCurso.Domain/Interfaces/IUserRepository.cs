@@ -1,5 +1,6 @@
 ﻿
 using DesafioCurso.Domain.Entities;
+using DesafioCurso.Domain.Enums;
 
 namespace DesafioCurso.Domain.Interfaces
 {
@@ -10,5 +11,7 @@ namespace DesafioCurso.Domain.Interfaces
         Task<User> CheckIfdEmailExist(string email);
         Task<User> CheckIfNicknameExist(string surname);
         Task<User> CheckDataLogin(string userName, string password);
+
+        Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role);
     }
 }

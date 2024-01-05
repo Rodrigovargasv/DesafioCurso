@@ -82,15 +82,23 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             #region Handlers de User
             services.AddScoped<IRequestHandler<CreateUserRequest, CreateUserResponse>, CreateUserHandler>();
             services.AddScoped<IRequestHandler<GetAllUserRequest, IEnumerable<GetAllUserResponse>>, GetAllUserHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeSellerRequest, IEnumerable<GetAllUserTypeSellerResponse>>, GetAllUserTypeSellerHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeManagerRequest, IEnumerable<GetAllUserTypeManagerResponse>>, GetAllUserTypeManagerHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeAdministratorRequest, IEnumerable<GetAllUserTypeAdministradorResponse>>, GetAllUserTypeAdministratorHandler>();
             services.AddScoped<IRequestHandler<UpdateUserRequest, UpdateUserResponse>, UpdateUserHandler>();
             services.AddScoped<IRequestHandler<GetUserByIdRequest, GetUserByIdResponse>, GetUserByIdHandler>();
             services.AddScoped<IRequestHandler<DeleteUserRequest, DeleteUserResponse>, DeleteUserHandler>();
 
             #endregion
 
+            #region Handlers de UserPermission
             services.AddScoped<IRequestHandler<UpdateUserPermissionRequest, UpdateUserPermissionResponse>, UpdateUserPermissionHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserPermissionRequest, IEnumerable<GetAllUserPermissionResponse>>, GetAllUserPermissionHandler>();
+            #endregion
 
+            // Handlers de Login User
             services.AddScoped<IRequestHandler<LoginUserRequest, LoginUserResponse>, LoginUserHandler>();
+
             return services; 
 
         }
