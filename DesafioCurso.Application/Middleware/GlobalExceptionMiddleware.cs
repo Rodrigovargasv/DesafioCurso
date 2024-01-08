@@ -10,11 +10,20 @@ namespace DesafioCurso.Application.Middleware
 {
     public class GlobalExceptionMiddleware : IMiddleware
     {
+
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
             {
                 await next(context);
+
+                if (context.Response.StatusCode is 401)
+                    throw new UnauthorizedException("Usuário não autenticado, realize o login no sistema e tente novamente.");
+
+                if (context.Response.StatusCode is 403)
+                    throw new ForbiddenException("O usuário não tem permissão para acessar este recurso.");
+                
+                 
             }
             catch (Exception ex)
             {
@@ -44,6 +53,7 @@ namespace DesafioCurso.Application.Middleware
                         errorResult.Messages.Add($"[{error.PropertyName}] {error.ErrorMessage}");
                     }
                 }
+             
                 switch (ex)
                 {
                     case CustomException e:

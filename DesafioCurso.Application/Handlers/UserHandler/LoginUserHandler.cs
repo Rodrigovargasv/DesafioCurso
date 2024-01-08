@@ -19,7 +19,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             _tokenService = tokenService;
             _userPermissionRepository = userPermissionRepository;
         }
-
         public async Task<LoginUserResponse> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
             var userLogin = await _userRepository.CheckDataLogin(request.UserName.ToLower(), request.Password);
