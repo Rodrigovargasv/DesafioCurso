@@ -1,6 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Response.Person;
-using DesafioCurso.Domain.Commons;
+﻿using DesafioCurso.Application.Commands.Response.Person;
 using MediatR;
 using System.Text.Json.Serialization;
 

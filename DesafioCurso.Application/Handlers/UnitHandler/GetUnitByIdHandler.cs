@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Unit;
+﻿using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
@@ -19,7 +18,6 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<GetUnitByIdResponse> Handle(GetUnitByIdRequest request, CancellationToken cancellationToken)
         {
-
             var unitId = await _unitRepository.GetById(request.Id);
 
             if (unitId is null)

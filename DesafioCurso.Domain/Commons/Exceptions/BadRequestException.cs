@@ -1,5 +1,4 @@
-﻿
-using System.Net;
+﻿using System.Net;
 
 namespace DesafioCurso.Domain.Common.Exceptions;
 
@@ -9,6 +8,7 @@ public class BadRequestException : CustomException
         : base(message, errors, HttpStatusCode.BadRequest)
     {
     }
+
     public BadRequestException(string message, params string[] errors)
         : base(message, errors.ToList(), HttpStatusCode.BadRequest)
     {

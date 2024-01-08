@@ -1,11 +1,8 @@
-﻿
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Application.Services;
 using DesafioCurso.Domain.Common.Exceptions;
-using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
-using Mapster;
 using MediatR;
 
 namespace DesafioCurso.Application.Handlers.UserHandler
@@ -25,7 +22,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
         public async Task<LoginUserResponse> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var userLogin = await _userRepository.CheckDataLogin(request.UserName, request.Password);
+            var userLogin = await _userRepository.CheckDataLogin(request.UserName.ToLower(), request.Password);
 
             if (userLogin == null)
                 throw new BadRequestException("Usuário ou senha inválido.");
@@ -35,9 +32,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             // Gera o token de autenticação usando o serviço de token
             var token = await _tokenService.GenerateToken(userLogin, userPermission);
 
-            
-
-            return new LoginUserResponse() { Token = token};
+            return new LoginUserResponse() { Token = token };
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace DesafioCurso.Domain.Enums
+﻿namespace DesafioCurso.Domain.Enums
 {
     public enum UserRole
     {
@@ -7,6 +6,5 @@ namespace DesafioCurso.Domain.Enums
         administrator = 2,
         manager = 3,
         seller = 4
-
     }
 }

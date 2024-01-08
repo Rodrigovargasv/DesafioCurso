@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
+using Microsoft.AspNetCore.Http;
+using Serilog;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
-using Serilog;
-using DesafioCurso.Domain.Common.Exceptions;
 
 namespace DesafioCurso.Application.Middleware
 {
@@ -12,11 +12,9 @@ namespace DesafioCurso.Application.Middleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-
             try
             {
                 await next(context);
-
             }
             catch (Exception ex)
             {
@@ -29,7 +27,6 @@ namespace DesafioCurso.Application.Middleware
                     ErrorId = errorId,
                     SupportMessage = $"Forneça o ErrorId {errorId} à equipe de suporte para uma análise mais aprofundada."
                 };
-
 
                 if (ex is not CustomException && ex.InnerException != null)
                 {
@@ -57,6 +54,7 @@ namespace DesafioCurso.Application.Middleware
                         }
 
                         break;
+
                     case KeyNotFoundException:
                         errorResult.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
@@ -64,9 +62,11 @@ namespace DesafioCurso.Application.Middleware
                     case ValidationException:
                         errorResult.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
+
                     case FluentValidation.ValidationException:
                         errorResult.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
                         break;
+
                     default:
                         errorResult.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
@@ -77,7 +77,6 @@ namespace DesafioCurso.Application.Middleware
                 response.StatusCode = errorResult.StatusCode;
                 await response.WriteAsync(JsonSerializer.Serialize(errorResult));
             }
-
         }
     }
 }

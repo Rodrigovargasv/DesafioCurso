@@ -3,16 +3,19 @@ using System;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
+namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    partial class SqliteDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240105193813_DefaultUser")]
+    partial class DefaultUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -78,7 +81,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("perfil_de_acesso");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("id_usuario");
 
@@ -87,7 +90,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("permissões", (string)null);
+                    b.ToTable("permissoes", (string)null);
                 });
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.UserPermission", b =>
@@ -95,8 +98,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                     b.HasOne("DesafioCurso.Domain.Entities.User", "User")
                         .WithOne("Permission")
                         .HasForeignKey("DesafioCurso.Domain.Entities.UserPermission", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

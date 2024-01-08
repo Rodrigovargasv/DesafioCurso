@@ -1,8 +1,6 @@
-﻿
-using DesafioCurso.Domain.Interfaces;
+﻿using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace DesafioCurso.Infra.Ioc.Repository
 {

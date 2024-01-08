@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SQLitePCL;
 
 namespace DesafioCurso.Infra.Ioc.ContextDB
 {
@@ -27,10 +26,7 @@ namespace DesafioCurso.Infra.Ioc.ContextDB
             services.AddDbContext<DataBaseInMemory>(options =>
                 options.UseInMemoryDatabase("BancoEmMemoria"));
 
-
-
             return services;
-
         }
     }
 }

@@ -21,9 +21,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var unitResponses = units.Adapt<IEnumerable<GetAllPersonResponse>>();
 
-
             return unitResponses;
-
         }
     }
 }

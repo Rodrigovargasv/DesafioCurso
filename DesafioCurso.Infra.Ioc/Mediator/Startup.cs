@@ -17,7 +17,6 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-
 namespace DesafioCurso.Infra.Ioc.Mediator
 {
     internal static class Startup
@@ -25,12 +24,11 @@ namespace DesafioCurso.Infra.Ioc.Mediator
         // Configura o serviço de injeção de dependência do mediator
         internal static IServiceCollection AddServiceMediator(this IServiceCollection services)
         {
-
-           
             // Adiciona o MediatR e registra os handlers no assembly atual
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             #region Handlers de unidade
+
             // Registra o handler para CreateUnitRequest
             services.AddScoped<IRequestHandler<CreateUnitRequest, CreateUnitResponse>, CreateUnitHandler>();
 
@@ -45,24 +43,26 @@ namespace DesafioCurso.Infra.Ioc.Mediator
 
             // Registra o handler para DelegatingHandler
             services.AddScoped<IRequestHandler<DeleteUnitRequest, DeleteUnitResponse>, DeleteUnitHandler>();
-            #endregion
 
+            #endregion Handlers de unidade
 
             #region Handlers de Person
+
             // Registra o handler para CreatePersonRequest
             services.AddScoped<IRequestHandler<GetAllPersonRequest, IEnumerable<GetAllPersonResponse>>, GetAllPersonHandler>();
 
             // Registra o handler para GetPersonByIdHandler
             services.AddScoped<IRequestHandler<GetPersonByIdRequest, GetPersonByIdResponse>, GetPersonByIdHandler>();
 
-            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePesonHandler>();
+            services.AddScoped<IRequestHandler<CreatePersonRequest, CreatePersonResponse>, CreatePersonHandler>();
 
             // Registra o handler para UpdatePersonHandler
             services.AddScoped<IRequestHandler<UpdatePersonRequest, UpdatePersonResponse>, UpdatePersonHandler>();
 
             // Registra o handler para DeletePersonHandler
             services.AddScoped<IRequestHandler<DeletePesonRequest, DeletePersonResponse>, DeletePersonHandler>();
-            #endregion
+
+            #endregion Handlers de Person
 
             #region Handlers de Product
 
@@ -71,27 +71,38 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             services.AddScoped<IRequestHandler<UpdateProductRequest, UpdateProductResponse>, UpdateProductHandler>();
 
             services.AddScoped<IRequestHandler<GetAllProductRequest, IEnumerable<GetAllProductResponse>>, GetAllProductHandler>();
+            services.AddScoped<IRequestHandler<GetAllProductSeleableRequest, IEnumerable<GetAllProductSeleableResponse>>, GetAllProductSeleableHandler>();
 
             services.AddScoped<IRequestHandler<GetProductByIdRequest, GetProductByIdResponse>, GetProductByIdHandler>();
 
             services.AddScoped<IRequestHandler<DeleteProductRequest, DeleteProductResponse>, DeleteProductHandler>();
 
-            #endregion
+            #endregion Handlers de Product
 
             #region Handlers de User
+
             services.AddScoped<IRequestHandler<CreateUserRequest, CreateUserResponse>, CreateUserHandler>();
             services.AddScoped<IRequestHandler<GetAllUserRequest, IEnumerable<GetAllUserResponse>>, GetAllUserHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeSellerRequest, IEnumerable<GetAllUserTypeSellerResponse>>, GetAllUserTypeSellerHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeManagerRequest, IEnumerable<GetAllUserTypeManagerResponse>>, GetAllUserTypeManagerHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserTypeAdministratorRequest, IEnumerable<GetAllUserTypeAdministradorResponse>>, GetAllUserTypeAdministratorHandler>();
             services.AddScoped<IRequestHandler<UpdateUserRequest, UpdateUserResponse>, UpdateUserHandler>();
             services.AddScoped<IRequestHandler<GetUserByIdRequest, GetUserByIdResponse>, GetUserByIdHandler>();
             services.AddScoped<IRequestHandler<DeleteUserRequest, DeleteUserResponse>, DeleteUserHandler>();
 
-            #endregion
+            #endregion Handlers de User
+
+            #region Handlers de UserPermission
 
             services.AddScoped<IRequestHandler<UpdateUserPermissionRequest, UpdateUserPermissionResponse>, UpdateUserPermissionHandler>();
+            services.AddScoped<IRequestHandler<GetAllUserPermissionRequest, IEnumerable<GetAllUserPermissionResponse>>, GetAllUserPermissionHandler>();
 
+            #endregion Handlers de UserPermission
+
+            // Handlers de Login User
             services.AddScoped<IRequestHandler<LoginUserRequest, LoginUserResponse>, LoginUserHandler>();
-            return services; 
 
+            return services;
         }
     }
 }

@@ -2,13 +2,12 @@
 using DesafioCurso.Domain.Entities;
 using FluentValidation;
 
-
 namespace DesafioCurso.Domain.Validations
 {
     public class UnitValidation : AbstractValidator<Unit>
 
     {
-        public UnitValidation() 
+        public UnitValidation()
         {
             RuleFor(u => u.Acronym)
            .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.")
@@ -21,10 +20,4 @@ namespace DesafioCurso.Domain.Validations
                 .NotNull();
         }
     }
-
 }
-    
-    
-
-
-

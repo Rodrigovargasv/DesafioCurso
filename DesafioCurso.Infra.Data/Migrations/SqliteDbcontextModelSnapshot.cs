@@ -3,19 +3,16 @@ using System;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
+namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    [Migration("20240104152356_ChangedTableRole")]
-    partial class ChangedTableRole
+    partial class SqliteDbcontextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -44,16 +41,23 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                         .HasColumnType("TEXT")
                         .HasColumnName("nome_completo");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
+
+                    b.Property<string>("Nickname")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("apelido");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("TEXT")
                         .HasColumnName("senha");
-
-                    b.Property<string>("Surname")
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("apelido");
 
                     b.HasKey("Id");
 
@@ -63,7 +67,10 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("Surname")
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
+                    b.HasIndex("Nickname")
                         .IsUnique();
 
                     b.ToTable("usuario", (string)null);
@@ -76,21 +83,31 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("TEXT")
+                        .IsFixedLength();
+
                     b.Property<int>("Role")
                         .HasMaxLength(15)
                         .HasColumnType("INTEGER")
                         .HasColumnName("perfil_de_acesso");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("id_usuario");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("permissões", (string)null);
+                    b.ToTable("permissoes", (string)null);
                 });
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.UserPermission", b =>
@@ -98,8 +115,7 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                     b.HasOne("DesafioCurso.Domain.Entities.User", "User")
                         .WithOne("Permission")
                         .HasForeignKey("DesafioCurso.Domain.Entities.UserPermission", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });

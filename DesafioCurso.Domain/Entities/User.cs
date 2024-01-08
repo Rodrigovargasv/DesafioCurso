@@ -1,6 +1,4 @@
-﻿
-using DesafioCurso.Domain.Commons;
-using DesafioCurso.Domain.Enums;
+﻿using DesafioCurso.Domain.Commons;
 
 namespace DesafioCurso.Domain.Entities
 {

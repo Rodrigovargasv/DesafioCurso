@@ -1,5 +1,4 @@
-﻿
-namespace DesafioCurso.Domain.Entities
+﻿namespace DesafioCurso.Domain.Entities
 {
     public class ErrorResult
     {

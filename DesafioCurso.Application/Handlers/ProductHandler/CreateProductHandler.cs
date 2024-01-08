@@ -8,7 +8,6 @@ using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
-using Unit = DesafioCurso.Domain.Entities.Unit;
 
 namespace DesafioCurso.Application.Handlers.ProductHandler
 {
@@ -42,7 +41,6 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             if (unit is null)
                 throw new NotFoundException("Unidade informada não existe no banco de dados." +
                     "Realize o cadastro da unidade em seu endpoint.");
-
 
             var barCode = await _productRepository.VerifyIfBarCodeExists(product.BarCode);
 

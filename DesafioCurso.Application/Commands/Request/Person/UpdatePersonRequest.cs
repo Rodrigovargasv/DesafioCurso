@@ -8,23 +8,19 @@ namespace DesafioCurso.Application.Commands.Request.Person
 {
     public class UpdatePersonRequest : IRequest<UpdatePersonResponse>
     {
-
-
         [JsonIgnore]
-        public Guid Id { get; set; }    
+        public Guid Id { get; set; }
 
-        public string? FullName { get; set; }
-        public string? Document { get; set; }
-        public string? City { get; set; }
-        public string? Observation { get; set; }
-        public string? AlternativeCode { get; set; }
+        public string FullName { get; set; }
+        public string Document { get; set; }
+        public string City { get; set; }
+        public string Observation { get; set; }
+        public string AlternativeCode { get; set; }
 
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool? ReleaseSale { get; set; } // liberar venda
+        public bool ReleaseSale { get; set; } // liberar venda
 
-
-        public bool? Active { get; set; } 
+        public bool Active { get; set; }
     }
-    
 }

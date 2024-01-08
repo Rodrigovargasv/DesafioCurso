@@ -1,8 +1,6 @@
-﻿using DesafioCurso.Domain.Common.Exceptions;
-using System.Net;
+﻿using System.Net;
 
 namespace DesafioCurso.Domain.Common.Exceptions;
-
 
 public class InternalServerException : CustomException
 {
@@ -10,6 +8,7 @@ public class InternalServerException : CustomException
         : base(message, errors, HttpStatusCode.InternalServerError)
     {
     }
+
     public InternalServerException(string message, params string[] errors)
         : base(message, errors.ToList(), HttpStatusCode.InternalServerError)
     {

@@ -14,15 +14,20 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbContext = context;
         }
 
-        public async Task<Person> PropertyDocumentAndAlternativeCodeExist(string document, string alternativeCode)
+        public async Task<Person> PropertyAlternativeCodeExist(string alternativeCode)
         {
-            if (document == null || alternativeCode == null)
-            
-                // Lida com o caso em que o código de barras é nulo
+            if (alternativeCode == null)
                 return null;
 
+            return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.AlternativeCode == alternativeCode);
+        }
 
-            return await _dbContext.Set<Person>().AsNoTracking().FirstOrDefaultAsync(p => p.Document == document || p.AlternativeCode == alternativeCode);
+        public async Task<Person> PropertyDocumentExist(string document)
+        {
+            if (document == null)
+                return null;
+
+            return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.Document == document);
         }
     }
 }

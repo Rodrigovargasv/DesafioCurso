@@ -1,8 +1,6 @@
-﻿using DesafioCurso.Domain.Common.Exceptions;
-using System.Net;
+﻿using System.Net;
 
 namespace DesafioCurso.Domain.Common.Exceptions;
-
 
 public class ForbiddenException : CustomException
 {

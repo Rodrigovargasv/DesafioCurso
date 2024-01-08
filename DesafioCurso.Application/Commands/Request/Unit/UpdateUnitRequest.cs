@@ -1,5 +1,4 @@
 ﻿using DesafioCurso.Application.Commands.Response.Unit;
-using DesafioCurso.Domain.Commons;
 using MediatR;
 using System.Text.Json.Serialization;
 
@@ -9,7 +8,7 @@ namespace DesafioCurso.Application.Commands.Request.Unit
     {
         [JsonIgnore]
         public Guid Id { get; set; }
-        public string Decription { get; set; }
 
+        public string Decription { get; set; }
     }
 }

@@ -16,7 +16,6 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 // Adicona os serviços de injeção de depêndencia.
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -35,7 +34,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
-
 
 app.MapControllers();
 

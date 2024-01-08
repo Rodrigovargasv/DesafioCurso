@@ -7,14 +7,11 @@ using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 using MediatR;
-using System;
-using Unit = DesafioCurso.Domain.Entities.Unit;
 
 namespace DesafioCurso.Application.Handlers.UnitHandler
 {
     public class UpdateUnitHandler : IRequestHandler<UpdateUnitRequest, UpdateUnitResponse>
     {
-
         private readonly IUnitRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UnitValidation _unitValidation;
@@ -28,7 +25,6 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<UpdateUnitResponse> Handle(UpdateUnitRequest request, CancellationToken cancellationToken)
         {
-           
             var unitId = await _context.GetById(request.Id);
 
             // Verifica se a pessoa existe
@@ -42,7 +38,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
             // Se a pessoa não for válida, lança uma exceção de validação
             if (!unitValidation.IsValid)
-                    throw new ValidationException(unitValidation.Errors);
+                throw new ValidationException(unitValidation.Errors);
 
             // Atualiza a pessoa no contexto
             _context.Update(unitId);
@@ -50,9 +46,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             // Commit das alterações no banco de dados
             await _uow.Commit();
 
-
             return unitId.Adapt<UpdateUnitResponse>();
-
         }
     }
 }

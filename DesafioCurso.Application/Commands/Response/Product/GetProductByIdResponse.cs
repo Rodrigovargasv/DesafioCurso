@@ -1,5 +1,4 @@
-﻿
-namespace DesafioCurso.Application.Commands.Response.Product
+﻿namespace DesafioCurso.Application.Commands.Response.Product
 {
     public class GetProductByIdResponse
     {
@@ -11,7 +10,5 @@ namespace DesafioCurso.Application.Commands.Response.Product
         public bool Active { get; set; }
         public bool Saleable { get; set; } // vendavel
         public string AcronynmUnit { get; set; }
-
-     
     }
 }

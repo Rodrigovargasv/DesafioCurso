@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
@@ -24,8 +23,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Relacionamento 1 para muitos entre permissões e usuário
             builder.HasOne(u => u.Permission)
             .WithOne(u => u.User)
-            .HasForeignKey<UserPermission>(x => x.Id);
-
+            .HasForeignKey<UserPermission>(x => x.Id)
+            .OnDelete(DeleteBehavior.Cascade);
 
             // Configuração de index unico.
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
