@@ -23,13 +23,24 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Saleable).HasColumnName("vendavel").HasDefaultValue(false).IsRequired();
             builder.Property(x => x.AcronynmUnit).HasColumnName("unidade").HasMaxLength(10).IsRequired();
 
+
+            // Identificador unico
+            builder.Property(x => x.Identifier)
+                 .HasColumnName("Identificador")
+                 .IsRequired()
+                 .HasMaxLength(10);
+
+
             // Cofiguranção de index unico.
             builder.HasIndex(x => x.BarCode).IsUnique();
+            builder.HasIndex(x => x.Identifier).IsUnique();
 
             // Configuração de chave estrangeira
             builder.HasOne(p => p.UnitProduct)
                 .WithMany(u => u.RelatedProducts)
                 .HasForeignKey(p => p.AcronynmUnit);  // Utiliza a propriedade SiglaUnidade como chave estrangeira
+
+           
         }
     }
 }

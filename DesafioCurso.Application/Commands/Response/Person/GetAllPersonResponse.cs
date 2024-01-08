@@ -11,5 +11,6 @@ namespace DesafioCurso.Application.Commands.Response.Person
         public string? AlternativeCode { get; set; }
         public bool ReleaseSale { get; set; } // liberar venda
         public bool Active { get; set; }
+        public string? Identifier { get; set; }
     }
 }

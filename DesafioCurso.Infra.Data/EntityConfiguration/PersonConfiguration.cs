@@ -22,9 +22,16 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.ReleaseSale).HasColumnName("libera_venda").HasDefaultValue(false);
             builder.Property(x => x.Active).HasColumnName("ativo").HasDefaultValue(true);
 
+            // Identificador unico
+            builder.Property(x => x.Identifier)
+                .HasColumnName("Identificador")
+                .IsRequired()
+                .HasMaxLength(10);
+
             // Configuranção de index unico.
             builder.HasIndex(x => x.Document).IsUnique();
             builder.HasIndex(x => x.AlternativeCode).IsUnique();
+            builder.HasIndex(x => x.Identifier).IsUnique();
         }
     }
 }

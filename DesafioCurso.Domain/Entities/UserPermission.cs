@@ -7,6 +7,8 @@ namespace DesafioCurso.Domain.Entities
     {
         public UserRole Role { get; set; }
 
+        public string? Identifier { get; set; }
+
         public User User { get; set; }
 
         public Guid? UserId { get; set; }

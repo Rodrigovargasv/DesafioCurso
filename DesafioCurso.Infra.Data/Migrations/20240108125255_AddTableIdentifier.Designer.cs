@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    [Migration("20240105193813_DefaultUser")]
-    partial class DefaultUser
+    [Migration("20240108125255_AddTableIdentifier")]
+    partial class AddTableIdentifier
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,12 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("nome_completo");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Identificador");
+
                     b.Property<string>("Nickname")
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
@@ -63,6 +69,9 @@ namespace DesafioCurso.Infra.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
                     b.HasIndex("Nickname")
                         .IsUnique();
 
@@ -76,6 +85,12 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Identificador");
+
                     b.Property<int>("Role")
                         .HasMaxLength(15)
                         .HasColumnType("INTEGER")
@@ -86,6 +101,9 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .HasColumnName("id_usuario");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Identifier")
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();

@@ -1,5 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
+using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
@@ -16,12 +17,15 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
         private readonly IUnitRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UnitValidation _unitValidation;
+        private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
-        public CreateUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow, UnitValidation validations)
+        public CreateUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow,
+            UnitValidation validations, IShortIdGeneratorService shortIdGenerator)
         {
             _context = context;
             _uow = uow;
             _unitValidation = validations;
+            _shortIdGeneratorService = shortIdGenerator;
         }
 
         // Implementando a interface Handle
@@ -40,6 +44,8 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();
+
+            unit.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _context.Create(unit);
             await _uow.Commit();

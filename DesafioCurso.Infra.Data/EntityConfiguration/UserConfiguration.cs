@@ -26,10 +26,18 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             .HasForeignKey<UserPermission>(x => x.Id)
             .OnDelete(DeleteBehavior.Cascade);
 
+
+            // Identificador unico
+            builder.Property(x => x.Identifier)
+             .HasColumnName("Identificador")
+             .IsRequired()
+             .HasMaxLength(10);
+
             // Configuração de index unico.
             builder.HasIndex(x => x.Cpf_Cnpj).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasIndex(x => x.Nickname).IsUnique();
+            builder.HasIndex(x => x.Identifier).IsUnique();
         }
     }
 }

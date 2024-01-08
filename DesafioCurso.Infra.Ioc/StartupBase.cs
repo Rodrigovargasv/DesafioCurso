@@ -4,6 +4,7 @@ using DesafioCurso.Infra.Ioc.GlobalExecptions;
 using DesafioCurso.Infra.Ioc.JWT;
 using DesafioCurso.Infra.Ioc.Mediator;
 using DesafioCurso.Infra.Ioc.Repository;
+using DesafioCurso.Infra.Ioc.Service;
 using DesafioCurso.Infra.Ioc.Swagger;
 using DesafioCurso.Infra.Ioc.UnitOfWorkDependecy;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,8 @@ namespace DesafioCurso.Infra.Ioc
             services.AddServiceJwtAuthenticationAndAutorization(configuration);
 
             services.AddServiceSwagger();
+
+            services.AddServiceGeneratorShortId();
 
             return services;
         }
