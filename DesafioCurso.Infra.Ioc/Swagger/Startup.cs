@@ -10,7 +10,7 @@ namespace DesafioCurso.Infra.Ioc.Swagger
             // Adicionado o serviço de autenticação com JWT bearer.
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoListApi", Version = "v1" });
+                s.SwaggerDoc("v1", new OpenApiInfo { Title = "DesafioCurso", Version = "v1" });
 
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
