@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DesafioCurso.Infra.Ioc\DesafioCurso.Infra.Ioc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>
