@@ -1,5 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
+using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Enums;
@@ -19,15 +20,17 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         private readonly UserValidation _userValidation;
         private readonly IPersonRepository _personRepository;
         private readonly IUserPermissionRepository _userPermissionRepository;
+        private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
         public CreateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow,
-            UserValidation userValidation, IPersonRepository personRepository, IUserPermissionRepository userPermissionRepository)
+            UserValidation userValidation, IPersonRepository personRepository, IUserPermissionRepository userPermissionRepository, IShortIdGeneratorService shortIdGenerator)
         {
             _userRepository = userRepository;
             _uow = uow;
             _userValidation = userValidation;
             _personRepository = personRepository;
             _userPermissionRepository = userPermissionRepository;
+            _shortIdGeneratorService = shortIdGenerator;
         }
 
         public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
@@ -66,8 +69,17 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 
+            user.Identifier = _shortIdGeneratorService.GenerateShortId();
+
             await _userRepository.Create(user);
-            await _userPermissionRepository.Create(new UserPermission() { Role = UserRole.commonUser, UserId = user.Id.Value });
+
+            await _userPermissionRepository.Create(new UserPermission() 
+            {   
+                Role = UserRole.commonUser, 
+                UserId = user.Id.Value, Identifier = 
+                _shortIdGeneratorService.GenerateShortId()
+            });
+
             await _uow.Commit();
 
             return user.Adapt<CreateUserResponse>();

@@ -12,6 +12,7 @@ namespace DesafioCurso.Domain.Entities
         // Representa um CPF ou CNPJ.
         public string? Cpf_Cnpj { get; set; }
 
+        public string? Identifier { get; set; }
         public UserPermission Permission { get; set; }
     }
 }

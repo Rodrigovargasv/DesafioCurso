@@ -1,5 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
@@ -16,12 +17,14 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         private readonly IPersonRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly PersonValidation _personValidation;
+        private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
-        public CreatePersonHandler(IPersonRepository context, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validations)
+        public CreatePersonHandler(IPersonRepository context, IUnitOfWork<ApplicationDbContext> uow, PersonValidation validations, IShortIdGeneratorService shortIdGenerator )
         {
             _context = context;
             _uow = uow;
             _personValidation = validations;
+            _shortIdGeneratorService = shortIdGenerator;
         }
 
         public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
@@ -41,6 +44,8 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             if (alternativeCode != null || documentExist != null)
                 throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
+
+            person.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _context.Create(person);
 

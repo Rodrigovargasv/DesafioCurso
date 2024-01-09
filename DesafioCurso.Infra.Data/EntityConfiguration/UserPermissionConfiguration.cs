@@ -23,6 +23,16 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.HasOne(x => x.User)
                 .WithOne(x => x.Permission)
                   .HasForeignKey<UserPermission>(p => p.UserId);
+
+
+            // Identificador unico
+            builder.Property(x => x.Identifier)
+                 .HasColumnName("Identificador")
+                 .IsRequired()
+                 .HasMaxLength(10);
+
+            // Configuração de index unico.
+            builder.HasIndex(x => x.Identifier).IsUnique();
         }
     }
 }

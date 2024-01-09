@@ -8,5 +8,6 @@ namespace DesafioCurso.Application.Commands.Response.UserPermission
         public UserRole Role { get; set; }
 
         public Guid UserId { get; set; }
+        public string? Identifier { get; set; }
     }
 }

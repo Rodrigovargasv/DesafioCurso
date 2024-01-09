@@ -26,8 +26,8 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpGet("GetAllUserTypeSeller")]
-        public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllUserTypeSeller(int value)
+        [HttpGet("GetAllPermissionUsers")]
+        public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int value)
         {
             var command = new GetAllUserPermissionRequest();
             command.Quantity = value;

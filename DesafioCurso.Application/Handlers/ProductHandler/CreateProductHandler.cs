@@ -1,5 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
+using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
@@ -17,15 +18,18 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
         private readonly IProductRepository _productRepository;
         private readonly ProductValidation _productValidations;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
+        private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
         private readonly IUnitRepository _unitRepository;
 
-        public CreateProductHandler(IProductRepository productRepository, ProductValidation productValidations, IUnitOfWork<ApplicationDbContext> uow, IUnitRepository unitRepository)
+        public CreateProductHandler(IProductRepository productRepository, ProductValidation productValidations,
+            IUnitOfWork<ApplicationDbContext> uow, IUnitRepository unitRepository, IShortIdGeneratorService shortIdGenerator)
         {
             _productRepository = productRepository;
             _productValidations = productValidations;
             _uow = uow;
             _unitRepository = unitRepository;
+            _shortIdGeneratorService = shortIdGenerator;
         }
 
         public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
@@ -48,6 +52,8 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
                 throw new CustomException("Já existe um código de barras cadastrado com estas informações");
 
             product.AcronynmUnit = product.AcronynmUnit.ToUpper();
+
+            product.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _productRepository.Create(product);
             await _uow.Commit();

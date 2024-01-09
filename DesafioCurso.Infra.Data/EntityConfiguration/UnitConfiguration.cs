@@ -17,8 +17,16 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Acronym).HasColumnName("sigla").HasMaxLength(10).IsRequired();
             builder.Property(x => x.Decription).HasColumnName("descricao").HasMaxLength(50).IsRequired();
 
+            // Identificador unico
+            builder.Property(x => x.Identifier)
+             .HasColumnName("Identificador")
+             .IsRequired()
+             .HasMaxLength(10);
+
+
             // Configuração de index unico.
             builder.HasIndex(x => x.Acronym).IsUnique();
+            builder.HasIndex(x => x.Identifier).IsUnique();
 
             // Configuração de chave estrangeira
             builder.HasMany(u => u.RelatedProducts)
