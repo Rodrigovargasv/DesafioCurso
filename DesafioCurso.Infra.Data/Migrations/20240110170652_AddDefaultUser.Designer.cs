@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    [Migration("20240108131508_AddDefaultUser")]
+    [Migration("20240110170652_AddDefaultUser")]
     partial class AddDefaultUser
     {
         /// <inheritdoc />

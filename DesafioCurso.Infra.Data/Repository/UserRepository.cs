@@ -3,6 +3,7 @@ using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Razor.Tokenizer.Symbols;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
@@ -39,18 +40,19 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
         }
 
-        public async Task<User> CheckDataLogin(string userName, string password)
+        public async Task<User> CheckDataLogin(string userName)
         {
-            if (userName == null || password == null)
+            if (userName == null)
                 return null;
+
 
             // Recebe o resultado da verificação se o email é valido
             bool isEmail = IsValidEmail(userName);
 
             if (isEmail)
-                return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName && u.Password == password);
+                return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == userName);
 
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName && u.Password == password);
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName);
         }
 
         // verifica se é email o que o usuário digitou

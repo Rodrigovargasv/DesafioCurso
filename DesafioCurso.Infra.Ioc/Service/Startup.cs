@@ -10,6 +10,9 @@ namespace DesafioCurso.Infra.Ioc.Service
         internal static IServiceCollection AddServiceGeneratorShortId(this IServiceCollection services)
         {
             services.AddScoped<IShortIdGeneratorService, ShortIdGeneratorService>();
+
+            services.AddScoped<IPasswordManger, PasswordManager>();
+
             return services;
         }
     }

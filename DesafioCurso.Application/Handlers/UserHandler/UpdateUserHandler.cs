@@ -1,5 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
+using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
@@ -16,13 +17,16 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         private readonly IUnitOfWork<SqliteDbcontext> _uow;
         private readonly UserValidation _userValidation;
         private readonly IPersonRepository _personRepository;
+        private readonly IPasswordManger _passwordManger;
 
-        public UpdateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow, UserValidation userValidation, IPersonRepository personRepository)
+        public UpdateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow,
+            UserValidation userValidation, IPersonRepository personRepository, IPasswordManger passwordManger)
         {
             _userRepository = userRepository;
             _uow = uow;
             _userValidation = userValidation;
             _personRepository = personRepository;
+            _passwordManger = passwordManger;
         }
 
         public async Task<UpdateUserResponse> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
@@ -62,6 +66,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (!string.IsNullOrEmpty(request.Password))
                 userId.Password = request.Password;
+            
 
             if (!string.IsNullOrEmpty(request.Cpf_Cnpj))
             {
@@ -84,6 +89,8 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
+
+            userId.Password = _passwordManger.HashPassword(request.Password);
 
             #endregion
 

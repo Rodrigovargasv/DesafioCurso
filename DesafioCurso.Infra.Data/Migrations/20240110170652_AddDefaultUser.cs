@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Domain.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -9,12 +8,12 @@ namespace DesafioCurso.Infra.Data.Migrations
     /// <inheritdoc />
     public partial class AddDefaultUser : Migration
     {
-        
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             string shortIdUser = GenerateShortId();
-     
+
             var adminUser = new
             {
                 Id = Guid.NewGuid(),
@@ -29,7 +28,7 @@ namespace DesafioCurso.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "usuario",
                 columns: new[] { "id", "nome_completo", "apelido", "email", "senha", "cpf_cnpj", "Identificador" },
-                values: new object[] { adminUser.Id, adminUser.NomeCompleto, adminUser.Apelido, adminUser.Email, adminUser.Senha, adminUser.CpfCnpj, adminUser.Identificador }
+                values: new object[] { adminUser.Id, adminUser.NomeCompleto, adminUser.Apelido, adminUser.Email, HashPassword(adminUser.Senha), adminUser.CpfCnpj, adminUser.Identificador }
             );
 
             // Inserir Permissões para o Usuário padrão
@@ -40,6 +39,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                 columns: new[] { "id", "perfil_de_acesso", "id_usuario", "Identificador" },
                 values: new object[] { Guid.NewGuid(), perfilAcesso, adminUser.Id, shortIdPermission }
             );
+
         }
 
         /// <inheritdoc />
@@ -47,7 +47,6 @@ namespace DesafioCurso.Infra.Data.Migrations
         {
 
         }
-
         private string GenerateShortId()
         {
             // Gera um GUID (Globally Unique Identifier)
@@ -66,6 +65,12 @@ namespace DesafioCurso.Infra.Data.Migrations
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));
 
             return shortId;
+        }
+
+        private string HashPassword(string password)
+        {
+            var passwordHasher = new PasswordHasher<object>();
+            return passwordHasher.HashPassword(null, password);
         }
     }
 }

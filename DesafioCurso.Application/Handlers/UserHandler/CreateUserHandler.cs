@@ -21,9 +21,11 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         private readonly IPersonRepository _personRepository;
         private readonly IUserPermissionRepository _userPermissionRepository;
         private readonly IShortIdGeneratorService _shortIdGeneratorService;
+        private readonly IPasswordManger _passwordManger;
 
         public CreateUserHandler(IUserRepository userRepository, IUnitOfWork<SqliteDbcontext> uow,
-            UserValidation userValidation, IPersonRepository personRepository, IUserPermissionRepository userPermissionRepository, IShortIdGeneratorService shortIdGenerator)
+            UserValidation userValidation, IPersonRepository personRepository, IUserPermissionRepository userPermissionRepository,
+            IShortIdGeneratorService shortIdGenerator, IPasswordManger passwordManger)
         {
             _userRepository = userRepository;
             _uow = uow;
@@ -31,6 +33,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             _personRepository = personRepository;
             _userPermissionRepository = userPermissionRepository;
             _shortIdGeneratorService = shortIdGenerator;
+            _passwordManger = passwordManger;
         }
 
         public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
@@ -72,6 +75,8 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
+
+            user.Password = _passwordManger.HashPassword(request.Password);
 
             // Gerar identificador unico para cada usuario criado.
             user.Identifier = _shortIdGeneratorService.GenerateShortId();
