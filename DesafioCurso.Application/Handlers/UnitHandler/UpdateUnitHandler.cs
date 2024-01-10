@@ -25,9 +25,14 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<UpdateUnitResponse> Handle(UpdateUnitRequest request, CancellationToken cancellationToken)
         {
+           
             #region Verifica se unidade existe no banco de dados, e valida dados informados no request, para a atualização da unidade.
 
             var unitId = await _context.GetById(request.Id);
+
+            if (!string.IsNullOrEmpty(request.Decription))
+                unitId.Decription = request.Decription;
+
             var unitValidation = await _unitValidation.ValidateAsync(unitId);
 
             if (unitId is null)
@@ -38,7 +43,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             #endregion Verifica se unidade existe no banco de dados, e valida dados informados no request, para a atualização da unidade.
 
             // Recebe os dados do request se tudo estiver correto.
-            unitId.Decription = request.Decription;
+         
 
             _context.Update(unitId);
 

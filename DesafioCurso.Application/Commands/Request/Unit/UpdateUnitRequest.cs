@@ -9,6 +9,6 @@ namespace DesafioCurso.Application.Commands.Request.Unit
         [JsonIgnore]
         public Guid Id { get; set; }
 
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
     }
 }

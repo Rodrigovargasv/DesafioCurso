@@ -19,8 +19,8 @@ namespace DesafioCurso.Application.Commands.Request.Person
 
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public bool ReleaseSale { get; set; } // liberar venda
+        public bool? ReleaseSale { get; set; } // liberar venda
 
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
     }
 }

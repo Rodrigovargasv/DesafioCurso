@@ -9,7 +9,7 @@ namespace DesafioCurso.Application.Commands.Request.User
         public string? Nickname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string? ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
 
         // Representa um CPF ou CNPJ.
         public string? Cpf_Cnpj { get; set; }
