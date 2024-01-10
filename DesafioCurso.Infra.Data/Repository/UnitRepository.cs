@@ -14,6 +14,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbContext = context;
         }
 
+        // Verifica se a sigla já existe no banco de dados
         public async Task<Unit> PropertyAcronymExists(string acronym)
         {
             return await _dbContext.Units.AsNoTracking().FirstOrDefaultAsync(p => p.Acronym == acronym);

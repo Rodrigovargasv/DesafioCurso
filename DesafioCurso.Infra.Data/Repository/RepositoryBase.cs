@@ -15,6 +15,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
+        #region Métodos básicos e genéricos de CREATE, READ,UPADATE e DELETE. 
         public async Task<IEnumerable<TEntity>> GetAll(int quantidade)
         {
             return await _context.Set<TEntity>().Take(quantidade).ToListAsync();
@@ -39,5 +40,6 @@ namespace DesafioCurso.Infra.Data.Repository
         {
             _context.Set<TEntity>().Remove(entity);
         }
+        #endregion
     }
 }

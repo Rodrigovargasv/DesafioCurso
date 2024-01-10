@@ -6,6 +6,7 @@ namespace DesafioCurso.Infra.Ioc.Repository
 {
     internal static class Startup
     {
+        // Configura serviço dos repositorios
         internal static IServiceCollection AddServiceRepository(this IServiceCollection services)
         {
             services.AddScoped<IUnitRepository, UnitRepository>();

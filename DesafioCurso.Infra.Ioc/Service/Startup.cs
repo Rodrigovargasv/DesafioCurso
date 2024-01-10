@@ -7,7 +7,8 @@ namespace DesafioCurso.Infra.Ioc.Service
 {
     internal static class Startup
     {
-        internal static IServiceCollection AddServiceGeneratorShortId(this IServiceCollection services)
+        // Configurar os serviços da aplicação
+        internal static IServiceCollection AddServiceApplication(this IServiceCollection services)
         {
             services.AddScoped<IShortIdGeneratorService, ShortIdGeneratorService>();
 

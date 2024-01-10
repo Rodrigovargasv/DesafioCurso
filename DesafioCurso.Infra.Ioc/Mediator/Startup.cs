@@ -24,7 +24,7 @@ namespace DesafioCurso.Infra.Ioc.Mediator
         // Configura o serviço de injeção de dependência do mediator
         internal static IServiceCollection AddServiceMediator(this IServiceCollection services)
         {
-            // Adiciona o MediatR e registra os handlers no assembly atual
+            // Configura serviço do MediatR e registra os handlers no assembly atual
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             #region Handlers de unidade

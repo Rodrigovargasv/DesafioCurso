@@ -18,12 +18,11 @@ namespace DesafioCurso.Application.Services
 
         public async Task<string> GenerateToken(User user, UserPermission userPermission)
         {
-            // Busca dados no appsettings
+            // Busca os dados no appsettings
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.Development.json");
 
-            //IConfigurationRoot configuration = builder.Build();
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

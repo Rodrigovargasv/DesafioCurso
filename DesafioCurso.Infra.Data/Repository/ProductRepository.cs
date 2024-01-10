@@ -14,6 +14,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbContext = context;
         }
 
+        // Lista todos os produtos vendaveis
         public async Task<IEnumerable<Product>> GetAllProductsSaleables(int quantity)
         {
             return await _dbContext.Products
@@ -22,6 +23,7 @@ namespace DesafioCurso.Infra.Data.Repository
                  .ToListAsync();
         }
 
+        // Verifica se código de barras já existe no banco de dados.
         public async Task<Product> VerifyIfBarCodeExists(string? barCode)
         {
             if (barCode == null)

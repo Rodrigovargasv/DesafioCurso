@@ -11,8 +11,10 @@ namespace DesafioCurso.Infra.Ioc.JWT
     {
         internal static IServiceCollection AddServiceJwtAuthenticationAndAutorization(this IServiceCollection services, IConfiguration configuration)
         {
+            // Configura o serviço de geração de token
             services.AddTransient<TokenService>();
 
+            // Configura o serviço de autenticação de usuário utilizando token JWT
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -26,7 +28,6 @@ namespace DesafioCurso.Infra.Ioc.JWT
                    x.TokenValidationParameters = new TokenValidationParameters
                    {
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
-                       //ValidateIssuerSigningKey = true,
                        ValidateIssuer = false,
                        ValidateAudience = false,
                        ValidateLifetime = true

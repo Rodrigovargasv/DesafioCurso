@@ -34,20 +34,5 @@ namespace DesafioCurso.Domain.Validations
                 .MaximumLength(50);
         }
 
-        //// Implementando metados de validação de documento usuando a biblioteca DocumentValidator;
-        //private bool ValidationCpfAndCnpj(string document)
-        //{
-        //    if (string.IsNullOrEmpty(document))
-        //        return true;
-
-        //    if (CpfValidation.Validate(document))
-        //        return true;
-
-        //    if (CnpjValidation.Validate(document))
-        //        return true;
-
-        //    return false;
-
-        //}
     }
 }

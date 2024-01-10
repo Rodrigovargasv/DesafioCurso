@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
 
+    // Ignora o valores nulos durante a serialição dos objetos
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
@@ -15,7 +16,7 @@ builder.Services.AddControllers()
 
 
 
-// Desabilidade model state
+// Desabilita model state
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;

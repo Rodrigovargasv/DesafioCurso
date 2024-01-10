@@ -16,6 +16,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
+        // Verifica se CPF ou CNPJ já existe no banco de dados
         public async Task<User> CheckIfCPF_CNPJExist(string cpf_cnpj)
         {
             if (cpf_cnpj == null)
@@ -24,6 +25,7 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
         }
 
+        // Verifica se Email já existe no banco de dados
         public async Task<User> CheckIfdEmailExist(string email)
         {
             if (email == null)
@@ -32,6 +34,7 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        // Verifica se apelido já existe no banco de dados
         public async Task<User> CheckIfNicknameExist(string nickname)
         {
             if (nickname == null)
@@ -40,6 +43,7 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
         }
 
+        // Verifica se apelido o email existe no banco de dados para realizar o login no sistema
         public async Task<User> CheckDataLogin(string userName)
         {
             if (userName == null)
@@ -55,7 +59,7 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == userName);
         }
 
-        // verifica se é email o que o usuário digitou
+        // Verifica se é email o que o usuário digitou é valido
         private bool IsValidEmail(string userName)
         {
             try
@@ -69,6 +73,7 @@ namespace DesafioCurso.Infra.Data.Repository
             }
         }
 
+        // Busca usuário pelo seu tipo recebido via parâmetro.
         public async Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role)
         {
             var permission = await _context.Permissions
