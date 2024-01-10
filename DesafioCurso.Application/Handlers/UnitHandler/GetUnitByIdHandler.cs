@@ -18,6 +18,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<GetUnitByIdResponse> Handle(GetUnitByIdRequest request, CancellationToken cancellationToken)
         {
+            // Busca uma unidade pelo Id, e valida se ela existe.
             var unitId = await _unitRepository.GetById(request.Id);
 
             if (unitId is null)

@@ -34,10 +34,11 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
         public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
         {
+
+            #region Validações dos dados informados request e verificações da existência de unidade e codígo de barras no banco de dados
             var product = request.Adapt<Product>();
-
             var unitValidation = await _productValidations.ValidateAsync(product);
-
+         
             if (!unitValidation.IsValid) throw new ValidationException(unitValidation.Errors);
 
             var unit = await _unitRepository.PropertyAcronymExists(request.AcronynmUnit.ToUpper());
@@ -51,8 +52,12 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             if (barCode != null)
                 throw new CustomException("Já existe um código de barras cadastrado com estas informações");
 
+            #endregion
+
+            // Alterar a singla da unidade sempre para maiúsculo;
             product.AcronynmUnit = product.AcronynmUnit.ToUpper();
 
+            // Gerar identificador unico para cada produto criado.
             product.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _productRepository.Create(product);

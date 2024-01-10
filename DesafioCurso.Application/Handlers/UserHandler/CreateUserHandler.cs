@@ -41,21 +41,24 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (user.Cpf_Cnpj != null)
                 user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
 
+           #region Validações dos dados informados request, verificações da existência dos campos CPF/CNPJ, Email, Apelido no banco de dados e validação de confirmação senha.
+
             var userValidation = await _userValidation.ValidateAsync(user);
+    
             if (!userValidation.IsValid)
                 throw new ValidationException(userValidation.Errors);
 
-            #region verificação duplicidade de dados
-
             var Cpf_CPJExist = await _userRepository.CheckIfCPF_CNPJExist(request.Cpf_Cnpj);
-            var EmailExist = await _userRepository.CheckIfdEmailExist(request.Email);
-            var NicknameExist = await _userRepository.CheckIfNicknameExist(request.Nickname);
 
             if (Cpf_CPJExist != null)
                 throw new CustomException("Não possível cadastrar o CPF ou CNPJ, pois eles estão indisponíveis.");
 
+            var EmailExist = await _userRepository.CheckIfdEmailExist(request.Email);
+
             if (EmailExist != null)
                 throw new CustomException("Não possível cadastrar o Email, pois ele está indisponível.");
+
+            var NicknameExist = await _userRepository.CheckIfNicknameExist(request.Nickname);
 
             if (NicknameExist != null)
                 throw new CustomException("Não possível cadastrar o Apelido, pois ele está indisponível");
@@ -65,14 +68,17 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             #endregion verificação duplicidade de dados
 
+             // Verifica já existe um pessoa que possui CPF ou CNPJ cadastrado.
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
 
+            // Gerar identificador unico para cada usuario criado.
             user.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _userRepository.Create(user);
 
+            // Cria permissões básicas para o novo usuário cadastrado.
             await _userPermissionRepository.Create(new UserPermission() 
             {   
                 Role = UserRole.commonUser, 

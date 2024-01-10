@@ -21,9 +21,9 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
         public async Task<DeleteUserResponse> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
         {
+            // Verifica se a usuário existe
             var userId = await _userRepository.GetById(request.Id);
 
-            // Verifica se a usuário existe
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 

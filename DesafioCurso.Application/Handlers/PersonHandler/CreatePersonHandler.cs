@@ -29,22 +29,25 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
         public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
-            var person = request.Adapt<Person>();
 
+            #region Validações dos dados informados request e verificações da existência de documento e codígo alternativo no banco de dados
+            var person = request.Adapt<Person>();
+            var personValidation = await _personValidation.ValidateAsync(person);
+            var documentExist = await _context.PropertyDocumentExist(person.Document);
+            var alternativeCode = await _context.PropertyAlternativeCodeExist(person.AlternativeCode);
+
+        
             if (person.Document != null)
                 person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
-            var personValidation = await _personValidation.ValidateAsync(person);
-
             if (!personValidation.IsValid) throw new ValidationException(personValidation.Errors);
-
-            var documentExist = await _context.PropertyDocumentExist(person.Document);
-
-            var alternativeCode = await _context.PropertyAlternativeCodeExist(person.AlternativeCode);
 
             if (alternativeCode != null || documentExist != null)
                 throw new CustomException("Já existe uma pessoa com estes dados de documento ou codigo alternativo");
 
+            #endregion
+
+            // Gerar identificador unico para cada pessoa criada.
             person.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _context.Create(person);

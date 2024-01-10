@@ -25,25 +25,21 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<UpdateUnitResponse> Handle(UpdateUnitRequest request, CancellationToken cancellationToken)
         {
+            #region Verifica se unidade existe no banco de dados, e valida dados informados no request, para a atualização da unidade.
             var unitId = await _context.GetById(request.Id);
-
-            // Verifica se a pessoa existe
-            if (unitId is null)
-                throw new NotFoundException("Unidade não encontrada");
-
-            // Atualiza as propriedades da pessoa com os dados da requisição
-            unitId.Decription = request.Decription;
-
             var unitValidation = await _unitValidation.ValidateAsync(unitId);
 
-            // Se a pessoa não for válida, lança uma exceção de validação
+            if (unitId is null)
+                throw new NotFoundException("Unidade não encontrada");
             if (!unitValidation.IsValid)
                 throw new ValidationException(unitValidation.Errors);
+            #endregion
 
-            // Atualiza a pessoa no contexto
+            // Recebe os dados do request se tudo estiver correto.
+            unitId.Decription = request.Decription;
+
             _context.Update(unitId);
 
-            // Commit das alterações no banco de dados
             await _uow.Commit();
 
             return unitId.Adapt<UpdateUnitResponse>();
