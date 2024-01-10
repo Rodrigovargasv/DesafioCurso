@@ -14,6 +14,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbcontext = context;
         }
 
+        // Verifica se usuário já existe no banco de dados
         public async Task<UserPermission> VerifyIfUserExist(Guid id)
         {
             if (id == null)

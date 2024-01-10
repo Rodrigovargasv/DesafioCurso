@@ -18,9 +18,9 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
         public async Task<GetUserByIdResponse> Handle(GetUserByIdRequest request, CancellationToken cancellationToken)
         {
+            // Busca um usuário pelo Id, e valida se ele existe.
             var userId = await _userRepository.GetById(request.Id);
 
-            // Verifica se a usuário existe
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 

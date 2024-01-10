@@ -14,6 +14,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _dbContext = context;
         }
 
+        // Verifica se o código altenativo ja este no banco de dados
         public async Task<Person> PropertyAlternativeCodeExist(string alternativeCode)
         {
             if (alternativeCode == null)
@@ -22,6 +23,7 @@ namespace DesafioCurso.Infra.Data.Repository
             return await _dbContext.People.AsNoTracking().FirstOrDefaultAsync(p => p.AlternativeCode == alternativeCode);
         }
 
+        // Verifica se o documento ja este no banco de dados
         public async Task<Person> PropertyDocumentExist(string document)
         {
             if (document == null)

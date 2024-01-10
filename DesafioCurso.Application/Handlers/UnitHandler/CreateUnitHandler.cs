@@ -28,11 +28,11 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             _shortIdGeneratorService = shortIdGenerator;
         }
 
-        // Implementando a interface Handle
         public async Task<CreateUnitResponse> Handle(CreateUnitRequest request, CancellationToken cancellationToken)
         {
-            var unit = request.Adapt<Unit>();
+            #region Validações dos dados informados request e verificações da existência da sigla no banco de dados
 
+            var unit = request.Adapt<Unit>();
             var unitValidation = await _unitValidation.ValidateAsync(unit);
 
             if (!unitValidation.IsValid) throw new ValidationException(unitValidation.Errors);
@@ -42,9 +42,12 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             if (unitExists != null)
                 throw new CustomException($"Já existe a unidade: {unit.Acronym}");
 
+            #endregion Validações dos dados informados request e verificações da existência da sigla no banco de dados
+
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();
 
+            // Gerar identificador unico para cada unidade criada.
             unit.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _context.Create(unit);

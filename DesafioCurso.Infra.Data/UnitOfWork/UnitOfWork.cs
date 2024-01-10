@@ -12,7 +12,7 @@ namespace DesafioCurso.Infra.Data.UnitOfWork
             _context = context;
         }
 
-        // Implementação do unit of work
+        // Implementação do unit of work com o método saveChanges
         public async Task<bool> Commit()
           => await _context.SaveChangesAsync() > 0;
 

@@ -1,5 +1,4 @@
-﻿using DesafioCurso.Application.Handlers.UserHandler;
-using DesafioCurso.Domain.Common.Exceptions;
+﻿using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -13,7 +12,6 @@ namespace DesafioCurso.Application.Middleware
 {
     public class GlobalExceptionMiddleware : IMiddleware
     {
-
         private readonly ILogger<GlobalExceptionMiddleware> _logger;
 
         public GlobalExceptionMiddleware(ILogger<GlobalExceptionMiddleware> logger)
@@ -38,12 +36,9 @@ namespace DesafioCurso.Application.Middleware
                     _logger.LogWarning("O usuário não tem permissão para acessar este recurso.");
                     throw new ForbiddenException("O usuário não tem permissão para acessar este recurso.");
                 }
-                
-                 
             }
             catch (Exception ex)
             {
-               
                 using (LogContext.PushProperty("ErrorId", Guid.NewGuid().ToString()))
                 {
                     var errorId = Guid.NewGuid().ToString();
@@ -108,7 +103,6 @@ namespace DesafioCurso.Application.Middleware
                     response.StatusCode = errorResult.StatusCode;
                     await response.WriteAsync(JsonSerializer.Serialize(errorResult));
                 }
-
             }
         }
     }

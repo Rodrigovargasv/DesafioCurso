@@ -35,8 +35,7 @@ namespace DesafioCurso.Infra.Ioc
 
             services.AddServiceSwagger();
 
-            services.AddServiceGeneratorShortId();
-
+            services.AddServiceApplication();
 
             services.AddServiceSeriLog();
 

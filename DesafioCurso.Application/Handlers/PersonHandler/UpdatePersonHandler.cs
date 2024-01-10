@@ -27,7 +27,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         {
             var personId = await _personRepository.GetById(request.Id);
 
-            // Verifica se a unidade existe
+            // Verifica se a pessoa existe
             if (personId is null)
                 throw new NotFoundException("Pessoa não encontrado");
 
@@ -40,6 +40,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             {
                 personId.Document = request.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
+                // Valida se o documento já existe no banco de dados.
                 var documentExist = await _personRepository.PropertyDocumentExist(personId.Document);
 
                 if (documentExist != null)
@@ -56,6 +57,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             {
                 personId.AlternativeCode = request.AlternativeCode;
 
+                // Valida se o código alternativo já existe no banco de dados
                 var alternativeCode = await _personRepository.PropertyAlternativeCodeExist(personId.AlternativeCode);
 
                 if (alternativeCode != null)
@@ -72,14 +74,11 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             var personValidation = await _personValidation.ValidateAsync(personId);
 
-            // Se a unidade não for válida, lança uma exceção de validação
+            // Se os dados informado no requesto para pessoa não for válido, é lançado uma exceção.
             if (!personValidation.IsValid)
                 throw new ValidationException(personValidation.Errors);
 
-            // Atualiza a entidade no contexto
             _personRepository.Update(personId);
-
-            // Commit das alterações no banco de dados
             await _uow.Commit();
 
             return personId.Adapt<UpdatePersonResponse>();

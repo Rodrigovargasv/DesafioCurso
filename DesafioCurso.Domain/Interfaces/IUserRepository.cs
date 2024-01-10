@@ -11,7 +11,7 @@ namespace DesafioCurso.Domain.Interfaces
 
         Task<User> CheckIfNicknameExist(string surname);
 
-        Task<User> CheckDataLogin(string userName, string password);
+        Task<User> CheckDataLogin(string userName);
 
         Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role);
     }

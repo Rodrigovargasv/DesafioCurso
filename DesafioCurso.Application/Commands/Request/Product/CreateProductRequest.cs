@@ -9,7 +9,7 @@ namespace DesafioCurso.Application.Commands.Request.Product
     {
         public string FullDescription { get; set; }
         public string BriefDescription { get; set; } // Descrição Resumida
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public int? QuantityStock { get; set; }
 
         [DefaultValue(null)]

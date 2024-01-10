@@ -15,7 +15,6 @@ namespace DesafioCurso.Api.Controllers
         public LoginUserController(IMediator mediator)
         {
             _mediator = mediator;
-        
         }
 
         [AllowAnonymous]

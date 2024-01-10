@@ -10,6 +10,7 @@ namespace DesafioCurso.Application.Commands.Response.User
 
         // Representa um CPF ou CNPJ.
         public string Cpf_Cnpj { get; set; }
+
         public string? Identifier { get; set; }
     }
 }

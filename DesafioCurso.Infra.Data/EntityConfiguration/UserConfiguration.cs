@@ -26,7 +26,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             .HasForeignKey<UserPermission>(x => x.Id)
             .OnDelete(DeleteBehavior.Cascade);
 
-
             // Identificador unico
             builder.Property(x => x.Identifier)
              .HasColumnName("Identificador")

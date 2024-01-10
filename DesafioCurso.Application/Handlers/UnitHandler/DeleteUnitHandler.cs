@@ -24,9 +24,9 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
         {
             var unit = request.Adapt<Unit>();
 
+            // Verifica se a unidade existe
             var unitId = await _context.GetById(unit.Id);
 
-            // Verifica se a unidade existe
             if (unitId is null)
                 throw new NotFoundException("Unidade não encontrada");
 
