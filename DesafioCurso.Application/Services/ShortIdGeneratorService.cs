@@ -16,7 +16,7 @@ namespace DesafioCurso.Application.Services
             string base64String = Convert.ToBase64String(guidBytes);
 
             // Remove caracteres especiais e espaços em branco
-            base64String = base64String.Replace("/", "_").Replace("+", "-").Replace("=", "");
+            base64String = base64String.Replace("/", "_").Replace("+", "").Replace("=", "").Replace("-", "");
 
             // Pega os primeiros 10 caracteres
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));
