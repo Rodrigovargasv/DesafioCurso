@@ -21,7 +21,6 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
         public async Task<DeleteProductResponse> Handle(DeleteProductRequest request, CancellationToken cancellationToken)
         {
-
             // Verifica se produto existe no banco de dados
             var productId = await _context.GetById(request.Id);
 

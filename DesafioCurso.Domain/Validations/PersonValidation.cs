@@ -33,6 +33,5 @@ namespace DesafioCurso.Domain.Validations
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo codigo alternativo não pode conter espaço em branco.")
                 .MaximumLength(50);
         }
-
     }
 }

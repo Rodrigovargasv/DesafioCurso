@@ -3,7 +3,6 @@ using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Web.Razor.Tokenizer.Symbols;
 
 namespace DesafioCurso.Infra.Data.Repository
 {
@@ -48,7 +47,6 @@ namespace DesafioCurso.Infra.Data.Repository
         {
             if (userName == null)
                 return null;
-
 
             // Recebe o resultado da verificação se o email é valido
             bool isEmail = IsValidEmail(userName);

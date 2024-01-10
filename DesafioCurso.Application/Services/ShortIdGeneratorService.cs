@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Interfaces;
+﻿using DesafioCurso.Application.Interfaces;
 
 namespace DesafioCurso.Application.Services
 {

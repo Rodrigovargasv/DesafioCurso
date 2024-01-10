@@ -66,7 +66,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (!string.IsNullOrEmpty(request.Password))
                 userId.Password = request.Password;
-            
 
             if (!string.IsNullOrEmpty(request.Cpf_Cnpj))
             {
@@ -79,11 +78,12 @@ namespace DesafioCurso.Application.Handlers.UserHandler
                     throw new CustomException("Não possível cadastrar o CPF ou CNPJ, pois eles estão indisponíveis.");
             }
 
-            #endregion Atualiza as propriedades da usuário com os dados da requisição e faz sua validação de duplicidade
+            #endregion Atualiza as propriedades da usuário com os dados da requisição e faz sua validação de duplicidade de dados
 
             #region Valida dados informados no request e Verifica se CPF/CNPJ já existe no banco de dados na tabela pessoa.
+
             var userValidation = await _userValidation.ValidateAsync(userId);
-           
+
             if (!userValidation.IsValid) throw new ValidationException(userValidation.Errors);
 
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
@@ -92,7 +92,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             userId.Password = _passwordManger.HashPassword(request.Password);
 
-            #endregion
+            #endregion Valida dados informados no request e Verifica se CPF/CNPJ já existe no banco de dados na tabela pessoa.
 
             _userRepository.Update(userId);
             await _uow.Commit();

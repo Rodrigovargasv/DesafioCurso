@@ -11,7 +11,6 @@ namespace DesafioCurso.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
             string shortIdUser = GenerateShortId();
 
             var adminUser = new
@@ -39,14 +38,13 @@ namespace DesafioCurso.Infra.Data.Migrations
                 columns: new[] { "id", "perfil_de_acesso", "id_usuario", "Identificador" },
                 values: new object[] { Guid.NewGuid(), perfilAcesso, adminUser.Id, shortIdPermission }
             );
-
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
+
         private string GenerateShortId()
         {
             // Gera um GUID (Globally Unique Identifier)

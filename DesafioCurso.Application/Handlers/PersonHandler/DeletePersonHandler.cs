@@ -22,6 +22,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         public async Task<DeletePersonResponse> Handle(DeletePesonRequest request, CancellationToken cancellationToken)
         {
             #region Verifica existência do usuário no banco e valida se a pessoa está liberado para vender.
+
             var personId = await _personRepository.GetById(request.Id);
 
             if (personId is null)
@@ -29,7 +30,8 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             if (personId.ReleaseSale == true)
                 throw new CustomException("Não foi possível realizar a exclusão da pessoa, desative a opção liberar venda e tente novamente.");
-            #endregion
+
+            #endregion Verifica existência do usuário no banco e valida se a pessoa está liberado para vender.
 
             _personRepository.Delete(personId);
             await _uow.Commit();

@@ -1,5 +1,4 @@
-﻿
-namespace DesafioCurso.Application.Interfaces
+﻿namespace DesafioCurso.Application.Interfaces
 {
     public interface IShortIdGeneratorService
     {

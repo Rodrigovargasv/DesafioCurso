@@ -24,7 +24,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
                 .WithOne(x => x.Permission)
                   .HasForeignKey<UserPermission>(p => p.UserId);
 
-
             // Identificador unico
             builder.Property(x => x.Identifier)
                  .HasColumnName("Identificador")

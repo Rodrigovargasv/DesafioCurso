@@ -5,8 +5,6 @@ using DesafioCurso.Application.Services;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Logging;
 
 namespace DesafioCurso.Application.Handlers.UserHandler
 {
@@ -24,12 +22,12 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             _tokenService = tokenService;
             _userPermissionRepository = userPermissionRepository;
             _passwordManger = passwordManger;
-            
-
         }
+
         public async Task<LoginUserResponse> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
             #region Verifica se usuário existe no banco de dados tem permissão para acessar o sistema.
+
             if (string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.Password))
                 throw new BadRequestException("Dados inválidos");
 
@@ -37,7 +35,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             var verifyPassword = _passwordManger.VerifyPassword(userLogin.Password, request.Password);
 
-     
             if (userLogin == null || verifyPassword == false)
                 throw new BadRequestException("Usuário ou senha inválido.");
 
@@ -45,14 +42,13 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             if (userPermission == null)
                 throw new NotFoundException("Usuário não encontrado.");
-            #endregion
 
+            #endregion Verifica se usuário existe no banco de dados tem permissão para acessar o sistema.
 
             // Gera o token de autenticação usando o serviço de token
             var token = await _tokenService.GenerateToken(userLogin, userPermission);
 
             return new LoginUserResponse() { Token = token };
-
         }
     }
 }

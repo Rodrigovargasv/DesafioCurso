@@ -32,6 +32,5 @@ namespace DesafioCurso.Domain.Validations
                .Must(value => UtilsValidations.ValidationCpfAndCnpj(value))
                .WithMessage("CPF ou CNPJ inválido");
         }
-
     }
 }

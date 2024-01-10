@@ -23,7 +23,6 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
              .IsRequired()
              .HasMaxLength(10);
 
-
             // Configuração de index unico.
             builder.HasIndex(x => x.Acronym).IsUnique();
             builder.HasIndex(x => x.Identifier).IsUnique();

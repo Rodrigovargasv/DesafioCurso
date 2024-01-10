@@ -14,8 +14,6 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
-
-
 // Desabilita model state
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

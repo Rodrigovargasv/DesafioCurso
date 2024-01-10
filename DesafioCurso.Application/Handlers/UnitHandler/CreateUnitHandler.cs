@@ -42,7 +42,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
             if (unitExists != null)
                 throw new CustomException($"Já existe a unidade: {unit.Acronym}");
 
-            #endregion
+            #endregion Validações dos dados informados request e verificações da existência da sigla no banco de dados
 
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();

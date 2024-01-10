@@ -44,10 +44,10 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (user.Cpf_Cnpj != null)
                 user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
 
-           #region Validações dos dados informados request, verificações da existência dos campos CPF/CNPJ, Email, Apelido no banco de dados e validação de confirmação senha.
+            #region Validações dos dados informados request, verificações da existência dos campos CPF/CNPJ, Email, Apelido no banco de dados e validação de confirmação senha.
 
             var userValidation = await _userValidation.ValidateAsync(user);
-    
+
             if (!userValidation.IsValid)
                 throw new ValidationException(userValidation.Errors);
 
@@ -69,9 +69,9 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (request.Password != request.ConfirmPassword)
                 throw new BadRequestException("O dados dos campos senha e confirmação de senha devem ser iguais");
 
-            #endregion verificação duplicidade de dados
+            #endregion Validações dos dados informados request, verificações da existência dos campos CPF/CNPJ, Email, Apelido no banco de dados e validação de confirmação senha.
 
-             // Verifica já existe um pessoa que possui CPF ou CNPJ cadastrado.
+            // Verifica já existe um pessoa que possui CPF ou CNPJ cadastrado.
             var documentInPersonexist = await _personRepository.PropertyDocumentExist(request.Cpf_Cnpj);
 
             if (documentInPersonexist != null) throw new CustomException("Ja existe um registro de pessoa com esta informação de CPF/CNPJ.");
@@ -84,10 +84,11 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             await _userRepository.Create(user);
 
             // Cria permissões básicas para o novo usuário cadastrado.
-            await _userPermissionRepository.Create(new UserPermission() 
-            {   
-                Role = UserRole.commonUser, 
-                UserId = user.Id.Value, Identifier = 
+            await _userPermissionRepository.Create(new UserPermission()
+            {
+                Role = UserRole.commonUser,
+                UserId = user.Id.Value,
+                Identifier =
                 _shortIdGeneratorService.GenerateShortId()
             });
 

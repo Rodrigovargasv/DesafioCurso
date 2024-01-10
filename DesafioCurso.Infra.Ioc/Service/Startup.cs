@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Interfaces;
+﻿using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 

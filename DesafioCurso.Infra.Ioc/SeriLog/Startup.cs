@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace DesafioCurso.Infra.Ioc.SeriLog
@@ -20,7 +19,6 @@ namespace DesafioCurso.Infra.Ioc.SeriLog
             });
 
             return services;
-
         }
     }
 }

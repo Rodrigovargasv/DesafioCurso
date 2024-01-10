@@ -62,8 +62,8 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             #endregion Atualiza as propriedades da product com os dados da requisição
 
             #region Valida os dados recebido no request para atualizar o produto, verifica se a sigla da unidade e código de barras já existe no banco.
-            var ProductValidation = await _productValidations.ValidateAsync(productId);
 
+            var ProductValidation = await _productValidations.ValidateAsync(productId);
 
             if (!ProductValidation.IsValid) throw new ValidationException(ProductValidation.Errors);
 
@@ -77,7 +77,8 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
             if (barCode != null)
                 throw new CustomException("Já existe um código de barras cadastrado com estas informações");
-            #endregion
+
+            #endregion Valida os dados recebido no request para atualizar o produto, verifica se a sigla da unidade e código de barras já existe no banco.
 
             // Passa a sigla da unidade para maiúculo.
             productId.AcronynmUnit = productId.AcronynmUnit.ToUpper();
