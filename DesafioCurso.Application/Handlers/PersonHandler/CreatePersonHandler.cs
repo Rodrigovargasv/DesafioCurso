@@ -46,6 +46,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
             #endregion Validações dos dados informados request e verificações da existência de documento e codígo alternativo no banco de dados
 
+            person.City = person.City.ToUpper();
             // Gerar identificador unico para cada pessoa criada.
             person.Identifier = _shortIdGeneratorService.GenerateShortId();
 

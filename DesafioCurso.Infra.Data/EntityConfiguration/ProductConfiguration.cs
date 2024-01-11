@@ -11,8 +11,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configura nome da tabela no banco de dados
             builder.ToTable("produto");
 
-            // Configura o banco de dados para gerar automaticamente o id
-            builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
+            // Configura coluna Id
+            builder.Property(x => x.Id).HasColumnName("id").IsRequired();
 
             builder.Property(x => x.FullDescription).HasColumnName("descricao_completa").HasMaxLength(150).IsRequired();
             builder.Property(x => x.BriefDescription).HasColumnName("descricao_resumida").HasMaxLength(100).IsRequired();
@@ -25,7 +25,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
             // Identificador unico
             builder.Property(x => x.Identifier)
-                 .HasColumnName("Identificador")
+                 .HasColumnName("identificador")
                  .IsRequired()
                  .HasMaxLength(10);
 

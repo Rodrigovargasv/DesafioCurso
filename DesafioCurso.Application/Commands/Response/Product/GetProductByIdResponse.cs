@@ -1,6 +1,8 @@
-﻿namespace DesafioCurso.Application.Commands.Response.Product
+﻿using DesafioCurso.Domain.Commons;
+
+namespace DesafioCurso.Application.Commands.Response.Product
 {
-    public class GetProductByIdResponse
+    public class GetProductByIdResponse : EntityBase
     {
         public string FullDescription { get; set; }
         public string BriefDescription { get; set; } // Descrição Resumida
@@ -11,6 +13,6 @@
         public bool Saleable { get; set; } // vendavel
         public string AcronynmUnit { get; set; }
 
-        public string? Identifier { get; set; }
+      
     }
 }

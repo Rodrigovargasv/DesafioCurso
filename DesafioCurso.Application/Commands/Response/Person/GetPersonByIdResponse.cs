@@ -5,13 +5,12 @@ namespace DesafioCurso.Application.Commands.Response.Person
     public class GetPersonByIdResponse : EntityBase
     {
         public string FullName { get; set; }
-        public string Surnamed { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Document { get; set; }
+        public string City { get; set; }
+        public string Observation { get; set; }
+        public string AlternativeCode { get; set; }
+        public bool ReleaseSale { get; set; }// liberar venda
+        public bool Active { get; set; }
 
-        // Representa um CPF ou CNPJ.
-        public string Cpf_Cnpj { get; set; }
-
-        public string? Identifier { get; set; }
     }
 }

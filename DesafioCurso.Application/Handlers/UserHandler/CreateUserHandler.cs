@@ -87,7 +87,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             await _userPermissionRepository.Create(new UserPermission()
             {
                 Role = UserRole.commonUser,
-                UserId = user.Id.Value,
+                UserId = user.Id,
                 Identifier =
                 _shortIdGeneratorService.GenerateShortId()
             });

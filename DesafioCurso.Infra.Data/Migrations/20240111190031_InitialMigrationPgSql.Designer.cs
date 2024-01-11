@@ -9,25 +9,25 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
+namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240104215638_init")]
-    partial class init
+    [Migration("20240111190031_InitialMigrationPgSql")]
+    partial class InitialMigrationPgSql
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Person", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -60,6 +60,12 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nome_completo");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("identificador");
+
                     b.Property<string>("Observation")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
@@ -79,12 +85,15 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                     b.HasIndex("Document")
                         .IsUnique();
 
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
                     b.ToTable("pessoa", (string)null);
                 });
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Product", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -119,6 +128,12 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .HasColumnType("character varying(150)")
                         .HasColumnName("descricao_completa");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("identificador");
+
                     b.Property<decimal?>("Price")
                         .IsRequired()
                         .HasPrecision(18, 2)
@@ -146,12 +161,15 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                     b.HasIndex("BarCode")
                         .IsUnique();
 
+                    b.HasIndex("Identifier")
+                        .IsUnique();
+
                     b.ToTable("produto", (string)null);
                 });
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Unit", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -168,9 +186,18 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .HasColumnType("character varying(50)")
                         .HasColumnName("descricao");
 
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("identificador");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Acronym")
+                        .IsUnique();
+
+                    b.HasIndex("Identifier")
                         .IsUnique();
 
                     b.ToTable("unidade", (string)null);

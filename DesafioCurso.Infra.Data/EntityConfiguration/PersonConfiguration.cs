@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.ComponentModel.DataAnnotations;
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {
@@ -11,8 +12,8 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             // Configura nome da tabela
             builder.ToTable("pessoa");
 
-            // Configura o banco de dados para gerar automaticamente o id
-            builder.Property(x => x.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
+            // Configura coluna Id
+            builder.Property(x => x.Id).HasColumnName("id").IsRequired();
 
             builder.Property(x => x.FullName).HasColumnName("nome_completo").HasMaxLength(100).IsRequired();
             builder.Property(x => x.Document).HasColumnName("documento").HasMaxLength(14);
@@ -24,7 +25,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
 
             // Identificador unico
             builder.Property(x => x.Identifier)
-                .HasColumnName("Identificador")
+                .HasColumnName("identificador")
                 .IsRequired()
                 .HasMaxLength(10);
 

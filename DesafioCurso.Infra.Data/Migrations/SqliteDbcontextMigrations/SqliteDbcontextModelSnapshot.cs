@@ -3,26 +3,23 @@ using System;
 using DesafioCurso.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations
+namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 {
     [DbContext(typeof(SqliteDbcontext))]
-    [Migration("20240108125255_AddTableIdentifier")]
-    partial class AddTableIdentifier
+    partial class SqliteDbcontextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.User", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
@@ -48,7 +45,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Identificador");
+                        .HasColumnName("identificador");
 
                     b.Property<string>("Nickname")
                         .HasMaxLength(50)
@@ -80,7 +77,7 @@ namespace DesafioCurso.Infra.Data.Migrations
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.UserPermission", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
@@ -89,7 +86,7 @@ namespace DesafioCurso.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Identificador");
+                        .HasColumnName("identificador");
 
                     b.Property<int>("Role")
                         .HasMaxLength(15)

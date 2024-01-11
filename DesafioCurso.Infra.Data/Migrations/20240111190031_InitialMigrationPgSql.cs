@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
+namespace DesafioCurso.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialMigrationPgSql : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +22,8 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                     observacao = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true),
                     codigo_alternativo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     libera_venda = table.Column<bool>(type: "boolean", nullable: true, defaultValue: false),
-                    ativo = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true)
+                    ativo = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true),
+                    identificador = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +36,8 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     sigla = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    descricao = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    descricao = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    identificador = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +57,8 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                     codigo_barras = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: true),
                     ativo = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     vendavel = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    unidade = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
+                    unidade = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    identificador = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,15 +84,33 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_pessoa_identificador",
+                table: "pessoa",
+                column: "identificador",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_produto_codigo_barras",
                 table: "produto",
                 column: "codigo_barras",
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_produto_identificador",
+                table: "produto",
+                column: "identificador",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_produto_unidade",
                 table: "produto",
                 column: "unidade");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_unidade_identificador",
+                table: "unidade",
+                column: "identificador",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_unidade_sigla",

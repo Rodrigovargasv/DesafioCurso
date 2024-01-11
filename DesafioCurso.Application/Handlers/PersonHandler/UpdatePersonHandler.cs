@@ -48,7 +48,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             }
 
             if (!string.IsNullOrEmpty(request.City))
-                personId.City = request.City;
+                personId.City = request.City.ToUpper() ;
 
             if (!string.IsNullOrEmpty(request.Observation))
                 personId.Observation = request.Observation;

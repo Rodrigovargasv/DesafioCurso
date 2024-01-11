@@ -4,7 +4,8 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class DeleteProductRequest : EntityBase, IRequest<DeleteProductResponse>
+    public class DeleteProductRequest : IRequest<DeleteProductResponse>
     {
+        public Guid Id { get; set; }
     }
 }
