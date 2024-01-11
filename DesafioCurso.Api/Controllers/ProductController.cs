@@ -1,4 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -63,9 +64,12 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeleteProduct")]
-        public async Task<DeleteProductResponse> DeleteProduct([FromBody] DeleteProductRequest command)
+        [HttpDelete("DeleteProduct/{id:Guid}")]
+        public async Task<DeleteProductResponse> DeleteProduct(Guid id)
         {
+            var command = new DeleteProductRequest();
+            command.Id = id;
+
             return await _mediator.Send(command);
         }
     }

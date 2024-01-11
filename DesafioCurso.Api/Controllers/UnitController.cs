@@ -1,4 +1,5 @@
-﻿using DesafioCurso.Application.Commands.Request.Unit;
+﻿using DesafioCurso.Application.Commands.Request.Person;
+using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -52,10 +53,14 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeleteUnit")]
-        public async Task<DeleteUnitResponse> DeleteUnit([FromBody] DeleteUnitRequest command)
+        [HttpDelete("DeleteUnit/{id:guid}")]
+        public async Task<DeleteUnitResponse> DeleteUnit(Guid id)
         {
+            var command = new DeleteUnitRequest();
+            command.Id = id;
+
             return await _mediator.Send(command);
+            
         }
     }
 }
