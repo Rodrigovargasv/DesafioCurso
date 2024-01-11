@@ -28,6 +28,9 @@ namespace DesafioCurso.Domain.Validations
 
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);
+
+            RuleFor(x => x.BarCode)
+                .Length(13);
         }
     }
 }

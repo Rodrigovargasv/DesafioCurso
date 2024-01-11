@@ -38,7 +38,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (userLogin == null || verifyPassword == false)
                 throw new BadRequestException("Usuário ou senha inválido.");
 
-            var userPermission = await _userPermissionRepository.VerifyIfUserExist(userLogin.Id.Value);
+            var userPermission = await _userPermissionRepository.VerifyIfUserExist(userLogin.Id);
 
             if (userPermission == null)
                 throw new NotFoundException("Usuário não encontrado.");

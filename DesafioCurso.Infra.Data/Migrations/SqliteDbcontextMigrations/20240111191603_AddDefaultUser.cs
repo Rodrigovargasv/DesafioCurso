@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations
+namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 {
     /// <inheritdoc />
     public partial class AddDefaultUser : Migration
@@ -26,7 +26,7 @@ namespace DesafioCurso.Infra.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "usuario",
-                columns: new[] { "id", "nome_completo", "apelido", "email", "senha", "cpf_cnpj", "Identificador" },
+                columns: new[] { "id", "nome_completo", "apelido", "email", "senha", "cpf_cnpj", "identificador" },
                 values: new object[] { adminUser.Id, adminUser.NomeCompleto, adminUser.Apelido, adminUser.Email, HashPassword(adminUser.Senha), adminUser.CpfCnpj, adminUser.Identificador }
             );
 
@@ -35,14 +35,16 @@ namespace DesafioCurso.Infra.Data.Migrations
             string shortIdPermission = GenerateShortId();
             migrationBuilder.InsertData(
                 table: "permissoes",
-                columns: new[] { "id", "perfil_de_acesso", "id_usuario", "Identificador" },
+                columns: new[] { "id", "perfil_de_acesso", "id_usuario", "identificador" },
                 values: new object[] { Guid.NewGuid(), perfilAcesso, adminUser.Id, shortIdPermission }
             );
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+
         }
 
         private string GenerateShortId()
@@ -57,7 +59,7 @@ namespace DesafioCurso.Infra.Data.Migrations
             string base64String = Convert.ToBase64String(guidBytes);
 
             // Remove caracteres especiais e espaços em branco
-            base64String = base64String.Replace("/", "_").Replace("+", "-").Replace("=", "");
+            base64String = base64String.Replace("/", "").Replace("+", "").Replace("=", "").Replace("-", "");
 
             // Pega os primeiros 10 caracteres
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));

@@ -53,9 +53,12 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeletePerson")]
-        public async Task<DeletePersonResponse> DeletePerson([FromBody] DeletePesonRequest command)
+        [HttpDelete("DeletePerson/{id:Guid}")]
+        public async Task<DeletePersonResponse> DeletePerson(Guid id)
         {
+            var command = new DeletePesonRequest();
+            command.Id = id;
+
             return await _mediator.Send(command);
         }
     }

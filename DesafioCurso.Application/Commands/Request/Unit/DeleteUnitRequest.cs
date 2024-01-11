@@ -4,7 +4,8 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Unit
 {
-    public class DeleteUnitRequest : EntityBase, IRequest<DeleteUnitResponse>
+    public class DeleteUnitRequest : IRequest<DeleteUnitResponse>
     {
+        public Guid Id { get; set; }
     }
 }

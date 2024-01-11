@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
+namespace DesafioCurso.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,14 +17,14 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Person", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -61,7 +61,7 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
-                        .HasColumnName("Identificador");
+                        .HasColumnName("identificador");
 
                     b.Property<string>("Observation")
                         .HasMaxLength(250)
@@ -90,7 +90,7 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Product", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -129,7 +129,7 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
-                        .HasColumnName("Identificador");
+                        .HasColumnName("identificador");
 
                     b.Property<decimal?>("Price")
                         .IsRequired()
@@ -166,7 +166,7 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("DesafioCurso.Domain.Entities.Unit", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
@@ -187,7 +187,7 @@ namespace DesafioCurso.Infra.Data.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
-                        .HasColumnName("Identificador");
+                        .HasColumnName("identificador");
 
                     b.HasKey("Id");
 

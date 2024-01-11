@@ -4,7 +4,8 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class GetProductByIdRequest : EntityBase, IRequest<GetProductByIdResponse>
+    public class GetProductByIdRequest : IRequest<GetProductByIdResponse>
     {
+        public Guid Id { get; set; }
     }
 }

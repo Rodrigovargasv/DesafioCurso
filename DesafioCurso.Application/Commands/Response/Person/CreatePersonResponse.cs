@@ -4,5 +4,6 @@ namespace DesafioCurso.Application.Commands.Response.Person
 {
     public class CreatePersonResponse : EntityBase
     {
+        
     }
 }

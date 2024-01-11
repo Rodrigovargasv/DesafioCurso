@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DesafioCurso.Infra.Data.Migrations
+namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialMigrationSqlite : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +20,8 @@ namespace DesafioCurso.Infra.Data.Migrations
                     apelido = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     senha = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    cpf_cnpj = table.Column<string>(type: "TEXT", maxLength: 14, nullable: true)
+                    cpf_cnpj = table.Column<string>(type: "TEXT", maxLength: 14, nullable: true),
+                    identificador = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +34,8 @@ namespace DesafioCurso.Infra.Data.Migrations
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
                     perfil_de_acesso = table.Column<int>(type: "INTEGER", maxLength: 15, nullable: false),
-                    id_usuario = table.Column<Guid>(type: "TEXT", nullable: false)
+                    id_usuario = table.Column<Guid>(type: "TEXT", nullable: true),
+                    identificador = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,6 +55,12 @@ namespace DesafioCurso.Infra.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_permissoes_identificador",
+                table: "permissoes",
+                column: "identificador",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_usuario_apelido",
                 table: "usuario",
                 column: "apelido",
@@ -67,6 +76,12 @@ namespace DesafioCurso.Infra.Data.Migrations
                 name: "IX_usuario_email",
                 table: "usuario",
                 column: "email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuario_identificador",
+                table: "usuario",
+                column: "identificador",
                 unique: true);
         }
 

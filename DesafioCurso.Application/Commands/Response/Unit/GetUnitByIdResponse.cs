@@ -7,6 +7,5 @@ namespace DesafioCurso.Application.Commands.Response.Unit
         public string Acronym { get; set; } // Sigla
 
         public string Decription { get; set; }
-        public string? Identifier { get; set; }
     }
 }
