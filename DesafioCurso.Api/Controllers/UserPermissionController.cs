@@ -21,7 +21,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpPut("UpdateUserPermission/{id:Guid}")]
         public async Task<UpdateUserPermissionResponse> UpdateUserPermission([FromBody] UpdateUserPermissionRequest command, Guid id)
         {
-            command.Id = id;
+            command.UserId = id;
             return await _mediator.Send(command);
         }
 
@@ -29,9 +29,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllPermissionUsers")]
         public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int value)
         {
-            var command = new GetAllUserPermissionRequest();
-            command.Quantity = value;
-
+            var command = new GetAllUserPermissionRequest() { Quantity = value };
             return await _mediator.Send(command);
         }
     }

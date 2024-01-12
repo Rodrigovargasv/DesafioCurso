@@ -22,9 +22,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
         {
-            var command = new GetAllProductRequest();
-            command.Quantity = value;
-
+            var command = new GetAllProductRequest() {Quantity = value };
             return await _mediator.Send(command);
         }
 
@@ -32,9 +30,8 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProductSeleable")]
         public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int value)
         {
-            var command = new GetAllProductSeleableRequest();
-            command.Quantity = value;
-
+            var command = new GetAllProductSeleableRequest() { Quantity = value };
+    
             return await _mediator.Send(command);
         }
 
@@ -42,9 +39,8 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetProductById/{idOrIdentifier}")]
         public async Task<GetProductByIdResponse> GetProductById(string idOrIdentifier)
         {
-            var command = new GetProductByIdRequest();
-            command.IdOrIdentifier = idOrIdentifier;
-
+            var command = new GetProductByIdRequest() { IdOrIdentifier = idOrIdentifier };
+       
             return await _mediator.Send(command);
         }
 
@@ -67,8 +63,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteProduct/{idOrIdentifier}")]
         public async Task<DeleteProductResponse> DeleteProduct(string idOrIdentifier)
         {
-            var command = new DeleteProductRequest();
-            command.IdOrIdentifier = idOrIdentifier;
+            var command = new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier };
 
             return await _mediator.Send(command);
         }

@@ -22,8 +22,8 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllUnit")]
         public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int value)
         {
-            var command = new GetAllUnitRequest();
-            command.Quantity = value;
+            var command = new GetAllUnitRequest() { Quantity = value};
+            
 
             return await _mediator.Send(command);
         }
@@ -56,8 +56,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUnit/{idOrIdentifier}")]
         public async Task<DeleteUnitResponse> DeleteUnit(string idOrIdentifier)
         {
-            var command = new DeleteUnitRequest();
-            command.IdOrIdentifier = idOrIdentifier;
+            var command = new DeleteUnitRequest() { IdOrIdentifier = idOrIdentifier };
 
             return await _mediator.Send(command);
             

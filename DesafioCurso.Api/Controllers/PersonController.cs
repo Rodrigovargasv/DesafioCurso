@@ -31,10 +31,8 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetPersonById/{idOrIdentifier}")]
         public async Task<GetPersonByIdResponse> GetPersonByID(string idOrIdentifier)
         {
-            var command = new GetPersonByIdRequest();
-            command.IdOrIdentifier = idOrIdentifier;
-      
-
+            var command = new GetPersonByIdRequest() { IdOrIdentifier = idOrIdentifier };
+    
             return await _mediator.Send(command);
         }
 
@@ -57,9 +55,8 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeletePerson/{idOrIdentifier}")]
         public async Task<DeletePersonResponse> DeletePerson(string idOrIdentifier)
         {
-            var command = new DeletePesonRequest();
-            command.IdOrIdentifier = idOrIdentifier;
-
+            var command = new DeletePesonRequest() { IdOrIdentifier = idOrIdentifier };
+    
             return await _mediator.Send(command);
         }
     }
