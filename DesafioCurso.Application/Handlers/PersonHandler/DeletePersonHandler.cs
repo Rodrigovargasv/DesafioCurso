@@ -34,6 +34,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             #endregion Verifica existência do usuário no banco e valida se a pessoa está liberado para vender.
 
             _personRepository.Delete(personId);
+
             await _uow.Commit();
 
             return personId.Adapt<DeletePersonResponse>();

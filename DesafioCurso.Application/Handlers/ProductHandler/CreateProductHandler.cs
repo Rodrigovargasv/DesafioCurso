@@ -61,6 +61,7 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             product.Identifier = _shortIdGeneratorService.GenerateShortId();
 
             await _productRepository.Create(product);
+
             await _uow.Commit();
 
             return product.Adapt<CreateProductResponse>();

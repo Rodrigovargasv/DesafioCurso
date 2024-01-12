@@ -27,6 +27,7 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
             if (productId == null) throw new NotFoundException("Produto não encontrado");
 
             _context.Delete(productId);
+
             await _uow.Commit();
 
             return productId.Adapt<DeleteProductResponse>();

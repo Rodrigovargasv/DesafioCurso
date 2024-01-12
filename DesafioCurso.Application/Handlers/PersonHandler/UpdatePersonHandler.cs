@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Domain.Common.Exceptions;
+using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
@@ -79,6 +80,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                 throw new ValidationException(personValidation.Errors);
 
             _personRepository.Update(personId);
+
             await _uow.Commit();
 
             return personId.Adapt<UpdatePersonResponse>();
