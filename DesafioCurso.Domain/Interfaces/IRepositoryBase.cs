@@ -2,9 +2,9 @@
 {
     public interface IRepositoryBase<TEntity>
     {
-        Task<IEnumerable<TEntity>> GetAll(int quantidade);
+        Task<IEnumerable<TEntity>> GetAll(int quantity);
 
-        Task<TEntity> GetById(Guid? id);
+        Task<TEntity> GetById(string value);
 
         Task Create(TEntity entity);
 

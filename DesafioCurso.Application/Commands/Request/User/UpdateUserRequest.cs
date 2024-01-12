@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Response.User;
+using DesafioCurso.Domain.Commons;
 using MediatR;
 using System.Text.Json.Serialization;
 
@@ -7,7 +8,7 @@ namespace DesafioCurso.Application.Commands.Request.User
     public class UpdateUserRequest : IRequest<UpdateUserResponse>
     {
         [JsonIgnore]
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
 
         public string? FullName { get; set; }
         public string? NickName { get; set; }

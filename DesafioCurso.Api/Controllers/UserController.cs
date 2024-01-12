@@ -58,11 +58,11 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
-        [HttpGet("GetUserById/{id:Guid}")]
-        public async Task<GetUserByIdResponse> GetUserById(Guid id)
+        [HttpGet("GetUserById/{idOrIdentifier}")]
+        public async Task<GetUserByIdResponse> GetUserById(string idOrIdentifier)
         {
             var command = new GetUserByIdRequest();
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
 
             return await _mediator.Send(command);
         }
@@ -75,19 +75,20 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator")]
-        [HttpPut("UpdateUser/{id:Guid}")]
-        public async Task<UpdateUserResponse> UpdateUser([FromBody] UpdateUserRequest command, Guid id)
+        [HttpPut("UpdateUser/{idOrIdentifier}")]
+        public async Task<UpdateUserResponse> UpdateUser([FromBody] UpdateUserRequest command, string idOrIdentifier)
         {
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeleteUser/{id:Guid}")]
-        public async Task<DeleteUserResponse> DeleteUser(Guid id)
+        [HttpDelete("DeleteUser/{idOrIdentifier}")]
+        public async Task<DeleteUserResponse> DeleteUser(string idOrIdentifier)
         {
             var command = new DeleteUserRequest();
-            command.Id = id;
+
+            command.IdOrIdentifier = idOrIdentifier;
 
             return await _mediator.Send(command);
         }

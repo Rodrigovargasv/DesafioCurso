@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Domain.Commons;
 using MediatR;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace DesafioCurso.Application.Commands.Request.Person
     public class UpdatePersonRequest : IRequest<UpdatePersonResponse>
     {
         [JsonIgnore]
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
 
         public string? FullName { get; set; }
         public string? Document { get; set; }

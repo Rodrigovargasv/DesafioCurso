@@ -25,7 +25,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
         public async Task<UpdatePersonResponse> Handle(UpdatePersonRequest request, CancellationToken cancellationToken)
         {
-            var personId = await _personRepository.GetById(request.Id);
+            var personId = await _personRepository.GetById(request.IdOrIdentifier);
 
             // Verifica se a pessoa existe
             if (personId is null)

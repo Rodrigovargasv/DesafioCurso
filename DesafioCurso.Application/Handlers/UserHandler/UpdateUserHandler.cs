@@ -31,7 +31,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
         public async Task<UpdateUserResponse> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
         {
-            var userId = await _userRepository.GetById(request.Id);
+            var userId = await _userRepository.GetById(request.IdOrIdentifier);
 
             // Verifica se o usuário existe
             if (userId is null)

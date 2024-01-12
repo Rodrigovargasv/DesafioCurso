@@ -6,6 +6,6 @@ namespace DesafioCurso.Application.Commands.Request.User
 {
     public class DeleteUserRequest : IRequest<DeleteUserResponse>
     {
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         public async Task<GetPersonByIdResponse> Handle(GetPersonByIdRequest request, CancellationToken cancellationToken)
         {
             // Busca uma pessoa pelo Id, e valida se ela existe.
-            var unitId = await _personRepository.GetById(request.Id);
+            var unitId = await _personRepository.GetById(request.IdOrIdentifier);
 
             if (unitId is null)
                 throw new NotFoundException("Pessoa não encontrada.");

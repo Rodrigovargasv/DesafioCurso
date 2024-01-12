@@ -21,7 +21,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpPut("UpdateUserPermission/{id:Guid}")]
         public async Task<UpdateUserPermissionResponse> UpdateUserPermission([FromBody] UpdateUserPermissionRequest command, Guid id)
         {
-            command.UserId = id;
+            command.Id = id;
             return await _mediator.Send(command);
         }
 

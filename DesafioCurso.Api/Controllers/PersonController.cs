@@ -28,11 +28,12 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
-        [HttpGet("GetPersonById/{id:Guid}")]
-        public async Task<GetPersonByIdResponse> GetPersonByID(Guid id)
+        [HttpGet("GetPersonById/{idOrIdentifier}")]
+        public async Task<GetPersonByIdResponse> GetPersonByID(string idOrIdentifier)
         {
             var command = new GetPersonByIdRequest();
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
+      
 
             return await _mediator.Send(command);
         }
@@ -45,19 +46,19 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpPut("UpdatePerson/{id:Guid}")]
-        public async Task<UpdatePersonResponse> UpdatePerson([FromBody] UpdatePersonRequest command, Guid id)
+        [HttpPut("UpdatePerson/{idOrIdentifier}")]
+        public async Task<UpdatePersonResponse> UpdatePerson([FromBody] UpdatePersonRequest command, string idOrIdentifier)
         {
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeletePerson/{id:Guid}")]
-        public async Task<DeletePersonResponse> DeletePerson(Guid id)
+        [HttpDelete("DeletePerson/{idOrIdentifier}")]
+        public async Task<DeletePersonResponse> DeletePerson(string idOrIdentifier)
         {
             var command = new DeletePesonRequest();
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
 
             return await _mediator.Send(command);
         }
