@@ -27,7 +27,7 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
         public async Task<UpdateProductResponse> Handle(UpdateProductRequest request, CancellationToken cancellationToken)
         {
-            var productId = await _productRepository.GetById(request.Id);
+            var productId = await _productRepository.GetById(request.IdOrIdentifier);
 
             // Verifica se a produto existe
             if (productId is null)

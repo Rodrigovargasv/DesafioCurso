@@ -23,7 +23,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
         {
             #region Verifica existência do usuário no banco e valida se a pessoa está liberado para vender.
 
-            var personId = await _personRepository.GetById(request.Id);
+            var personId = await _personRepository.GetById(request.IdOrIdentifier);
 
             if (personId is null)
                 throw new NotFoundException("Pessoa não encontrada.");
@@ -34,6 +34,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
             #endregion Verifica existência do usuário no banco e valida se a pessoa está liberado para vender.
 
             _personRepository.Delete(personId);
+
             await _uow.Commit();
 
             return personId.Adapt<DeletePersonResponse>();

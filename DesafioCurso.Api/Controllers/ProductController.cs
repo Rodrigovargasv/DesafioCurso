@@ -22,9 +22,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
         {
-            var command = new GetAllProductRequest();
-            command.Quantity = value;
-
+            var command = new GetAllProductRequest() {Quantity = value };
             return await _mediator.Send(command);
         }
 
@@ -32,19 +30,17 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProductSeleable")]
         public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int value)
         {
-            var command = new GetAllProductSeleableRequest();
-            command.Quantity = value;
-
+            var command = new GetAllProductSeleableRequest() { Quantity = value };
+    
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
-        [HttpGet("GetProductById/{id:Guid}")]
-        public async Task<GetProductByIdResponse> GetProductById(Guid id)
+        [HttpGet("GetProductById/{idOrIdentifier}")]
+        public async Task<GetProductByIdResponse> GetProductById(string idOrIdentifier)
         {
-            var command = new GetProductByIdRequest();
-            command.Id = id;
-
+            var command = new GetProductByIdRequest() { IdOrIdentifier = idOrIdentifier };
+       
             return await _mediator.Send(command);
         }
 
@@ -56,19 +52,18 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpPut("UpdateProduct/{id:Guid}")]
-        public async Task<UpdateProductResponse> UpdateProduct([FromBody] UpdateProductRequest command, Guid id)
+        [HttpPut("UpdateProduct/{idOrIdentifier}")]
+        public async Task<UpdateProductResponse> UpdateProduct([FromBody] UpdateProductRequest command, string idOrIdentifier)
         {
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeleteProduct/{id:Guid}")]
-        public async Task<DeleteProductResponse> DeleteProduct(Guid id)
+        [HttpDelete("DeleteProduct/{idOrIdentifier}")]
+        public async Task<DeleteProductResponse> DeleteProduct(string idOrIdentifier)
         {
-            var command = new DeleteProductRequest();
-            command.Id = id;
+            var command = new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier };
 
             return await _mediator.Send(command);
         }

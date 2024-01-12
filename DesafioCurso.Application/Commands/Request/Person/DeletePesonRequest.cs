@@ -6,6 +6,6 @@ namespace DesafioCurso.Application.Commands.Request.Person
 {
     public class DeletePesonRequest : IRequest<DeletePersonResponse>
     {
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
     }
 }

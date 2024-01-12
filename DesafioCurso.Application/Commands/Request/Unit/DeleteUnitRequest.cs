@@ -6,6 +6,6 @@ namespace DesafioCurso.Application.Commands.Request.Unit
 {
     public class DeleteUnitRequest : IRequest<DeleteUnitResponse>
     {
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
     }
 }

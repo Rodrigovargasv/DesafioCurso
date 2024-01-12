@@ -28,7 +28,7 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
         {
             #region Verifica a existência do usuário no banco de dados e suas permissões, valida os dados recebidos no request.
 
-            var userId = await _userPermissionRepository.VerifyIfUserExist(request.Id);
+            var userId = await _userPermissionRepository.VerifyIfUserExist(request.UserId);
             var userValidation = await _userPermissionValiton.ValidateAsync(userId);
 
             if (request.Role <= 0 || request.Role.Adapt<int>() >= 5)

@@ -22,18 +22,18 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllUnit")]
         public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int value)
         {
-            var command = new GetAllUnitRequest();
-            command.Quantity = value;
+            var command = new GetAllUnitRequest() { Quantity = value};
+            
 
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
-        [HttpGet("GetUnitById/{id:Guid}")]
-        public async Task<GetUnitByIdResponse> GetUnitById(Guid id)
+        [HttpGet("GetUnitById/{idOrIdentifier}")]
+        public async Task<GetUnitByIdResponse> GetUnitById(string idOrIdentifier)
         {
-            var command = new GetUnitByIdRequest { Id = id };
-
+            var command = new GetUnitByIdRequest { IdOrIdentifier = idOrIdentifier };
+  
             return await _mediator.Send(command);
         }
 
@@ -45,19 +45,18 @@ namespace DesafioCurso.Api.Controllers
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpPut("UpdateUnit/{id:Guid}")]
-        public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command, Guid id)
+        [HttpPut("UpdateUnit/{idOrIdentifier}")]
+        public async Task<UpdateUnitResponse> UpdateUnit([FromBody] UpdateUnitRequest command, string idOrIdentifier)
         {
-            command.Id = id;
+            command.IdOrIdentifier = idOrIdentifier;
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, manager")]
-        [HttpDelete("DeleteUnit/{id:guid}")]
-        public async Task<DeleteUnitResponse> DeleteUnit(Guid id)
+        [HttpDelete("DeleteUnit/{idOrIdentifier}")]
+        public async Task<DeleteUnitResponse> DeleteUnit(string idOrIdentifier)
         {
-            var command = new DeleteUnitRequest();
-            command.Id = id;
+            var command = new DeleteUnitRequest() { IdOrIdentifier = idOrIdentifier };
 
             return await _mediator.Send(command);
             

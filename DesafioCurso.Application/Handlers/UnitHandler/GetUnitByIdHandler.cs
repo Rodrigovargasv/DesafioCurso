@@ -19,7 +19,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
         public async Task<GetUnitByIdResponse> Handle(GetUnitByIdRequest request, CancellationToken cancellationToken)
         {
             // Busca uma unidade pelo Id, e valida se ela existe.
-            var unitId = await _unitRepository.GetById(request.Id);
+            var unitId = await _unitRepository.GetById(request.IdOrIdentifier);
 
             if (unitId is null)
                 throw new NotFoundException("Unidade não encontrada.");

@@ -19,7 +19,7 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
         public async Task<GetProductByIdResponse> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)
         {
             // Busca um produto pelo Id, e valida se ele existe.
-            var productId = await _context.GetById(request.Id);
+            var productId = await _context.GetById(request.IdOrIdentifier);
 
             if (productId is null)
                 throw new NotFoundException("Produto não encontrado.");

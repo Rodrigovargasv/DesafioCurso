@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Response.Product;
+using DesafioCurso.Domain.Commons;
 using MediatR;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -6,10 +7,11 @@ using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class UpdateProductRequest : IRequest<UpdateProductResponse>
+    public class UpdateProductRequest :  IRequest<UpdateProductResponse>
     {
+
         [JsonIgnore]
-        public Guid Id { get; set; }
+        public string IdOrIdentifier { get; set; }
 
         public string? FullDescription { get; set; }
         public string? BriefDescription { get; set; } // Descrição Resumida

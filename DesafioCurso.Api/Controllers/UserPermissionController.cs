@@ -29,9 +29,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllPermissionUsers")]
         public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int value)
         {
-            var command = new GetAllUserPermissionRequest();
-            command.Quantity = value;
-
+            var command = new GetAllUserPermissionRequest() { Quantity = value };
             return await _mediator.Send(command);
         }
     }

@@ -28,7 +28,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
            
             #region Verifica se unidade existe no banco de dados, e valida dados informados no request, para a atualização da unidade.
 
-            var unitId = await _context.GetById(request.Id);
+            var unitId = await _context.GetById(request.IdOrIdentifier);
 
             if (!string.IsNullOrEmpty(request.Decription))
                 unitId.Decription = request.Decription;
