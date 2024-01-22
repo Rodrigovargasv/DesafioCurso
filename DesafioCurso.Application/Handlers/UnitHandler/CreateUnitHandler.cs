@@ -30,20 +30,8 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<CreateUnitResponse> Handle(CreateUnitRequest request, CancellationToken cancellationToken)
         {
-            #region Validações dos dados informados request e verificações da existência da sigla no banco de dados
 
             var unit = request.Adapt<Unit>();
-            var unitValidation = await _unitValidation.ValidateAsync(unit);
-
-            if (!unitValidation.IsValid) throw new ValidationException(unitValidation.Errors);
-
-            var unitExists = await _context.PropertyAcronymExists(unit.Acronym);
-
-            if (unitExists != null)
-                throw new CustomException($"Já existe a unidade: {unit.Acronym}");
-
-            #endregion Validações dos dados informados request e verificações da existência da sigla no banco de dados
-
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();
 

@@ -37,10 +37,9 @@ namespace DesafioCurso.Infra.Data.Repository
             var entityQuery = _context.Set<TEntity>().AsNoTracking();
 
             if (Guid.TryParse(value, out Guid guidValue))
-                return await entityQuery.FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == guidValue);
-            
-            
-            return await entityQuery.FirstOrDefaultAsync(e => EF.Property<string>(e, "Identifier") == value);
+                return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == guidValue);
+
+            return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<string>(e, "Identifier") == value);
             
         }
 
