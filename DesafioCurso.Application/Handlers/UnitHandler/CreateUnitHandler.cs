@@ -1,11 +1,8 @@
 ﻿using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
 using DesafioCurso.Application.Interfaces;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
-using FluentValidation;
 using Mapster;
 using MediatR;
 using Unit = DesafioCurso.Domain.Entities.Unit;
@@ -16,15 +13,13 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
     {
         private readonly IUnitRepository _context;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
-        private readonly UnitValidation _unitValidation;
         private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
         public CreateUnitHandler(IUnitRepository context, IUnitOfWork<ApplicationDbContext> uow,
-            UnitValidation validations, IShortIdGeneratorService shortIdGenerator)
+             IShortIdGeneratorService shortIdGenerator)
         {
             _context = context;
             _uow = uow;
-            _unitValidation = validations;
             _shortIdGeneratorService = shortIdGenerator;
         }
 

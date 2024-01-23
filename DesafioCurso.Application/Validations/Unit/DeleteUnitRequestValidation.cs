@@ -1,5 +1,6 @@
 ﻿
 using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using FluentValidation;
 
@@ -15,8 +16,16 @@ namespace DesafioCurso.Application.Validations.Unit
             _unitRepository = unitRepository;
 
             RuleFor(x => x.IdOrIdentifier)
-                .MustAsync(async (request, cancellationToken) => await _unitRepository.GetById(request) != null)
-                .WithMessage("Unidade não encontrada");
+                .MustAsync(async (request, cancellationToken) =>
+                {
+                    var idOrIdentifier  = await _unitRepository.GetById(request);
+
+                    if (idOrIdentifier == null)
+                        throw new NotFoundException("Unidade não encontrada");
+
+                    return true;
+                });
+               
         }
     }
 }

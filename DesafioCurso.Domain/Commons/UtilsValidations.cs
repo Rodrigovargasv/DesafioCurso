@@ -16,9 +16,7 @@ namespace DesafioCurso.Domain.Commons
         // Faz a validação de CPF e CNPJ
         public static bool ValidationCpfAndCnpj(string document)
         {
-            if (string.IsNullOrEmpty(document))
-                return true;
-
+           
             if (CpfValidation.Validate(document))
                 return true;
 

@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Request.Unit;
+using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Commons;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
@@ -19,11 +20,18 @@ namespace DesafioCurso.Application.Validations.Unit
 
             RuleFor(u => u.Acronym)
            .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.")
-           .MustAsync(async (request, cancellationToken)
-                => await _dbContext.Units.AsNoTracking().FirstOrDefaultAsync(x => x.Acronym == request.ToLower()) != null)
-           .WithMessage("Esta unidade já existe")
            .NotEmpty()
-           .NotNull();
+           .NotNull()
+           .MustAsync(async (request, cancellationToken) =>
+           {
+               var acronym = await _dbContext.Units.AsNoTracking().FirstOrDefaultAsync(x => x.Acronym == request.ToUpper());
+
+               if (acronym != null)
+                   throw new BadRequestException("Já existe uma unidade com estás informações");
+
+               return true;
+           });
+         
 
             RuleFor(u => u.Decription)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.")
