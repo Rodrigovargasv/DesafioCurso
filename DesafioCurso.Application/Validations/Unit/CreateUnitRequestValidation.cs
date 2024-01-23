@@ -23,14 +23,8 @@ namespace DesafioCurso.Application.Validations.Unit
            .NotEmpty()
            .NotNull()
            .MustAsync(async (request, cancellationToken) =>
-           {
-               var acronym = await _dbContext.Units.AsNoTracking().FirstOrDefaultAsync(x => x.Acronym == request.ToUpper());
-
-               if (acronym != null)
-                   throw new BadRequestException("Já existe uma unidade com estás informações");
-
-               return true;
-           });
+                await _dbContext.Units.AsNoTracking().AnyAsync(x => x.Acronym == request.ToUpper())
+                    ? throw new BadRequestException("Já existe uma unidade com estás informações") : true);
          
 
             RuleFor(u => u.Decription)

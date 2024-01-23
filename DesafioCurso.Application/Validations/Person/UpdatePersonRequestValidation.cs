@@ -43,7 +43,8 @@ namespace DesafioCurso.Application.Validations.Person
                     if (string.IsNullOrEmpty(value))
                         return true;
                        
-                    return UtilsValidations.ValidationCpfAndCnpj(value.Replace(".", "").Replace("-", "").Replace("/", ""));
+                    return UtilsValidations.ValidationCpfAndCnpj(value) 
+                    ? true : throw new BadRequestException("CPF ou CNPJ inválido.");
                     
                 })
                 .WithMessage("CPF ou CNPJ inválido")
@@ -53,14 +54,9 @@ namespace DesafioCurso.Application.Validations.Person
                     if (string.IsNullOrEmpty(request))
                         return true;
 
-                    var personDocument = await _dbContext.People.AsNoTracking()
-                        .FirstOrDefaultAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", ""));
-
-                    if (personDocument != null)
-                        throw new BadRequestException("CPF ou CNPJ indisponível."); 
-                    
-
-                    return true;
+                    return await _dbContext.People.AsNoTracking()
+                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", "")) 
+                           ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
            
 
@@ -81,16 +77,10 @@ namespace DesafioCurso.Application.Validations.Person
                  {
                      if (string.IsNullOrWhiteSpace(request))
                          return true; 
-                     
 
-                     var personAlternativeCode =  await _dbContext.People.AsNoTracking()
-                        .FirstOrDefaultAsync(x => x.AlternativeCode == request) ;
-
-                     if (personAlternativeCode != null)
-                         throw new BadRequestException("Já existe um código alternativo com estas informações");
-
-
-                     return true;
+                     return await _dbContext.People.AsNoTracking()
+                        .AnyAsync(x => x.AlternativeCode == request) 
+                            ? throw new BadRequestException("Já existe um código alternativo com estas informações") : true;
                  });
         }
     }

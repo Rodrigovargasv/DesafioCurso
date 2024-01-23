@@ -1,4 +1,5 @@
 ﻿using DesafioCurso.Application.Validations.Person;
+using DesafioCurso.Application.Validations.Product;
 using DesafioCurso.Application.Validations.Unit;
 using DesafioCurso.Domain.Validations;
 using FluentValidation;
@@ -32,7 +33,12 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<DeletePersonRequestValidation>();
             #endregion
 
-
+            #region #region Registra os validadores FluentValidation de produto
+            services.AddValidatorsFromAssemblyContaining<CreatePersonRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<UpdateProductRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetProductByIdRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<DeleteProductRequestValidation>();
+            #endregion
             return services;
         }
     }

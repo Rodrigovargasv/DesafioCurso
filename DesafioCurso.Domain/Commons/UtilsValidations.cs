@@ -17,10 +17,10 @@ namespace DesafioCurso.Domain.Commons
         public static bool ValidationCpfAndCnpj(string document)
         {
            
-            if (CpfValidation.Validate(document))
+            if (CpfValidation.Validate(document.Replace(".", "").Replace("-", "").Replace("/", "")))
                 return true;
 
-            if (CnpjValidation.Validate(document))
+            if (CnpjValidation.Validate(document.Replace(".", "").Replace("-", "").Replace("/", "")))
                 return true;
 
             return false;

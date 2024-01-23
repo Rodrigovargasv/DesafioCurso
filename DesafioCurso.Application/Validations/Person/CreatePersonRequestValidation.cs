@@ -24,21 +24,22 @@ namespace DesafioCurso.Application.Validations.Person
             RuleFor(p => p.Document)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value))
                 .WithMessage("O campo documento não pode conter espaço em branco.")
-                .Must(value => UtilsValidations.ValidationCpfAndCnpj(value))
-                .WithMessage("CPF ou CNPJ inválido")
+                .Must(value =>
+                {
+                    if (string.IsNullOrEmpty(value))
+                        return true;
 
+                    return UtilsValidations.ValidationCpfAndCnpj(value) ? 
+                        true : throw new BadRequestException("CPF ou CNPJ Inválido.");
+                })
                 .MustAsync(async (request, cancellationToken) =>
                 {
                     if (string.IsNullOrWhiteSpace(request))
                         return true; 
 
-                    var personDocument = await _context.People.AsNoTracking()
-                        .FirstOrDefaultAsync(x => x.Document == request);
-
-                    if (personDocument != null)
-                        throw new BadRequestException("CPF ou CNPJ indisponível.");
-
-                    return true;
+                    return await _context.People.AsNoTracking()
+                        .AnyAsync(x => x.Document == request) 
+                            ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
 
             RuleFor(p => p.City)
@@ -59,14 +60,9 @@ namespace DesafioCurso.Application.Validations.Person
                      if (string.IsNullOrWhiteSpace(request))
                          return true;
 
-                     var personAlternativeCode = await _context.People.AsNoTracking()
-                         .FirstOrDefaultAsync(x => x.AlternativeCode == request);
-
-
-                     if (personAlternativeCode != null)
-                         throw new BadRequestException("Código alternativo indisponível.");
-
-                     return true;
+                     return await _context.People.AsNoTracking()
+                         .AnyAsync(x => x.AlternativeCode == request)
+                            ? throw new BadRequestException("Código alternativo indisponível.") : true;
                  });
 
         }
