@@ -26,6 +26,11 @@ namespace DesafioCurso.Infra.Ioc.ContextDB
             services.AddDbContext<DataBaseInMemory>(options =>
                 options.UseInMemoryDatabase("BancoEmMemoria"));
 
+            // Adiciona serviços relacionados ao Entity Framework para migrações automáticas
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
+            services.BuildServiceProvider().GetService<SqliteDbcontext>().Database.Migrate();
+
             return services;
         }
     }
