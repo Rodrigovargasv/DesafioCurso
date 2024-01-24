@@ -26,24 +26,17 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
 
         public async Task<UpdateUserPermissionResponse> Handle(UpdateUserPermissionRequest request, CancellationToken cancellationToken)
         {
-            #region Verifica a existência do usuário no banco de dados e suas permissões, valida os dados recebidos no request.
-
+            
             var userId = await _userPermissionRepository.VerifyIfUserExist(request.UserId);
-            var userValidation = await _userPermissionValiton.ValidateAsync(userId);
 
             if (request.Role <= 0 || request.Role.Adapt<int>() >= 5)
                 throw new CustomException("Esta permissão não existe");
 
-            if (userId is null)
-                throw new NotFoundException("Usuário não encontrado");
-
-            if (!userValidation.IsValid)
-                throw new ValidationException(userValidation.Errors);
 
             if (!string.IsNullOrEmpty(request.Role.ToString()))
                 userId.Role = request.Role;
 
-            #endregion Verifica a existência do usuário no banco de dados e suas permissões, valida os dados recebidos no request.
+          
 
             _userPermissionRepository.Update(userId);
             await _uow.Commit();

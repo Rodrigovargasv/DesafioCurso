@@ -2,6 +2,7 @@
 using DesafioCurso.Application.Validations.Product;
 using DesafioCurso.Application.Validations.Unit;
 using DesafioCurso.Application.Validations.User;
+using DesafioCurso.Application.Validations.UserPermission;
 using DesafioCurso.Domain.Validations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,11 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<UpdateUserRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<GetUserByIdRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<DeleteUserRequestValidation>();
+            #endregion
+
+            #region #region Registra os validadores FluentValidation de permissão de usuário
+            services.AddValidatorsFromAssemblyContaining<UpdateUserPermissionRequestValidation>();
+   
             #endregion
 
             return services;

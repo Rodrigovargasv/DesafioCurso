@@ -14,7 +14,7 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
 
-        public UpdateProductHandler(IProductRepository productRepository, IUnitOfWork<ApplicationDbContext> uow, )
+        public UpdateProductHandler(IProductRepository productRepository, IUnitOfWork<ApplicationDbContext> uow)
         {
             _productRepository = productRepository;
             _uow = uow;
