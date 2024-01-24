@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Application.Validations.Person;
 using DesafioCurso.Application.Validations.Product;
 using DesafioCurso.Application.Validations.Unit;
+using DesafioCurso.Application.Validations.User;
 using DesafioCurso.Domain.Validations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +13,6 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
         internal static IServiceCollection AddServiceValidationDomains(this IServiceCollection services)
         {
             // Configurado serviço de validação de entitdades utilizando fluent validation
-            services.AddScoped<ProductValidation>();
-            services.AddScoped<UserValidation>();
             services.AddScoped<UserPermissionValidation>();
 
 
@@ -39,6 +38,14 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<GetProductByIdRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<DeleteProductRequestValidation>();
             #endregion
+
+            #region #region Registra os validadores FluentValidation de usuário
+            services.AddValidatorsFromAssemblyContaining<CreateUserRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<UpdateUserRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetUserByIdRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<DeleteUserRequestValidation>();
+            #endregion
+
             return services;
         }
     }

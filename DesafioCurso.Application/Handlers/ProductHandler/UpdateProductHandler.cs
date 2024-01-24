@@ -4,7 +4,6 @@ using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
-using FluentValidation;
 using Mapster;
 using MediatR;
 
@@ -13,16 +12,12 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
     public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, UpdateProductResponse>
     {
         private readonly IProductRepository _productRepository;
-        private readonly ProductValidation _productValidations;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
-        private readonly IUnitRepository _unitRepository;
 
-        public UpdateProductHandler(IProductRepository productRepository, ProductValidation productValidations, IUnitOfWork<ApplicationDbContext> uow, IUnitRepository unitRepository)
+        public UpdateProductHandler(IProductRepository productRepository, IUnitOfWork<ApplicationDbContext> uow, )
         {
             _productRepository = productRepository;
-            _productValidations = productValidations;
             _uow = uow;
-            _unitRepository = unitRepository;
         }
 
         public async Task<UpdateProductResponse> Handle(UpdateProductRequest request, CancellationToken cancellationToken)

@@ -3,7 +3,6 @@ using DesafioCurso.Application.Commands.Response.Person;
 using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;

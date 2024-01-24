@@ -38,7 +38,7 @@ namespace DesafioCurso.Application.Validations.Person
                         return true; 
 
                     return await _context.People.AsNoTracking()
-                        .AnyAsync(x => x.Document == request) 
+                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", "")) 
                             ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
 

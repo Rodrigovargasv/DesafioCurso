@@ -17,9 +17,9 @@ namespace DesafioCurso.Application.Validations.Unit
             RuleFor(x => x.IdOrIdentifier)
                 .MustAsync(async (request, cancellationToken) =>
                 {
-                    var idOrIdentifierawait = await _unitRepository.GetById(request);
+                    var idOrIdentifier = await _unitRepository.GetById(request);
 
-                    if (idOrIdentifierawait == null)
+                    if (idOrIdentifier == null)
                         throw new NotFoundException("Unidae não encontrada.");
 
                     return true;
