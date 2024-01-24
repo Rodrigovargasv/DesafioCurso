@@ -1,8 +1,6 @@
 ﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
 using Mapster;
 using MediatR;
