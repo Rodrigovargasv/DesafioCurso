@@ -18,7 +18,7 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
         public async Task<IEnumerable<GetAllUnitResponse>> Handle(GetAllUnitRequest request, CancellationToken cancellationToken)
         {
             // Busca por todas as unidades no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var units = await _context.GetAll(request.Paramenters.Page, request.Paramenters.PageSize);
+            var units = await _context.GetAll(request.Page, request.PageSize);
 
             var unitResponses = units.Adapt<IEnumerable<GetAllUnitResponse>>();
 

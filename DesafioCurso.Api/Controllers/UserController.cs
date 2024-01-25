@@ -22,7 +22,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllUser")]
         public async Task<IEnumerable<GetAllUserResponse>> GetAllPerson(int page, int pageSize)
         {
-            return await _mediator.Send(new GetAllUserRequest() { Page = page, PageSize = pageSize );
+            return await _mediator.Send(new GetAllUserRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]

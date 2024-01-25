@@ -1,8 +1,7 @@
-﻿using DesafioCurso.Domain.Commons;
+﻿
+namespace DesafioCurso.Application.Commands.Response.UserPermission;
 
-namespace DesafioCurso.Application.Commands.Response.UserPermission
-{
-    public class UpdateUserPermissionResponse : EntityBase
-    {
-    }
-}
+public class UpdateUserPermissionResponse(Guid Id, string Identifier);
+
+
+

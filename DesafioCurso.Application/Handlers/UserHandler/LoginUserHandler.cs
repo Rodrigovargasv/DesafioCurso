@@ -32,7 +32,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             // Gera o token de autenticação usando o serviço de token
             var token = await _tokenService.GenerateToken(userLogin, userPermission);
 
-            return new LoginUserResponse() { Token = token };
+            return new LoginUserResponse(token);
         }
     }
 }

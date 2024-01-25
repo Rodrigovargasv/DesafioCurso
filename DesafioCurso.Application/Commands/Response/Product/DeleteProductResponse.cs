@@ -1,8 +1,6 @@
-﻿using DesafioCurso.Domain.Commons;
+﻿
 
-namespace DesafioCurso.Application.Commands.Response.Product
-{
-    public class DeleteProductResponse : EntityBase
-    {
-    }
-}
+namespace DesafioCurso.Application.Commands.Response.Product;
+
+public record DeleteProductResponse(Guid Id, string Identifier);
+    
