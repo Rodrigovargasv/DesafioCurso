@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.User
 {
-    public class GetAllUserRequest : IRequest<IEnumerable<GetAllUserResponse>>
+    public class GetAllUserRequest : PaginationParamenters,  IRequest<IEnumerable<GetAllUserResponse>>
     {
         public PaginationParamenters Paramenters { get; set; }
     }

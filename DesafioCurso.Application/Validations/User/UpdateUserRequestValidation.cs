@@ -28,7 +28,7 @@ namespace DesafioCurso.Application.Validations.User
                     var idOrIdentifier = await _userRepository.GetById(request);
 
                     if (idOrIdentifier == null)
-                        throw new NotFoundException("Unidae não encontrada.");
+                        throw new NotFoundException("Não foi encontrado o usuário com o id ou shortId informando.");
 
                     return true;
                 });

@@ -20,7 +20,7 @@ namespace DesafioCurso.Application.Validations.Unit
                     var idOrIdentifier = await _unitRepository.GetById(request);
 
                     if (idOrIdentifier == null)
-                        throw new NotFoundException("Unidae não encontrada.");
+                        throw new NotFoundException("Não foi encontrada a unidade com o id ou shortId informando.");
 
                     return true;
                 });

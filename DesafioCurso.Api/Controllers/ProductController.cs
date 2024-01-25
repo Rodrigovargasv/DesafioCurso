@@ -24,28 +24,22 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int page, int pageSize)
         {
-            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
-            var command = new GetAllProductRequest() {Paramenters = pagination };
-            return await _mediator.Send(command);
+
+            return await _mediator.Send(new GetAllProductRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllProductSeleable")]
         public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int page, int pageSize)
         {
-            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
-            var command = new GetAllProductSeleableRequest() { Paramenters = pagination };
-    
-            return await _mediator.Send(command);
+             return await _mediator.Send(new GetAllProductSeleableRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetProductById/{idOrIdentifier}")]
         public async Task<GetProductByIdResponse> GetProductById(string idOrIdentifier)
         {
-            var command = new GetProductByIdRequest() { IdOrIdentifier = idOrIdentifier };
-       
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetProductByIdRequest() { IdOrIdentifier = idOrIdentifier });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
@@ -67,9 +61,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteProduct/{idOrIdentifier}")]
         public async Task<DeleteProductResponse> DeleteProduct(string idOrIdentifier)
         {
-            var command = new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier };
-
-            return await _mediator.Send(command);
+             return await _mediator.Send(new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }
 }

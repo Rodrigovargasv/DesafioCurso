@@ -2,7 +2,7 @@
 
 namespace DesafioCurso.Domain.Entities
 {
-    public class PaginationParamenters
+    public abstract class PaginationParamenters
     {
         public int Page { get; set; }
 

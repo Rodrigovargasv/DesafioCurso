@@ -17,8 +17,7 @@ namespace DesafioCurso.Application.Validations.UserPermission
             RuleFor(x => x.UserId)
                  .MustAsync(async (request, cancellationToken) =>
                     await _dbContext.Permissions.AsNoTracking().AnyAsync(x => x.UserId == request) ?
-                     true : throw new NotFoundException("Usuário não encontrado") 
-
+                     true : throw new NotFoundException("Não foi encontrada a permisão de usuário com o id informando.")
                 );  
 
             RuleFor(x => x.UserId)

@@ -4,8 +4,8 @@ using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class GetAllProductSeleableRequest : IRequest<IEnumerable<GetAllProductSeleableResponse>>
+    public class GetAllProductSeleableRequest : PaginationParamenters, IRequest<IEnumerable<GetAllProductSeleableResponse>>
     {
-        public PaginationParamenters Paramenters { get; set; }
+     
     }
 }

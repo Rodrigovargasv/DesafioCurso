@@ -4,7 +4,6 @@ using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Api.Controllers
 {
@@ -31,9 +30,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllPermissionUsers")]
         public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int page, int pageSize)
         {
-            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
-            var command = new GetAllUserPermissionRequest() { Paramenters = pagination };
-            return await _mediator.Send(command);
+           return await _mediator.Send(new GetAllUserPermissionRequest() { Page = page, PageSize = pageSize });
         }
     }
 }

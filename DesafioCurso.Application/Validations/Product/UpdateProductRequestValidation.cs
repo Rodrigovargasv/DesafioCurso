@@ -25,7 +25,7 @@ namespace DesafioCurso.Application.Validations.Product
                     var productIdOrIdentifier = await _productRepository.GetById(request);
 
                     if (productIdOrIdentifier == null)
-                        throw new NotFoundException("Produto não encontrado");
+                        throw new NotFoundException("Não foi encontrado o produto com o id ou shortId informando.");
 
                     return true;
                 });

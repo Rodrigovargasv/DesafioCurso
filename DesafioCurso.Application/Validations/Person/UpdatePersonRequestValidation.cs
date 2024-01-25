@@ -24,7 +24,7 @@ namespace DesafioCurso.Application.Validations.Person
                      var personIdOrIdentifier = await _personRepository.GetById(request);
 
                      if (personIdOrIdentifier == null)
-                         throw new NotFoundException("Pessoa não encontrada.");
+                         throw new NotFoundException("Não foi encontrado a pessoa com o id ou shortId informando.");
                      
                      return true; // A validação passou
                  });
