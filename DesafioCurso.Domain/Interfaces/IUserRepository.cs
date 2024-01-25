@@ -13,6 +13,6 @@ namespace DesafioCurso.Domain.Interfaces
 
         Task<User> CheckDataLogin(string userName);
 
-        Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role);
+        Task<IEnumerable<User>> GetAllUserByType(int page, int pageSize, UserRole role);
     }
 }

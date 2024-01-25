@@ -4,6 +4,7 @@ using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Application.Handlers.UserHandler
 {
@@ -19,7 +20,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         public async Task<IEnumerable<GetAllUserTypeSellerResponse>> Handle(GetAllUserTypeSellerRequest request, CancellationToken cancellationToken)
         {
             // Busca por todos os usuários do tipo vendedor no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var users = await _userRepository.GetAllUserByType(request.Quantity, UserRole.seller);
+            var users = await _userRepository.GetAllUserByType(request.Paramenters.Page, request.Paramenters.PageSize, UserRole.seller);
 
             var userReponse = users.Adapt<IEnumerable<GetAllUserTypeSellerResponse>>();
 

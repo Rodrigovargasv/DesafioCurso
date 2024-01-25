@@ -1,9 +1,11 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
+using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Api.Controllers
 {
@@ -20,17 +22,19 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllProduct")]
-        public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int value)
+        public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int page, int pageSize)
         {
-            var command = new GetAllProductRequest() {Quantity = value };
+            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
+            var command = new GetAllProductRequest() {Paramenters = pagination };
             return await _mediator.Send(command);
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllProductSeleable")]
-        public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int value)
+        public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int page, int pageSize)
         {
-            var command = new GetAllProductSeleableRequest() { Quantity = value };
+            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
+            var command = new GetAllProductSeleableRequest() { Paramenters = pagination };
     
             return await _mediator.Send(command);
         }

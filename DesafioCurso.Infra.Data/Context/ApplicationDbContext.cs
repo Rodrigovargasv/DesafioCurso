@@ -15,6 +15,7 @@ namespace DesafioCurso.Infra.Data.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Unit> Units { get; set; }
 
+
         // Realiza a aplicação automatica das configurações de entidades que são definidas nas pasta EntityConfiguration
         protected override void OnModelCreating(ModelBuilder builder)
         {

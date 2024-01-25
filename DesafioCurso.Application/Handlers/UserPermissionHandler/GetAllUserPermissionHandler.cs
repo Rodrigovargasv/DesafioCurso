@@ -18,7 +18,7 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
         public async Task<IEnumerable<GetAllUserPermissionResponse>> Handle(GetAllUserPermissionRequest request, CancellationToken cancellationToken)
         {
             // Busca por todas as permissões dos usuários no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var users = await _userPermissionRepository.GetAll(request.Quantity);
+            var users = await _userPermissionRepository.GetAll(request.Paramenters.Page, request.Paramenters.PageSize);
 
             var userReponse = users.Adapt<IEnumerable<GetAllUserPermissionResponse>>();
 

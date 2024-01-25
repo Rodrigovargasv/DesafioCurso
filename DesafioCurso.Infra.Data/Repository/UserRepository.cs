@@ -72,14 +72,15 @@ namespace DesafioCurso.Infra.Data.Repository
         }
 
         // Busca usuário pelo seu tipo recebido via parâmetro.
-        public async Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role)
+        public async Task<IEnumerable<User>> GetAllUserByType(int page, int pageSize, UserRole role)
         {
             var permission = await _context.Permissions
                 .Where(p => p.Role == role).ToListAsync();
 
             var userIds = permission.Select(p => p.UserId).ToList();
 
-            var user = await _context.Users.Where(u => userIds.Contains(u.Id)).Take(quantity).ToListAsync();
+            var user = await _context.Users.Where(u =>
+                userIds.Contains(u.Id)).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return user;
         }

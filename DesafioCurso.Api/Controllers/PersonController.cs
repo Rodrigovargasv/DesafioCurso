@@ -1,8 +1,10 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
+using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Api.Controllers
 {
@@ -19,11 +21,11 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllPerson")]
-        public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int value)
+        public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int page, int pageSize)
         {
-            var command = new GetAllPersonRequest();
-            command.Quantity = value;
-
+            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
+            var command = new GetAllPersonRequest() { Paramenters = pagination };
+            
             return await _mediator.Send(command);
         }
 

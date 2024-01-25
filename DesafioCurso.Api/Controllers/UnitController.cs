@@ -1,6 +1,7 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
+using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,10 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllUnit")]
-        public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int value)
+        public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int page, int pageSize)
         {
-            var command = new GetAllUnitRequest() { Quantity = value};
-            
+            var pagination = new PaginationParamenters() { Page = page, PageSize = pageSize };
+            var command = new GetAllUnitRequest() { Paramenters = pagination};
 
             return await _mediator.Send(command);
         }

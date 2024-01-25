@@ -6,6 +6,6 @@ namespace DesafioCurso.Domain.Interfaces
     {
         Task<Product> VerifyIfBarCodeExists(string? barCode);
 
-        Task<IEnumerable<Product>> GetAllProductsSaleables(int quantity);
+        Task<IEnumerable<Product>> GetAllProductsSaleables(int page, int pageSize);
     }
 }

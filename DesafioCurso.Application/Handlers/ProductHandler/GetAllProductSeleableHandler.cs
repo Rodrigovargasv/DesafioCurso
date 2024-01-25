@@ -18,7 +18,8 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
         public async Task<IEnumerable<GetAllProductSeleableResponse>> Handle(GetAllProductSeleableRequest request, CancellationToken cancellationToken)
         {
             // Busca por todo os produtos vendaveis no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var products = await _productRepository.GetAllProductsSaleables(request.Quantity);
+            var products = await _productRepository.GetAll(request.Paramenters.Page, request.Paramenters.PageSize);
+
 
             var productResponse = products.Adapt<IEnumerable<GetAllProductSeleableResponse>>();
 
