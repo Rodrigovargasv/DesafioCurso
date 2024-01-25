@@ -4,7 +4,6 @@ using DesafioCurso.Domain.Enums;
 using DesafioCurso.Domain.Interfaces;
 using Mapster;
 using MediatR;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Application.Handlers.UserHandler
 {

@@ -1,6 +1,3 @@
-﻿
-
-namespace DesafioCurso.Application.Commands.Response.Product;
+﻿namespace DesafioCurso.Application.Commands.Response.Product;
 
 public record DeleteProductResponse(Guid Id, string Identifier);
-    

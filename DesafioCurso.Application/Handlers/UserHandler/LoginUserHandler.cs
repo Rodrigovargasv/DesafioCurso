@@ -2,7 +2,6 @@
 using DesafioCurso.Application.Commands.Response.User;
 using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Application.Services;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using MediatR;
 

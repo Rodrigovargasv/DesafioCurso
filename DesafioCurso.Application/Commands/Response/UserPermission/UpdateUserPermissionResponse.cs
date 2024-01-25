@@ -1,7 +1,3 @@
-﻿
-namespace DesafioCurso.Application.Commands.Response.UserPermission;
+﻿namespace DesafioCurso.Application.Commands.Response.UserPermission;
 
-public class UpdateUserPermissionResponse(Guid Id, string Identifier);
-
-
-
+public record UpdateUserPermissionResponse(Guid Id, string Identifier);

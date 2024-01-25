@@ -1,6 +1,4 @@
-﻿
-
-namespace DesafioCurso.Domain.Entities
+﻿namespace DesafioCurso.Domain.Entities
 {
     public abstract class PaginationParamenters
     {

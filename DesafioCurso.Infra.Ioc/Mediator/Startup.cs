@@ -14,8 +14,6 @@ using DesafioCurso.Application.Handlers.ProductHandler;
 using DesafioCurso.Application.Handlers.UnitHandler;
 using DesafioCurso.Application.Handlers.UserHandler;
 using DesafioCurso.Application.Handlers.UserPermissionHandler;
-using DesafioCurso.Application.Validations;
-using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -27,7 +25,6 @@ namespace DesafioCurso.Infra.Ioc.Mediator
         // Configura o serviço de injeção de dependência do mediator
         internal static IServiceCollection AddServiceMediator(this IServiceCollection services)
         {
- 
             #region Handlers de unidade
 
             // Registra o handler para CreateUnitRequest
@@ -103,15 +100,12 @@ namespace DesafioCurso.Infra.Ioc.Mediator
             // Handlers de Login User
             services.AddScoped<IRequestHandler<LoginUserRequest, LoginUserResponse>, LoginUserHandler>();
 
-         
             // Configura serviço do MediatR e registra os handlers no assembly atual
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-              
             });
-
 
             return services;
         }

@@ -24,9 +24,8 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
 
         public async Task<CreatePersonResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
         {
-           
             var person = request.Adapt<Person>();
- 
+
             if (person.Document != null)
                 person.Document = person.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 

@@ -1,5 +1,3 @@
-﻿
-namespace DesafioCurso.Application.Commands.Response.User;
+﻿namespace DesafioCurso.Application.Commands.Response.User;
 
-public class UpdateUserResponse(Guid Id, string Identifier);
-
+public record UpdateUserResponse(Guid Id, string Identifier);

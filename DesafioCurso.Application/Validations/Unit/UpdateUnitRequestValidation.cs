@@ -27,11 +27,6 @@ namespace DesafioCurso.Application.Validations.Unit
 
             RuleFor(x => x.Decription)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo senha não pode conter espaço em branco.");
-
-
-
         }
-
-
     }
 }

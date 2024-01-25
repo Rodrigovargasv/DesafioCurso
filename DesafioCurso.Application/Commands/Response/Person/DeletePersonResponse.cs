@@ -1,5 +1,3 @@
-﻿
+﻿namespace DesafioCurso.Application.Commands.Response.Person;
 
-namespace DesafioCurso.Application.Commands.Response.Person;
-
-    public record DeletePersonResponse(Guid Id, string Identifier);
+public record DeletePersonResponse(Guid Id, string Identifier);

@@ -50,9 +50,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUnit/{idOrIdentifier}")]
         public async Task<DeleteUnitResponse> DeleteUnit(string idOrIdentifier)
         {
-
             return await _mediator.Send(new DeleteUnitRequest() { IdOrIdentifier = idOrIdentifier });
-            
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Person;
+﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using FluentValidation;

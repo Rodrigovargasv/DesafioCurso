@@ -1,6 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Request.UserPermission;
 using DesafioCurso.Application.Commands.Response.UserPermission;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Mapster;
@@ -18,12 +17,10 @@ namespace DesafioCurso.Application.Handlers.UserPermissionHandler
         {
             _userPermissionRepository = userPermissionRepository;
             _uow = unitOfWork;
-          
         }
 
         public async Task<UpdateUserPermissionResponse> Handle(UpdateUserPermissionRequest request, CancellationToken cancellationToken)
         {
-            
             var userId = await _userPermissionRepository.VerifyIfUserExist(request.UserId);
 
             if (!string.IsNullOrEmpty(request.Role.ToString()))

@@ -1,10 +1,8 @@
 ﻿using DesafioCurso.Application.Commands.Request.Person;
 using DesafioCurso.Application.Commands.Response.Person;
-using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Api.Controllers
 {

@@ -1,6 +1,4 @@
-﻿
-
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Interfaces;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Infra.Data.Context;
@@ -11,7 +9,6 @@ namespace DesafioCurso.Application.Validations.Login
 {
     public class LoginRequestValidation : AbstractValidator<LoginUserRequest>
     {
-
         private readonly SqliteDbcontext _sqliteDbcontext;
         private readonly IPasswordManger _passwordManger;
 
@@ -33,7 +30,6 @@ namespace DesafioCurso.Application.Validations.Login
                     userName = await _sqliteDbcontext.Users
                         .AsNoTracking().FirstOrDefaultAsync(x => x.Nickname == request || x.Email == request);
 
-
                     return userDate ? true : throw new NotFoundException("Usuário ou senha inválido");
                 });
 
@@ -42,13 +38,12 @@ namespace DesafioCurso.Application.Validations.Login
                 .NotNull()
                  .MustAsync(async (request, cancellationToken) =>
                  {
-                    var verifyPassword = _passwordManger.VerifyPassword(userName.Password, request);
+                     var verifyPassword = _passwordManger.VerifyPassword(userName.Password, request);
 
                      if (verifyPassword == false)
                          throw new BadRequestException("Usuário ou senha inválido.");
 
                      return true;
-
                  });
         }
     }

@@ -13,7 +13,6 @@ namespace DesafioCurso.Application.Services
             // Converte o GUID para base64
             string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(id));
 
-
             // Pega os primeiros 10 caracteres
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));
 

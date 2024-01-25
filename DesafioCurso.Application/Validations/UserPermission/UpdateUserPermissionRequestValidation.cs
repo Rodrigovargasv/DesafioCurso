@@ -17,23 +17,16 @@ namespace DesafioCurso.Application.Validations.UserPermission
             RuleFor(x => x.UserId)
                  .MustAsync(async (request, cancellationToken) =>
                     await _dbContext.Permissions.AsNoTracking().AnyAsync(x => x.UserId == request) ?
-                     true : throw new NotFoundException("Não foi encontrada a permisão de usuário com o id informando.")
-                );  
+                     true : throw new NotFoundException("Não foi encontrada a permissão de usuário com o id informando.")
+                );
 
             RuleFor(x => x.UserId)
-              .NotNull()
+
               .NotEmpty();
 
             RuleFor(x => x.Role)
-               .NotNull()
-              .NotEmpty()
               .Must(role => (int)role >= 1 && (int)role <= 4)
               .WithMessage("A propriedade Role deve ser um número entre 1 e 4.");
-
-
-
-
         }
     }
-    
 }

@@ -1,6 +1,3 @@
-﻿
+﻿namespace DesafioCurso.Application.Commands.Response.Unit;
 
-namespace DesafioCurso.Application.Commands.Response.Unit;
-
-    public class UpdateUnitResponse(Guid Id, string Identifier, string Acronym, string Decription);
-
+public record UpdateUnitResponse(Guid Id, string Identifier, string Acronym, string Decription);

@@ -31,7 +31,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
             if (userId is null)
                 throw new NotFoundException("Usuário não encontrado");
 
-
             if (!string.IsNullOrEmpty(request.FullName))
                 userId.FullName = request.FullName;
 
@@ -42,12 +41,10 @@ namespace DesafioCurso.Application.Handlers.UserHandler
                 userId.Email = request.Email;
 
             if (!string.IsNullOrEmpty(request.Password))
-                userId.Password = request.Password;
+                userId.Password = _passwordManger.HashPassword(request.Password);
 
             if (!string.IsNullOrEmpty(request.Cpf_Cnpj))
                 userId.Cpf_Cnpj = request.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
-
-            userId.Password = _passwordManger.HashPassword(request.Password);
 
             _userRepository.Update(userId);
             await _uow.Commit();

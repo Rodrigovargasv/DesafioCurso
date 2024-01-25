@@ -16,12 +16,10 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
         {
             _context = context;
             _uow = uow;
-     
         }
 
         public async Task<UpdateUnitResponse> Handle(UpdateUnitRequest request, CancellationToken cancellationToken)
         {
-           
             var unitId = await _context.GetById(request.IdOrIdentifier);
 
             if (!string.IsNullOrEmpty(request.Decription))

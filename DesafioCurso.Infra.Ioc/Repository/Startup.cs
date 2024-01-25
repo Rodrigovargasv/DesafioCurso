@@ -17,6 +17,5 @@ namespace DesafioCurso.Infra.Ioc.Repository
 
             return services;
         }
-        
     }
 }

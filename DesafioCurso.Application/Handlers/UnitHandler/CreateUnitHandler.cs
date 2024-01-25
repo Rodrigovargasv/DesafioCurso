@@ -25,7 +25,6 @@ namespace DesafioCurso.Application.Handlers.UnitHandler
 
         public async Task<CreateUnitResponse> Handle(CreateUnitRequest request, CancellationToken cancellationToken)
         {
-
             var unit = request.Adapt<Unit>();
             // Salvar a propriedade sigla sempre em maiúsculo no banco de dados.
             unit.Acronym = unit.Acronym.ToUpper();

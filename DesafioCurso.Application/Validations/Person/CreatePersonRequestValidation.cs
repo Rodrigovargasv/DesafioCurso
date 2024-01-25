@@ -29,16 +29,16 @@ namespace DesafioCurso.Application.Validations.Person
                     if (string.IsNullOrEmpty(value))
                         return true;
 
-                    return UtilsValidations.ValidationCpfAndCnpj(value) ? 
+                    return UtilsValidations.ValidationCpfAndCnpj(value) ?
                         true : throw new BadRequestException("CPF ou CNPJ Inválido.");
                 })
                 .MustAsync(async (request, cancellationToken) =>
                 {
                     if (string.IsNullOrWhiteSpace(request))
-                        return true; 
+                        return true;
 
                     return await _context.People.AsNoTracking()
-                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", "")) 
+                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", ""))
                             ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
 
@@ -64,7 +64,6 @@ namespace DesafioCurso.Application.Validations.Person
                          .AnyAsync(x => x.AlternativeCode == request)
                             ? throw new BadRequestException("Código alternativo indisponível.") : true;
                  });
-
         }
     }
 }

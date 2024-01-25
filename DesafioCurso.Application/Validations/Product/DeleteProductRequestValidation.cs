@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using FluentValidation;
@@ -23,7 +22,6 @@ namespace DesafioCurso.Application.Validations.Product
                        throw new NotFoundException("Produto não encontrado");
 
                    return true;
-
                });
         }
     }

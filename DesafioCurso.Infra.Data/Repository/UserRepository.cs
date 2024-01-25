@@ -15,7 +15,6 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
-     
         // Verifica se apelido o email existe no banco de dados para realizar o login no sistema
         public async Task<User> CheckDataLogin(string userName)
         {

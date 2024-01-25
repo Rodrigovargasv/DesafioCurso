@@ -6,6 +6,5 @@ namespace DesafioCurso.Application.Commands.Request.Product
 {
     public class GetAllProductSeleableRequest : PaginationParamenters, IRequest<IEnumerable<GetAllProductSeleableResponse>>
     {
-     
     }
 }

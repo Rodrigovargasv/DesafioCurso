@@ -1,5 +1,4 @@
-﻿
-using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Commons;
 using DesafioCurso.Infra.Data.Context;
@@ -33,9 +32,9 @@ namespace DesafioCurso.Application.Validations.Product
                 .NotEmpty()
                 .NotNull()
                 .MaximumLength(10)
-                .MustAsync(async (request, cancellationToken) => 
+                .MustAsync(async (request, cancellationToken) =>
                     await _context.Units.AsNoTracking().AnyAsync(x => x.Acronym == request.ToUpper())
-                        ? true : throw new BadRequestException("A unidade informada não existe, cadastre uma unidade ou tente novamente.") );
+                        ? true : throw new BadRequestException("A unidade informada não existe, cadastre uma unidade ou tente novamente."));
 
             RuleFor(x => x.Price)
                 .GreaterThanOrEqualTo(0);

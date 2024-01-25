@@ -44,10 +44,8 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
                 productId.Active = request.Active;
 
             if (!string.IsNullOrEmpty(request.AcronynmUnit))
-                productId.AcronynmUnit = request.AcronynmUnit;
-
-            // Passa a sigla da unidade para maiúculo.
-            productId.AcronynmUnit = request.AcronynmUnit.ToUpper();
+                // Passa a sigla da unidade para maiúculo.
+                productId.AcronynmUnit = request.AcronynmUnit.ToUpper();
 
             _productRepository.Update(productId);
             await _uow.Commit();

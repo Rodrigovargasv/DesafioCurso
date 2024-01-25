@@ -16,7 +16,6 @@ namespace DesafioCurso.Domain.Commons
         // Faz a validação de CPF e CNPJ
         public static bool ValidationCpfAndCnpj(string document)
         {
-           
             if (CpfValidation.Validate(document.Replace(".", "").Replace("-", "").Replace("/", "")))
                 return true;
 

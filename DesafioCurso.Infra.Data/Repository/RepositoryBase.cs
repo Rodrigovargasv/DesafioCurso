@@ -41,7 +41,6 @@ namespace DesafioCurso.Infra.Data.Repository
                 return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == guidValue);
 
             return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<string>(e, "Identifier") == value);
-            
         }
 
         public void Delete(TEntity entity)

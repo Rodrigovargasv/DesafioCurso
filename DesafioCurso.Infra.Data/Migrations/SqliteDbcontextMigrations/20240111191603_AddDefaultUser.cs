@@ -39,13 +39,11 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                 columns: new[] { "id", "perfil_de_acesso", "id_usuario", "identificador" },
                 values: new object[] { Guid.NewGuid(), perfilAcesso, adminUser.Id, shortIdPermission }
             );
-
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
 
         public string GenerateShortId()
@@ -55,7 +53,6 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
 
             // Converte o GUID para base64
             string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(id));
-
 
             // Pega os primeiros 10 caracteres
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));

@@ -35,7 +35,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
 
             // Formarta CPF E CNPJ para apenas número se caso o usuário passar com caracteres especiais
             if (user.Cpf_Cnpj != null)
-                user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", "");;
+                user.Cpf_Cnpj = user.Cpf_Cnpj.Replace(".", "").Replace("-", "").Replace("/", ""); ;
 
             user.Password = _passwordManger.HashPassword(request.Password);
 

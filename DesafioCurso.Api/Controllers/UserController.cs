@@ -1,6 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
-using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +71,6 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUser/{idOrIdentifier}")]
         public async Task<DeleteUserResponse> DeleteUser(string idOrIdentifier)
         {
-
             return await _mediator.Send(new DeleteUserRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }

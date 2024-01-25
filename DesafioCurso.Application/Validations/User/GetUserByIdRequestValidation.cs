@@ -1,9 +1,6 @@
-﻿
-
-using DesafioCurso.Application.Commands.Request.User;
+﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Infra.Data.Context;
 using FluentValidation;
 
 namespace DesafioCurso.Application.Validations.User

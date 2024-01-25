@@ -19,8 +19,7 @@ namespace DesafioCurso.Infra.Data.Repository
         {
             return await _dbContext.Products
                  .Where(s => s.Saleable == true)
-                 .Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(); 
+                 .Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
-
     }
 }

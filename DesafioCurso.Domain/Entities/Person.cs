@@ -11,6 +11,5 @@ namespace DesafioCurso.Domain.Entities
         public string? AlternativeCode { get; set; }
         public bool? ReleaseSale { get; set; }// liberar venda
         public bool? Active { get; set; }
-       
     }
 }

@@ -53,7 +53,6 @@ namespace DesafioCurso.Application.Validations.User
                 .Equal(p => p.Password)
                 .WithMessage("A senha e confirmação de senha devem ser iguais.");
 
-
             RuleFor(p => p.Cpf_Cnpj)
                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo CPF/CNPJ não pode conter espaço em branco.")
                .Must(value =>
@@ -75,8 +74,7 @@ namespace DesafioCurso.Application.Validations.User
                         await _context.People.AsNoTracking()
                             .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", ""));
 
-
-                    return isCpfCnpjUnavailable ?  throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
+                    return isCpfCnpjUnavailable ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
         }
     }

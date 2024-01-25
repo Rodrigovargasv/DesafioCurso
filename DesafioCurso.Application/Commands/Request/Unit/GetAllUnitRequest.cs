@@ -6,6 +6,5 @@ namespace DesafioCurso.Application.Commands.Request.Unit
 {
     public class GetAllUnitRequest : PaginationParamenters, IRequest<IEnumerable<GetAllUnitResponse>>
     {
-
     }
 }

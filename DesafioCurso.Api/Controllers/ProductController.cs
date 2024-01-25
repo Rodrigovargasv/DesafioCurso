@@ -1,11 +1,8 @@
-﻿using DesafioCurso.Application.Commands.Request.Person;
-using DesafioCurso.Application.Commands.Request.Product;
+﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
-using DesafioCurso.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesafioCurso.Api.Controllers
 {
@@ -24,7 +21,6 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProduct")]
         public async Task<IEnumerable<GetAllProductResponse>> GetAllPerson(int page, int pageSize)
         {
-
             return await _mediator.Send(new GetAllProductRequest() { Page = page, PageSize = pageSize });
         }
 
@@ -32,7 +28,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpGet("GetAllProductSeleable")]
         public async Task<IEnumerable<GetAllProductSeleableResponse>> GetAllProductSeleable(int page, int pageSize)
         {
-             return await _mediator.Send(new GetAllProductSeleableRequest() { Page = page, PageSize = pageSize });
+            return await _mediator.Send(new GetAllProductSeleableRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
@@ -61,7 +57,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteProduct/{idOrIdentifier}")]
         public async Task<DeleteProductResponse> DeleteProduct(string idOrIdentifier)
         {
-             return await _mediator.Send(new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier });
+            return await _mediator.Send(new DeleteProductRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }
 }

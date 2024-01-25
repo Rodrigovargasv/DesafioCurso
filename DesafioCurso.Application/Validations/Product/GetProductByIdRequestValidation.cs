@@ -22,7 +22,6 @@ namespace DesafioCurso.Application.Validations.Product
                         throw new NotFoundException("Produto não encontrado");
 
                     return true;
-
                 });
         }
     }

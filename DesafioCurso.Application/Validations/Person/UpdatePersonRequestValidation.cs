@@ -25,14 +25,12 @@ namespace DesafioCurso.Application.Validations.Person
 
                      if (personIdOrIdentifier == null)
                          throw new NotFoundException("Não foi encontrado a pessoa com o id ou shortId informando.");
-                     
+
                      return true; // A validação passou
                  });
 
             RuleFor(p => p.FullName)
               .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo descrição completa não pode conter espaço em branco.")
-              .NotNull()
-              .NotEmpty()
               .MaximumLength(100);
 
             RuleFor(p => p.Document)
@@ -42,28 +40,23 @@ namespace DesafioCurso.Application.Validations.Person
                 {
                     if (string.IsNullOrEmpty(value))
                         return true;
-                       
-                    return UtilsValidations.ValidationCpfAndCnpj(value) 
+
+                    return UtilsValidations.ValidationCpfAndCnpj(value)
                     ? true : throw new BadRequestException("CPF ou CNPJ inválido.");
-                    
                 })
                 .WithMessage("CPF ou CNPJ inválido")
                 .MustAsync(async (request, cancellationToken) =>
                 {
-
                     if (string.IsNullOrEmpty(request))
                         return true;
 
                     return await _dbContext.People.AsNoTracking()
-                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", "")) 
+                        .AnyAsync(x => x.Document == request.Replace(".", "").Replace("-", "").Replace("/", ""))
                            ? throw new BadRequestException("CPF ou CNPJ indisponível.") : true;
                 });
-           
 
             RuleFor(p => p.City)
                 .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo cidade não pode conter espaço em branco.")
-                .NotEmpty()
-                .NotNull()
                 .MaximumLength(30);
 
             RuleFor(p => p.Observation)
@@ -76,10 +69,10 @@ namespace DesafioCurso.Application.Validations.Person
                  .MustAsync(async (request, cancellationToken) =>
                  {
                      if (string.IsNullOrWhiteSpace(request))
-                         return true; 
+                         return true;
 
                      return await _dbContext.People.AsNoTracking()
-                        .AnyAsync(x => x.AlternativeCode == request) 
+                        .AnyAsync(x => x.AlternativeCode == request)
                             ? throw new BadRequestException("Já existe um código alternativo com estas informações") : true;
                  });
         }

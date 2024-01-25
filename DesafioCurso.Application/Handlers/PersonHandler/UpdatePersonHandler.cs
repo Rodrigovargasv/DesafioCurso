@@ -29,7 +29,7 @@ namespace DesafioCurso.Application.Handlers.PersonHandler
                 personId.Document = request.Document.Replace(".", "").Replace("-", "").Replace("/", "");
 
             if (!string.IsNullOrEmpty(request.City))
-                personId.City = request.City.ToUpper() ;
+                personId.City = request.City.ToUpper();
 
             if (!string.IsNullOrEmpty(request.Observation))
                 personId.Observation = request.Observation;
