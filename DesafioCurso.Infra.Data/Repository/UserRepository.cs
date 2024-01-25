@@ -15,33 +15,7 @@ namespace DesafioCurso.Infra.Data.Repository
             _context = context;
         }
 
-        // Verifica se CPF ou CNPJ já existe no banco de dados
-        public async Task<User> CheckIfCPF_CNPJExist(string cpf_cnpj)
-        {
-            if (cpf_cnpj == null)
-                return null;
-
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Cpf_Cnpj == cpf_cnpj);
-        }
-
-        // Verifica se Email já existe no banco de dados
-        public async Task<User> CheckIfdEmailExist(string email)
-        {
-            if (email == null)
-                return null;
-
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
-        }
-
-        // Verifica se apelido já existe no banco de dados
-        public async Task<User> CheckIfNicknameExist(string nickname)
-        {
-            if (nickname == null)
-                return null;
-
-            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Nickname == nickname);
-        }
-
+     
         // Verifica se apelido o email existe no banco de dados para realizar o login no sistema
         public async Task<User> CheckDataLogin(string userName)
         {

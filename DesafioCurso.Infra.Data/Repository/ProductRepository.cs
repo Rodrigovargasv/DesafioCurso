@@ -22,18 +22,5 @@ namespace DesafioCurso.Infra.Data.Repository
                  .Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(); 
         }
 
-        // Verifica se código de barras já existe no banco de dados.
-        public async Task<Product> VerifyIfBarCodeExists(string? barCode)
-        {
-            if (barCode == null)
-            {
-                // Lida com o caso em que o código de barras é nulo
-                return null;
-            }
-
-            return await _dbContext.Products
-                .AsNoTracking()
-                .FirstOrDefaultAsync(b => b.BarCode == barCode);
-        }
     }
 }
