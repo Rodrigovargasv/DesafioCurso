@@ -1,6 +1,5 @@
 ﻿using DesafioCurso.Application.Commands.Request.User;
 using DesafioCurso.Application.Commands.Response.User;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Interfaces;
 using DesafioCurso.Infra.Data.Context;
 using Mapster;
@@ -23,9 +22,6 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         {
             // Verifica se a usuário existe
             var userId = await _userRepository.GetById(request.IdOrIdentifier);
-
-            if (userId is null)
-                throw new NotFoundException("Usuário não encontrado");
 
             _userRepository.Delete(userId);
             await _uow.Commit();

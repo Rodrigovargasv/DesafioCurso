@@ -1,10 +1,10 @@
 ﻿using DesafioCurso.Application.Commands.Response.Product;
+using DesafioCurso.Domain.Entities;
 using MediatR;
 
 namespace DesafioCurso.Application.Commands.Request.Product
 {
-    public class GetAllProductSeleableRequest : IRequest<IEnumerable<GetAllProductSeleableResponse>>
+    public class GetAllProductSeleableRequest : PaginationParamenters, IRequest<IEnumerable<GetAllProductSeleableResponse>>
     {
-        public int Quantity { get; set; }
     }
 }

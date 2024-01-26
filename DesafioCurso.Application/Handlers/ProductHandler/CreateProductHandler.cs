@@ -1,12 +1,9 @@
 ﻿using DesafioCurso.Application.Commands.Request.Product;
 using DesafioCurso.Application.Commands.Response.Product;
 using DesafioCurso.Application.Interfaces;
-using DesafioCurso.Domain.Common.Exceptions;
 using DesafioCurso.Domain.Entities;
 using DesafioCurso.Domain.Interfaces;
-using DesafioCurso.Domain.Validations;
 using DesafioCurso.Infra.Data.Context;
-using FluentValidation;
 using Mapster;
 using MediatR;
 
@@ -16,43 +13,20 @@ namespace DesafioCurso.Application.Handlers.ProductHandler
 
     {
         private readonly IProductRepository _productRepository;
-        private readonly ProductValidation _productValidations;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly IShortIdGeneratorService _shortIdGeneratorService;
 
-        private readonly IUnitRepository _unitRepository;
-
-        public CreateProductHandler(IProductRepository productRepository, ProductValidation productValidations,
-            IUnitOfWork<ApplicationDbContext> uow, IUnitRepository unitRepository, IShortIdGeneratorService shortIdGenerator)
+        public CreateProductHandler(IProductRepository productRepository,
+            IUnitOfWork<ApplicationDbContext> uow, IShortIdGeneratorService shortIdGenerator)
         {
             _productRepository = productRepository;
-            _productValidations = productValidations;
             _uow = uow;
-            _unitRepository = unitRepository;
             _shortIdGeneratorService = shortIdGenerator;
         }
 
         public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
         {
-            #region Validações dos dados informados request e verificações da existência de unidade e codígo de barras no banco de dados
-
             var product = request.Adapt<Product>();
-            var unitValidation = await _productValidations.ValidateAsync(product);
-
-            if (!unitValidation.IsValid) throw new ValidationException(unitValidation.Errors);
-
-            var unit = await _unitRepository.PropertyAcronymExists(request.AcronynmUnit.ToUpper());
-
-            if (unit is null)
-                throw new NotFoundException("Unidade informada não existe no banco de dados." +
-                    "Realize o cadastro da unidade em seu endpoint.");
-
-            var barCode = await _productRepository.VerifyIfBarCodeExists(product.BarCode);
-
-            if (barCode != null)
-                throw new CustomException("Já existe um código de barras cadastrado com estas informações");
-
-            #endregion Validações dos dados informados request e verificações da existência de unidade e codígo de barras no banco de dados
 
             // Alterar a singla da unidade sempre para maiúsculo;
             product.AcronynmUnit = product.AcronynmUnit.ToUpper();

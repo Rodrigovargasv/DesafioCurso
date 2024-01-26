@@ -17,9 +17,10 @@ namespace DesafioCurso.Infra.Data.Repository
 
         #region Métodos básicos e genéricos de CREATE, READ,UPADATE e DELETE.
 
-        public async Task<IEnumerable<TEntity>> GetAll(int quantidade)
+        public async Task<IEnumerable<TEntity>> GetAll(int page, int pageSize)
         {
-            return await _context.Set<TEntity>().Take(quantidade).ToListAsync();
+            return await _context.Set<TEntity>()
+                .Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
 
         public async Task Create(TEntity entity)
@@ -37,11 +38,9 @@ namespace DesafioCurso.Infra.Data.Repository
             var entityQuery = _context.Set<TEntity>().AsNoTracking();
 
             if (Guid.TryParse(value, out Guid guidValue))
-                return await entityQuery.FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == guidValue);
-            
-            
-            return await entityQuery.FirstOrDefaultAsync(e => EF.Property<string>(e, "Identifier") == value);
-            
+                return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == guidValue);
+
+            return await entityQuery.AsNoTracking().FirstOrDefaultAsync(e => EF.Property<string>(e, "Identifier") == value);
         }
 
         public void Delete(TEntity entity)

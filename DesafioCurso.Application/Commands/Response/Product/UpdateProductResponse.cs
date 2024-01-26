@@ -1,8 +1,6 @@
-﻿using DesafioCurso.Domain.Commons;
-
-namespace DesafioCurso.Application.Commands.Response.Product
+﻿namespace DesafioCurso.Application.Commands.Response.Product
 {
-    public class UpdateProductResponse : EntityBase
-    {
-    }
+    public record UpdateProductResponse(Guid Id, string Identifier,
+        string fullDescription, string briefDescription, decimal price,
+        int quantityStock, string barCode, bool active, bool saleable, string acronynmUnit);
 }

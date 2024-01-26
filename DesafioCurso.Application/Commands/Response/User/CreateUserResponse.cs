@@ -1,8 +1,3 @@
-﻿using DesafioCurso.Domain.Commons;
+﻿namespace DesafioCurso.Application.Commands.Response.User;
 
-namespace DesafioCurso.Application.Commands.Response.User
-{
-    public class CreateUserResponse : EntityBase
-    {
-    }
-}
+public record CreateUserResponse(Guid Id, string Identifier);

@@ -1,7 +1,6 @@
 ﻿using DesafioCurso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
 
 namespace DesafioCurso.Infra.Data.EntityConfiguration
 {

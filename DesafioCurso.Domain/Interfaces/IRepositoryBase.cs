@@ -2,7 +2,7 @@
 {
     public interface IRepositoryBase<TEntity>
     {
-        Task<IEnumerable<TEntity>> GetAll(int quantity);
+        Task<IEnumerable<TEntity>> GetAll(int page, int pageSize);
 
         Task<TEntity> GetById(string value);
 

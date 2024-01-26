@@ -5,14 +5,8 @@ namespace DesafioCurso.Domain.Interfaces
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-        Task<User> CheckIfCPF_CNPJExist(string cpf_cnpj);
-
-        Task<User> CheckIfdEmailExist(string email);
-
-        Task<User> CheckIfNicknameExist(string surname);
-
         Task<User> CheckDataLogin(string userName);
 
-        Task<IEnumerable<User>> GetAllUserByType(int quantity, UserRole role);
+        Task<IEnumerable<User>> GetAllUserByType(int page, int pageSize, UserRole role);
     }
 }

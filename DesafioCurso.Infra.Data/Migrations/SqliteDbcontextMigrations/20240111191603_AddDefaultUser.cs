@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System.Text;
 
 #nullable disable
 
@@ -38,28 +39,20 @@ namespace DesafioCurso.Infra.Data.Migrations.SqliteDbcontextMigrations
                 columns: new[] { "id", "perfil_de_acesso", "id_usuario", "identificador" },
                 values: new object[] { Guid.NewGuid(), perfilAcesso, adminUser.Id, shortIdPermission }
             );
-
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
 
-        private string GenerateShortId()
+        public string GenerateShortId()
         {
             // Gera um GUID (Globally Unique Identifier)
-            Guid guid = Guid.NewGuid();
+            var id = Guid.NewGuid().ToString("N").ToUpper();
 
-            // Converte o GUID para uma sequência de bytes
-            byte[] guidBytes = guid.ToByteArray();
-
-            // Converte os bytes para base64
-            string base64String = Convert.ToBase64String(guidBytes);
-
-            // Remove caracteres especiais e espaços em branco
-            base64String = base64String.Replace("/", "").Replace("+", "").Replace("=", "").Replace("-", "");
+            // Converte o GUID para base64
+            string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(id));
 
             // Pega os primeiros 10 caracteres
             string shortId = base64String.Substring(0, Math.Min(base64String.Length, 10));

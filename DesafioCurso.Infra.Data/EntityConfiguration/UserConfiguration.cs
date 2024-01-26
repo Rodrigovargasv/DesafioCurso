@@ -20,7 +20,7 @@ namespace DesafioCurso.Infra.Data.EntityConfiguration
             builder.Property(x => x.Password).HasColumnName("senha").HasMaxLength(255).IsRequired();
             builder.Property(x => x.Cpf_Cnpj).HasColumnName("cpf_cnpj").HasMaxLength(14);
 
-            // Relacionamento 1 para muitos entre permissões e usuário
+            // Relacionamento 1 para 1 entre permissões e usuário
             builder.HasOne(u => u.Permission)
             .WithOne(u => u.User)
             .HasForeignKey<UserPermission>(x => x.Id)

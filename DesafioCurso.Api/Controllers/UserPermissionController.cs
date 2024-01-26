@@ -27,10 +27,9 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, manager")]
         [HttpGet("GetAllPermissionUsers")]
-        public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int value)
+        public async Task<IEnumerable<GetAllUserPermissionResponse>> GetAllPermissionUsers(int page, int pageSize)
         {
-            var command = new GetAllUserPermissionRequest() { Quantity = value };
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUserPermissionRequest() { Page = page, PageSize = pageSize });
         }
     }
 }

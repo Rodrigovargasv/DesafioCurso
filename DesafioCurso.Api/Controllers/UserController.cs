@@ -19,47 +19,37 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUser")]
-        public async Task<IEnumerable<GetAllUserResponse>> GetAllPerson(int value)
+        public async Task<IEnumerable<GetAllUserResponse>> GetAllPerson(int page, int pageSize)
         {
-            var command = new GetAllUserRequest() { Quantity = value };
-   
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUserRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUserTypeSeller")]
-        public async Task<IEnumerable<GetAllUserTypeSellerResponse>> GetAllUserTypeSeller(int value)
+        public async Task<IEnumerable<GetAllUserTypeSellerResponse>> GetAllUserTypeSeller(int page, int pageSize)
         {
-            var command = new GetAllUserTypeSellerRequest() { Quantity = value };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUserTypeSellerRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUserTypeManager")]
-        public async Task<IEnumerable<GetAllUserTypeManagerResponse>> GetAllUserTypeManager(int value)
+        public async Task<IEnumerable<GetAllUserTypeManagerResponse>> GetAllUserTypeManager(int page, int pageSize)
         {
-            var command = new GetAllUserTypeManagerRequest() { Quantity = value};
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUserTypeManagerRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetAllUserTypeAdministrator")]
-        public async Task<IEnumerable<GetAllUserTypeAdministradorResponse>> GetAllUserTypeAdministrator(int value)
+        public async Task<IEnumerable<GetAllUserTypeAdministradorResponse>> GetAllUserTypeAdministrator(int page, int pageSize)
         {
-            var command = new GetAllUserTypeAdministratorRequest() { Quantity = value };
-    
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUserTypeAdministratorRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, manager, seller")]
         [HttpGet("GetUserById/{idOrIdentifier}")]
         public async Task<GetUserByIdResponse> GetUserById(string idOrIdentifier)
         {
-            var command = new GetUserByIdRequest() { IdOrIdentifier = idOrIdentifier };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetUserByIdRequest() { IdOrIdentifier = idOrIdentifier });
         }
 
         [Authorize(Roles = "administrator")]
@@ -81,9 +71,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUser/{idOrIdentifier}")]
         public async Task<DeleteUserResponse> DeleteUser(string idOrIdentifier)
         {
-            var command = new DeleteUserRequest() { IdOrIdentifier = idOrIdentifier };
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new DeleteUserRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }
 }

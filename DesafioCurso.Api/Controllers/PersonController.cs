@@ -19,21 +19,16 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllPerson")]
-        public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int value)
+        public async Task<IEnumerable<GetAllPersonResponse>> GetAllPerson(int page, int pageSize)
         {
-            var command = new GetAllPersonRequest();
-            command.Quantity = value;
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllPersonRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetPersonById/{idOrIdentifier}")]
         public async Task<GetPersonByIdResponse> GetPersonByID(string idOrIdentifier)
         {
-            var command = new GetPersonByIdRequest() { IdOrIdentifier = idOrIdentifier };
-    
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetPersonByIdRequest() { IdOrIdentifier = idOrIdentifier });
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -55,9 +50,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeletePerson/{idOrIdentifier}")]
         public async Task<DeletePersonResponse> DeletePerson(string idOrIdentifier)
         {
-            var command = new DeletePesonRequest() { IdOrIdentifier = idOrIdentifier };
-    
-            return await _mediator.Send(command);
+            return await _mediator.Send(new DeletePesonRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }
 }

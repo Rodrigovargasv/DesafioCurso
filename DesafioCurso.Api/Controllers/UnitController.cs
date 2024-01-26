@@ -1,5 +1,4 @@
-﻿using DesafioCurso.Application.Commands.Request.Person;
-using DesafioCurso.Application.Commands.Request.Unit;
+﻿using DesafioCurso.Application.Commands.Request.Unit;
 using DesafioCurso.Application.Commands.Response.Unit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -20,21 +19,16 @@ namespace DesafioCurso.Api.Controllers
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetAllUnit")]
-        public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int value)
+        public async Task<IEnumerable<GetAllUnitResponse>> GetAllUnit(int page, int pageSize)
         {
-            var command = new GetAllUnitRequest() { Quantity = value};
-            
-
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetAllUnitRequest() { Page = page, PageSize = pageSize });
         }
 
         [Authorize(Roles = "administrator, commonUser, manager, seller")]
         [HttpGet("GetUnitById/{idOrIdentifier}")]
         public async Task<GetUnitByIdResponse> GetUnitById(string idOrIdentifier)
         {
-            var command = new GetUnitByIdRequest { IdOrIdentifier = idOrIdentifier };
-  
-            return await _mediator.Send(command);
+            return await _mediator.Send(new GetUnitByIdRequest { IdOrIdentifier = idOrIdentifier });
         }
 
         [Authorize(Roles = "administrator, manager")]
@@ -56,10 +50,7 @@ namespace DesafioCurso.Api.Controllers
         [HttpDelete("DeleteUnit/{idOrIdentifier}")]
         public async Task<DeleteUnitResponse> DeleteUnit(string idOrIdentifier)
         {
-            var command = new DeleteUnitRequest() { IdOrIdentifier = idOrIdentifier };
-
-            return await _mediator.Send(command);
-            
+            return await _mediator.Send(new DeleteUnitRequest() { IdOrIdentifier = idOrIdentifier });
         }
     }
 }

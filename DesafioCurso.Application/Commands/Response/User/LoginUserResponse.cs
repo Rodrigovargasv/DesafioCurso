@@ -1,7 +1,3 @@
-﻿namespace DesafioCurso.Application.Commands.Response.User
-{
-    public class LoginUserResponse
-    {
-        public string Token { get; set; }
-    }
-}
+﻿namespace DesafioCurso.Application.Commands.Response.User;
+
+public record LoginUserResponse(string Token);

@@ -1,5 +1,4 @@
 ﻿using DesafioCurso.Application.Commands.Response.Person;
-using DesafioCurso.Domain.Commons;
 using MediatR;
 using Newtonsoft.Json;
 using System.ComponentModel;

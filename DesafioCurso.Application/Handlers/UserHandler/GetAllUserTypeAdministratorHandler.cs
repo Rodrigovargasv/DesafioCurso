@@ -19,7 +19,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         public async Task<IEnumerable<GetAllUserTypeAdministradorResponse>> Handle(GetAllUserTypeAdministratorRequest request, CancellationToken cancellationToken)
         {
             // Busca por todos os usuários do administrador no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var users = await _userRepository.GetAllUserByType(request.Quantity, UserRole.administrator);
+            var users = await _userRepository.GetAllUserByType(request.Page, request.PageSize, UserRole.administrator);
 
             var userReponse = users.Adapt<IEnumerable<GetAllUserTypeAdministradorResponse>>();
 

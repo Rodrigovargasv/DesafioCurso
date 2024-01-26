@@ -1,8 +1,3 @@
-﻿using DesafioCurso.Domain.Commons;
+﻿namespace DesafioCurso.Application.Commands.Response.User;
 
-namespace DesafioCurso.Application.Commands.Response.User
-{
-    public class DeleteUserResponse : EntityBase
-    {
-    }
-}
+public record DeleteUserResponse(Guid Id, string Identifier);

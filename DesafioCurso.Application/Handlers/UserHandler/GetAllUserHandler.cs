@@ -18,7 +18,7 @@ namespace DesafioCurso.Application.Handlers.UserHandler
         public async Task<IEnumerable<GetAllUserResponse>> Handle(GetAllUserRequest request, CancellationToken cancellationToken)
         {
             // Busca por todos os usuários no banco de dados, sendo limitado pela quantidade que o usuário informar no request.
-            var users = await _userRepository.GetAll(request.Quantity);
+            var users = await _userRepository.GetAll(request.Paramenters.Page, request.Paramenters.PageSize);
 
             var userReponse = users.Adapt<IEnumerable<GetAllUserResponse>>();
 
