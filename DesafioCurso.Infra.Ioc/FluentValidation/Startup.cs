@@ -16,10 +16,10 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             #region Registra os validadores FluentValidation de unidade
 
             services.AddValidatorsFromAssemblyContaining<CreateUnitRequestValidation>();
-
             services.AddValidatorsFromAssemblyContaining<UpdateUnitRequestValidation>();
-
             services.AddValidatorsFromAssemblyContaining<DeleteUnitRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUnitRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetUnitByIdRequestValidation>();
 
             #endregion Registra os validadores FluentValidation de unidade
 
@@ -28,6 +28,7 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<CreatePersonRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<UpdatePersonRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<GetPersonByIdRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllPersonRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<DeletePersonRequestValidation>();
 
             #endregion #region Registra os validadores FluentValidation de pessoa
@@ -37,6 +38,8 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<CreatePersonRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<UpdateProductRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<GetProductByIdRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllProductRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllProductRequestSeleableValidation>();
             services.AddValidatorsFromAssemblyContaining<DeleteProductRequestValidation>();
 
             #endregion #region Registra os validadores FluentValidation de produto
@@ -47,12 +50,17 @@ namespace DesafioCurso.Infra.Ioc.FluentValidation
             services.AddValidatorsFromAssemblyContaining<UpdateUserRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<GetUserByIdRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<DeleteUserRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUserTypeSellerRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUserTypeManagerRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUserTypeAdministratorRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUserRequestValidation>();
 
             #endregion #region Registra os validadores FluentValidation de usuário
 
             #region #region Registra os validadores FluentValidation de permissão de usuário
 
             services.AddValidatorsFromAssemblyContaining<UpdateUserPermissionRequestValidation>();
+            services.AddValidatorsFromAssemblyContaining<GetAllUserPermissionRequestValidation>();
             services.AddValidatorsFromAssemblyContaining<LoginRequestValidation>();
 
             #endregion #region Registra os validadores FluentValidation de permissão de usuário
